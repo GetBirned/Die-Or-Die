@@ -1,0 +1,1 @@
+Adds 1 to the value of all sides, lasts for 3 rolls

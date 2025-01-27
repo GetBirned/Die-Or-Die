@@ -1,0 +1,1 @@
+Choose a side to make blank

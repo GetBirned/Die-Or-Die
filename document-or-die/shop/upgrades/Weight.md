@@ -1,0 +1,1 @@
+Doubles the chance of a specific side being rolled
