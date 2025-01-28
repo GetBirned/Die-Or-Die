@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="gamedesign/document-or-die/images/DieOrDie.png"
+  <img src="document-or-die/images/DieOrDie.png"
        alt="Die or Die Logo" 
        title="Die or Die Logo" 
        width="200" />
