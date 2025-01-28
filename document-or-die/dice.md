@@ -23,3 +23,13 @@
 ## [[Even Die]]
 
 ## [[Odd Die]]
+
+## [[Mirror Die]]
+
+## [[Golden Die]]
+
+## [[Lucky Seven]]
+
+## [[Nervous Die]]
+
+## [[Cannibal Die]]
