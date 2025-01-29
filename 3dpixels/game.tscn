@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dubjxv5s7vcej"]
+
+[ext_resource type="PackedScene" uid="uid://fd3v2mowfx8a" path="res://die.tscn" id="1_iul00"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q2igm"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Game" type="Node2D"]
+
+[node name="Die" parent="." instance=ExtResource("1_iul00")]
+position = Vector2(595, 329)
+scale = Vector2(8, 8)
+texture = SubResource("ViewportTexture_q2igm")

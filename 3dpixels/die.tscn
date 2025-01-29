@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://fd3v2mowfx8a"]
+
+[ext_resource type="Shader" path="res://pixel.gdshader" id="1_6e14t"]
+[ext_resource type="Script" path="res://diecam.gd" id="1_jpfv6"]
+[ext_resource type="Script" path="res://rotate.gd" id="2_ob71r"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jh56p"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_t7ee3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uutif"]
+render_priority = 0
+shader = ExtResource("1_6e14t")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = true
+shader_parameter/shadow_strength = 0.4
+shader_parameter/highlight_strength = 0.1
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m2t1k"]
+next_pass = SubResource("ShaderMaterial_uutif")
+albedo_color = Color(0, 0.811765, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hct1"]
+size = Vector2(64, 64)
+
+[node name="Die" type="Sprite2D"]
+texture = SubResource("ViewportTexture_jh56p")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="Die" type="Node3D" parent="SubViewport"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport/Die"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/Die"]
+transform = Transform3D(-0.707107, -0.415627, 0.572061, 0, 0.809017, 0.587785, -0.707107, 0.415627, -0.572061, 2, 2, -2)
+fov = 35.0
+script = ExtResource("1_jpfv6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Die"]
+mesh = SubResource("BoxMesh_t7ee3")
+surface_material_override/0 = SubResource("StandardMaterial3D_m2t1k")
+script = ExtResource("2_ob71r")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_2hct1")
+
+[connection signal="mouse_entered" from="Area2D" to="SubViewport/Die/Camera3D" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_entered" from="Area2D" to="SubViewport/Die/MeshInstance3D" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="SubViewport/Die/Camera3D" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_exited" from="Area2D" to="SubViewport/Die/MeshInstance3D" method="_on_area_2d_mouse_exited"]
