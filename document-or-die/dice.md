@@ -33,3 +33,8 @@
 ## [[Nervous Die]]
 
 ## [[Cannibal Die]]
+
+## [[Half Die]]
+
+## [[Half-n-Half Die]]
+
