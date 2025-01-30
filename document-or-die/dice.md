@@ -38,3 +38,5 @@
 
 ## [[Half-n-Half Die]]
 
+## [[Cheater's Die]]
+

@@ -6,3 +6,4 @@
 
 ## [[Eraser]]
 
+## [[Stickers]]
