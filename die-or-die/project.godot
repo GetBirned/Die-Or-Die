@@ -11,9 +11,21 @@ config_version=5
 [application]
 
 config/name="Die or Die"
+run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://resources/icon.svg"
+config/icon="res://resources/DieOrDie.png"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
 project/assembly_name="Die or Die"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

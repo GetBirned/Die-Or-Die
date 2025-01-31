@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c35x6ihsiifu5"]
+
+[ext_resource type="Texture2D" uid="uid://bcnngx20n6nxi" path="res://resources/DieOrDie.png" id="1_xsoj8"]
+
+[node name="TitleScreen" type="Node2D"]
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(644, 349)
+texture = ExtResource("1_xsoj8")
