@@ -2,6 +2,7 @@ extends Node
 
 signal special
 
+@export var cost: int = 3
 @export var sides: Array = ['1','2','3','4','5','6']
 
 func do_special():

@@ -7,7 +7,16 @@
 [node name="Standard" parent="." instance=ExtResource("1_78xbe")]
 
 [node name="LuckySeven" parent="." instance=ExtResource("1_78xbe")]
+cost = 4
 sides = ["7", "7", "7", "b", "b", "b"]
 
 [node name="Satan" parent="." instance=ExtResource("1_78xbe")]
+cost = 4
 sides = ["6", "6", "6", "0", "0", "-1"]
+
+[node name="Marble" parent="." instance=ExtResource("1_78xbe")]
+sides = ["1"]
+
+[node name="Greedy" parent="." instance=ExtResource("1_78xbe")]
+cost = 4
+sides = ["4", "4", "$1", "$1", "$1", "$4"]
