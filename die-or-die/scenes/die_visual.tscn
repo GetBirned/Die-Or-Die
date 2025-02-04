@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://deuttny8qpucy"]
 
-[ext_resource type="Script" path="res://scenes/die_visual.gd" id="1_dwiy2"]
+[ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_dwiy2"]
 [ext_resource type="Texture2D" uid="uid://cd3thi0w33hds" path="res://resources/template_die.png" id="1_kd52h"]
 [ext_resource type="Texture2D" uid="uid://camflqjq3tf0h" path="res://resources/die_faces/top_face.png" id="2_xftob"]
 [ext_resource type="Texture2D" uid="uid://b37e76cugkk4c" path="res://resources/die_faces/left_face.png" id="3_kxnrv"]
