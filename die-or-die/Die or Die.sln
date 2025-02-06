@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Die or Die", "Die or Die.csproj", "{00829559-611B-48B7-97E4-6FAB4958927E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Die or Die", "Die or Die.csproj", "{2041C00E-B9EC-4FF2-ABA7-9444D9E0C99D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00829559-611B-48B7-97E4-6FAB4958927E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00829559-611B-48B7-97E4-6FAB4958927E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00829559-611B-48B7-97E4-6FAB4958927E}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{00829559-611B-48B7-97E4-6FAB4958927E}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{00829559-611B-48B7-97E4-6FAB4958927E}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{00829559-611B-48B7-97E4-6FAB4958927E}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{2041C00E-B9EC-4FF2-ABA7-9444D9E0C99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2041C00E-B9EC-4FF2-ABA7-9444D9E0C99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2041C00E-B9EC-4FF2-ABA7-9444D9E0C99D}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{2041C00E-B9EC-4FF2-ABA7-9444D9E0C99D}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{2041C00E-B9EC-4FF2-ABA7-9444D9E0C99D}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{2041C00E-B9EC-4FF2-ABA7-9444D9E0C99D}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

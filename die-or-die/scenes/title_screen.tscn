@@ -1,17 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c35x6ihsiifu5"]
+[gd_scene load_steps=2 format=3 uid="uid://c35x6ihsiifu5"]
 
-[ext_resource type="Texture2D" uid="uid://bcnngx20n6nxi" path="res://resources/DieOrDie.png" id="1_xsoj8"]
-[ext_resource type="PackedScene" uid="uid://deuttny8qpucy" path="res://scenes/die_visual.tscn" id="2_ehpkh"]
+[ext_resource type="PackedScene" uid="uid://cxfft1wass0ut" path="res://scenes/title_screen_ui.tscn" id="1_m3o0d"]
 
 [node name="TitleScreen" type="Node2D"]
 
-[node name="Logo" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(644, 349)
-texture = ExtResource("1_xsoj8")
-
-[node name="DieVisual" parent="." instance=ExtResource("2_ehpkh")]
-position = Vector2(619, 335)
-top_face = 6
-left_face = 6
-right_face = 6
+[node name="TitleScreenUI" parent="." instance=ExtResource("1_m3o0d")]
+offset_right = 1280.0
+offset_bottom = 720.0
