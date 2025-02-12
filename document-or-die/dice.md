@@ -30,7 +30,7 @@
 
 ## [[Lucky Seven]]
 
-## [[Nervous Die]]
+## [[Shy Die]]
 
 ## [[Cannibal Die]]
 
