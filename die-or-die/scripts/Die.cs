@@ -2,15 +2,13 @@ using Godot;
 
 public abstract partial class Die : Node2D {
 
-	int[] faces;
-	int current_value;
-	bool frozen;
-	string description;
-	int dieid;
+	protected int[] faces;
+	protected int current_value;
+	protected bool frozen;
+	protected string description;
+	protected int dieid;
 	
-	public void __init__() {
-		// constructor   
-	}
+	public abstract void __init__();
 
 	public int Roll() {
 		return -1;
@@ -28,9 +26,14 @@ public abstract partial class Die : Node2D {
 		return current_value;
 	}
 
-	private void Cycle_Freeze() {
-		frozen = !frozen;
+	private void Freeze() {
+		frozen = true;
 	}
+
+    private void Unfreeze() {
+		frozen = false;
+	}
+
 	private void Set_Value(int value) {
 		current_value = value;
 	}
