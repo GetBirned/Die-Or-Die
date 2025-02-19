@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd3thi0w33hds"
-path="res://.godot/imported/template_die.png-b8cd2361dfdd3cf39048c35012c86f3a.ctex"
+uid="uid://bjukmh02g2lua"
+path="res://.godot/imported/numberfaces.png-7f0aaf42af97d9e95b62a3fb7ee0fef7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/template_die.png"
-dest_files=["res://.godot/imported/template_die.png-b8cd2361dfdd3cf39048c35012c86f3a.ctex"]
+source_file="res://resources/die_faces/numberfaces.png"
+dest_files=["res://.godot/imported/numberfaces.png-7f0aaf42af97d9e95b62a3fb7ee0fef7.ctex"]
 
 [params]
 

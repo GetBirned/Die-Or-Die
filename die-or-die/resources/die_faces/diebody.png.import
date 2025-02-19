@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://camflqjq3tf0h"
-path="res://.godot/imported/top_face.png-8bdde556f7445a0563002c20afd85f23.ctex"
+uid="uid://bscajpxqoemj1"
+path="res://.godot/imported/diebody.png-42e0648ff480de242ca86e958b74b1ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/die_faces/top_face.png"
-dest_files=["res://.godot/imported/top_face.png-8bdde556f7445a0563002c20afd85f23.ctex"]
+source_file="res://resources/die_faces/diebody.png"
+dest_files=["res://.godot/imported/diebody.png-42e0648ff480de242ca86e958b74b1ef.ctex"]
 
 [params]
 

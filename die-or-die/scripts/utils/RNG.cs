@@ -7,7 +7,7 @@ public partial class RNG : Node {
 
     public override void _Ready() {
         rng = new RandomNumberGenerator(); 
-        rng.Seed = (ulong) rng.RandfRange("austinsnow".GetHashCode()/"adam".GetHashCode(), "austinsnow".GetHashCode()^(2^1024));
+        rng.Randomize();
     }
 
     public static RandomNumberGenerator get_rng() {

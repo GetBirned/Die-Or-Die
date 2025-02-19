@@ -7,3 +7,24 @@
 [node name="TitleScreenUI" parent="." instance=ExtResource("1_m3o0d")]
 offset_right = 1280.0
 offset_bottom = 720.0
+
+[node name="debugbuttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 197.0
+offset_bottom = 237.0
+
+[node name="shopdebug" type="Button" parent="debugbuttons"]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "open shop"
+
+[node name="dicebagdebug" type="Button" parent="debugbuttons"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 180.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 32
+text = "open bag"
