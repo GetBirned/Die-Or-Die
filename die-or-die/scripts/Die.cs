@@ -1,17 +1,24 @@
+using System.Security.Cryptography;
 using Godot;
 
 public abstract partial class Die : Node2D {
 
 	protected int[] faces;
-	protected int current_value;
-	protected bool frozen;
+	protected int current_value=-1;
+	protected bool frozen=false;
 	protected string description;
 	protected int dieid;
 	
 	public abstract void __init__();
 
+	// doesn't handle animation only runs a random number generator
 	public int Roll() {
-		return -1;
+		/**
+		We should probably have a global rng somewhere
+		**/
+		
+		
+		return faces[RNG.get_rng().RandiRange(1, faces.Length-1)];
 	}
 
 	public void Show_Tooltip() {

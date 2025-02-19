@@ -18,6 +18,7 @@ config/icon="res://resources/DieOrDie.png"
 [autoload]
 
 CustomSignals="*res://scripts/utils/CustomSignals.cs"
+RNG="*res://scripts/utils/RNG.cs"
 
 [display]
 
