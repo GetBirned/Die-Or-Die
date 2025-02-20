@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://kp3fk6x1nw20"]
+
+[ext_resource type="PackedScene" uid="uid://deuttny8qpucy" path="res://scenes/die_visual.tscn" id="2_k60uq"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qbjc1"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oanyl"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bklka"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_li1gd"]
+normal = Vector2(-1, 0)
+
+[node name="DemoTray" type="Node2D"]
+
+[node name="Top" type="StaticBody2D" parent="."]
+position = Vector2(100, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+shape = SubResource("WorldBoundaryShape2D_qbjc1")
+
+[node name="Left" type="StaticBody2D" parent="."]
+position = Vector2(0, 100)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+shape = SubResource("WorldBoundaryShape2D_oanyl")
+
+[node name="Bottom" type="StaticBody2D" parent="."]
+position = Vector2(1180, 720)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+shape = SubResource("WorldBoundaryShape2D_bklka")
+
+[node name="Right" type="StaticBody2D" parent="."]
+position = Vector2(1280, 620)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+shape = SubResource("WorldBoundaryShape2D_li1gd")
+
+[node name="DieVisual" parent="." instance=ExtResource("2_k60uq")]
+position = Vector2(596, 388)

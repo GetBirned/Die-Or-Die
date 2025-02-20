@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://deuttny8qpucy"]
+[gd_scene load_steps=18 format=3 uid="uid://deuttny8qpucy"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_dwiy2"]
 [ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="2_1jmxq"]
@@ -142,7 +142,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="DieVisual" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
+size = Vector2(128, 128)
+
+[node name="DieVisual" type="CharacterBody2D"]
 script = ExtResource("1_dwiy2")
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
@@ -151,3 +154,6 @@ sprite_frames = SubResource("SpriteFrames_icm1i")
 [node name="Face" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3pw7x")
 animation = &"1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y05ou")
