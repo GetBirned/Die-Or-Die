@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c35x6ihsiifu5"]
+[gd_scene load_steps=3 format=3 uid="uid://c35x6ihsiifu5"]
 
+[ext_resource type="Script" path="res://scripts/gdscript/title_screen.gd" id="1_kqayp"]
 [ext_resource type="PackedScene" uid="uid://cxfft1wass0ut" path="res://scenes/title_screen_ui.tscn" id="1_m3o0d"]
 
 [node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_kqayp")
 
 [node name="TitleScreenUI" parent="." instance=ExtResource("1_m3o0d")]
 offset_right = 1280.0
@@ -28,3 +30,13 @@ offset_right = 180.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 32
 text = "open bag"
+
+[node name="rolldebug" type="Button" parent="debugbuttons"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 180.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 32
+text = "roll tray"
+
+[connection signal="pressed" from="debugbuttons/rolldebug" to="." method="_on_rolldebug_pressed"]

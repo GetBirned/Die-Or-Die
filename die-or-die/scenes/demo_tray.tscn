@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://kp3fk6x1nw20"]
+[gd_scene load_steps=7 format=3 uid="uid://kp3fk6x1nw20"]
 
+[ext_resource type="Script" path="res://scripts/gdscript/demo_tray.gd" id="1_dl2bt"]
 [ext_resource type="PackedScene" uid="uid://deuttny8qpucy" path="res://scenes/die_visual.tscn" id="2_k60uq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qbjc1"]
@@ -14,6 +15,7 @@ normal = Vector2(1, 0)
 normal = Vector2(-1, 0)
 
 [node name="DemoTray" type="Node2D"]
+script = ExtResource("1_dl2bt")
 
 [node name="Top" type="StaticBody2D" parent="."]
 position = Vector2(100, 0)
@@ -43,5 +45,36 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
 shape = SubResource("WorldBoundaryShape2D_li1gd")
 
-[node name="DieVisual" parent="." instance=ExtResource("2_k60uq")]
-position = Vector2(596, 388)
+[node name="Dice" type="Node2D" parent="."]
+
+[node name="DieVisual" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(251, 349)
+
+[node name="DieVisual2" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(453, 339)
+
+[node name="DieVisual3" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(648, 341)
+
+[node name="DieVisual4" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(838, 345)
+
+[node name="DieVisual5" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(1017, 344)
+
+[node name="RollButton" type="Button" parent="."]
+offset_right = 180.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "roll
+"
+
+[node name="BackButton" type="Button" parent="."]
+offset_top = 60.0
+offset_right = 180.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 32
+text = "back"
+
+[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
