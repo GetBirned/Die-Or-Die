@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://kp3fk6x1nw20"]
+[gd_scene load_steps=8 format=3 uid="uid://kp3fk6x1nw20"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/demo_tray.gd" id="1_dl2bt"]
 [ext_resource type="PackedScene" uid="uid://deuttny8qpucy" path="res://scenes/die_visual.tscn" id="2_k60uq"]
+[ext_resource type="Texture2D" uid="uid://7iuvh2yp5lqq" path="res://resources/graybox.png" id="3_rekqf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qbjc1"]
 normal = Vector2(0, 1)
@@ -17,50 +18,59 @@ normal = Vector2(-1, 0)
 [node name="DemoTray" type="Node2D"]
 script = ExtResource("1_dl2bt")
 
-[node name="Top" type="StaticBody2D" parent="."]
-position = Vector2(100, 0)
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Top" type="StaticBody2D" parent="Walls"]
+position = Vector2(334, 119)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
 shape = SubResource("WorldBoundaryShape2D_qbjc1")
 
-[node name="Left" type="StaticBody2D" parent="."]
-position = Vector2(0, 100)
+[node name="Left" type="StaticBody2D" parent="Walls"]
+position = Vector2(256, 177)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left"]
 shape = SubResource("WorldBoundaryShape2D_oanyl")
 
-[node name="Bottom" type="StaticBody2D" parent="."]
-position = Vector2(1180, 720)
+[node name="Bottom" type="StaticBody2D" parent="Walls"]
+position = Vector2(943, 567)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom"]
 shape = SubResource("WorldBoundaryShape2D_bklka")
 
-[node name="Right" type="StaticBody2D" parent="."]
-position = Vector2(1280, 620)
+[node name="Right" type="StaticBody2D" parent="Walls"]
+position = Vector2(1024, 516)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right"]
 shape = SubResource("WorldBoundaryShape2D_li1gd")
 
 [node name="Dice" type="Node2D" parent="."]
 
 [node name="DieVisual" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(251, 349)
+position = Vector2(401, 444)
 
 [node name="DieVisual2" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(453, 339)
+position = Vector2(519, 283)
 
 [node name="DieVisual3" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(648, 341)
+position = Vector2(653, 443)
 
 [node name="DieVisual4" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(838, 345)
+position = Vector2(752, 296)
 
 [node name="DieVisual5" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(1017, 344)
+position = Vector2(849, 436)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(640, 343)
+scale = Vector2(12, 7)
+texture = ExtResource("3_rekqf")
+metadata/_edit_lock_ = true
 
 [node name="RollButton" type="Button" parent="."]
 offset_right = 180.0
