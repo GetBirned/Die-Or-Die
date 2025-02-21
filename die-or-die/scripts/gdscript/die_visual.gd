@@ -40,18 +40,26 @@ func _physics_process(delta):
 			velocity = velocity * friction
 			friction -= 0.001
 				
-			if velocity.length() <= 100:
+			if velocity.length() <= 200:
 				velocity = Vector2(0,0)
 				$CollisionShape2D.disabled = true
 				status = "face"
+				scale = Vector2(0.75,0.75)
 		"face":
 			$Face.play(current_side)
+			$Face.visible = true
+			$Die.play("default")
 		#"dragging":
 			#global_position = get_global_mouse_position()
 
 func roll():
 	if not held:
 		$CollisionShape2D.disabled = false
+		$Face.visible = false
+		$Die.play("rolling")
+		$Die.frame = rng.randi_range(0, 12)
+		scale = Vector2(1,1)
+		
 		current_side = sides[rng.randi_range(0, sides.size()-1)]
 		roll_physics()
 
@@ -62,9 +70,11 @@ func roll_physics():
 
 
 func _on_button_button_down():
-	if status == "face":
-		status = "dragging"
+	pass
+	#if status == "face":
+		#status = "dragging"
 
 
 func _on_button_button_up():
-	status = "face"
+	pass
+	#status = "face"
