@@ -11,6 +11,8 @@ var do_bounce
 
 var held
 
+var return_position
+
 @onready var sides = ["1", "2", "3", "4", "5", "6"]
 
 @onready var current_side = "1"
@@ -42,19 +44,27 @@ func _physics_process(delta):
 				
 			if velocity.length() <= 200:
 				velocity = Vector2(0,0)
-				$CollisionShape2D.disabled = true
+				#$CollisionShape2D.disabled = true
 				status = "face"
 				scale = Vector2(0.75,0.75)
 		"face":
 			$Face.play(current_side)
 			$Face.visible = true
 			$Die.play("default")
-		#"dragging":
-			#global_position = get_global_mouse_position()
+		"dragging":
+			global_position = get_global_mouse_position()
+		"dropping":
+			if abs(global_position.distance_to(return_position)) < 10:
+				global_position = return_position
+				status = "face"
+			else:
+				global_position.x += (return_position.x - global_position.x) * 0.2
+				global_position.y += (return_position.y - global_position.y) * 0.2
+				
 
 func roll():
 	if not held:
-		$CollisionShape2D.disabled = false
+		#$CollisionShape2D.disabled = false
 		$Face.visible = false
 		$Die.play("rolling")
 		$Die.frame = rng.randi_range(0, 12)
@@ -70,11 +80,11 @@ func roll_physics():
 
 
 func _on_button_button_down():
-	pass
-	#if status == "face":
-		#status = "dragging"
+	if status == "face":
+		return_position = global_position
+		status = "dragging"
 
 
 func _on_button_button_up():
-	pass
-	#status = "face"
+	if status == "dragging":
+		status = "dropping"

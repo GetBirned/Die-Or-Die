@@ -18,59 +18,62 @@ normal = Vector2(-1, 0)
 [node name="DemoTray" type="Node2D"]
 script = ExtResource("1_dl2bt")
 
-[node name="Walls" type="Node2D" parent="."]
+[node name="Tray" type="Node2D" parent="."]
+position = Vector2(0, -50)
 
-[node name="Top" type="StaticBody2D" parent="Walls"]
-position = Vector2(334, 119)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
-shape = SubResource("WorldBoundaryShape2D_qbjc1")
-
-[node name="Left" type="StaticBody2D" parent="Walls"]
-position = Vector2(256, 177)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left"]
-shape = SubResource("WorldBoundaryShape2D_oanyl")
-
-[node name="Bottom" type="StaticBody2D" parent="Walls"]
-position = Vector2(943, 567)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom"]
-shape = SubResource("WorldBoundaryShape2D_bklka")
-
-[node name="Right" type="StaticBody2D" parent="Walls"]
-position = Vector2(1024, 516)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right"]
-shape = SubResource("WorldBoundaryShape2D_li1gd")
-
-[node name="Dice" type="Node2D" parent="."]
-
-[node name="DieVisual" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(401, 444)
-
-[node name="DieVisual2" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(519, 283)
-
-[node name="DieVisual3" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(653, 443)
-
-[node name="DieVisual4" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(752, 296)
-
-[node name="DieVisual5" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(849, 436)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Tray"]
 z_index = -1
 position = Vector2(640, 343)
 scale = Vector2(12, 7)
 texture = ExtResource("3_rekqf")
 metadata/_edit_lock_ = true
+
+[node name="Walls" type="Node2D" parent="Tray"]
+
+[node name="Top" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(334, 119)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Top"]
+shape = SubResource("WorldBoundaryShape2D_qbjc1")
+
+[node name="Left" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(256, 177)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Left"]
+shape = SubResource("WorldBoundaryShape2D_oanyl")
+
+[node name="Bottom" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(943, 567)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Bottom"]
+shape = SubResource("WorldBoundaryShape2D_bklka")
+
+[node name="Right" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(1024, 516)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Right"]
+shape = SubResource("WorldBoundaryShape2D_li1gd")
+
+[node name="Dice" type="Node2D" parent="."]
+
+[node name="DieVisual" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(392, 385)
+
+[node name="DieVisual2" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(509, 178)
+
+[node name="DieVisual3" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(603, 376)
+
+[node name="DieVisual4" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(766, 203)
+
+[node name="DieVisual5" parent="Dice" instance=ExtResource("2_k60uq")]
+position = Vector2(880, 348)
 
 [node name="RollButton" type="Button" parent="."]
 offset_right = 180.0
