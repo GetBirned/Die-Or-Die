@@ -42,7 +42,7 @@ public partial class Dice_Particles : CpuParticles2D {
 		Amount = 500; // temporary
 		Position = new Vector2(100, 100);
 		Emitting = true;
-		GD.Print(Amount);
+		//GD.Print(Amount);
 	}
 
 }

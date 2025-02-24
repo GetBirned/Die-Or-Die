@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://deuttny8qpucy"]
+[gd_scene load_steps=34 format=3 uid="uid://deuttny8qpucy"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_dwiy2"]
 [ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="2_1jmxq"]
@@ -247,6 +247,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
 size = Vector2(108, 108)
 
+[sub_resource type="Curve" id="Curve_1i7rn"]
+min_value = -10.0
+max_value = 80.0
+_data = [Vector2(0, 80), 0.0, 0.0, 0, 0, Vector2(1, -10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o4ekf"]
+min_value = 0.01
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="DieVisual" type="CharacterBody2D"]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_dwiy2")
@@ -275,6 +286,21 @@ offset_bottom = 58.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+one_shot = true
+speed_scale = 0.9
+explosiveness = 0.88
+randomness = 0.3
+spread = 180.0
+gravity = Vector2(0, 350)
+initial_velocity_max = 500.0
+linear_accel_curve = SubResource("Curve_1i7rn")
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_o4ekf")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

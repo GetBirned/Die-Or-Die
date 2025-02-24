@@ -63,6 +63,10 @@ func _physics_process(delta):
 				status = "face"
 				transition = true
 				scale = Vector2(0.75,0.75)
+				
+				# do particle effect
+				$CPUParticles2D.amount = 50 * get_value()
+				$CPUParticles2D.emitting = true
 		"face":
 			if transition:
 				particle_controller.explosion_vfx(current_side)
@@ -97,6 +101,12 @@ func roll_physics():
 	velocity = Vector2(rng.randf_range(-1,1), rng.randf_range(-1,1)).normalized() * speed
 	status = "rolling"
 
+
+func get_value():
+	if current_side.is_valid_int():
+		return current_side.to_int()
+	else:
+		return 0
 
 func _on_button_button_down():
 	if status == "face":
