@@ -13,6 +13,16 @@ var held
 
 var return_position
 
+var transition
+
+var signals
+
+var explosion_vfx
+
+var particle_script
+
+var particle_controller
+
 @onready var sides = ["1", "2", "3", "4", "5", "6"]
 
 @onready var current_side = "1"
@@ -24,9 +34,14 @@ func _ready():
 	speed = 1500
 	do_bounce = true
 	held = false
-	
-	
+	transition = false
+	signals = CustomSignals.get_instance()
+	explosion_vfx = signals.ExplosionVFX
 
+	particle_script = load("res://scripts/utils/Dice_Particles.cs")
+	particle_controller = particle_script.new()
+	add_child(particle_controller)
+	
 func _physics_process(delta):
 	match status:
 		"display":
@@ -46,8 +61,12 @@ func _physics_process(delta):
 				velocity = Vector2(0,0)
 				#$CollisionShape2D.disabled = true
 				status = "face"
+				transition = true
 				scale = Vector2(0.75,0.75)
 		"face":
+			if transition:
+				particle_controller.explosion_vfx(current_side)
+				transition = false
 			$Face.play(current_side)
 			$Face.visible = true
 			$Die.play("default")
