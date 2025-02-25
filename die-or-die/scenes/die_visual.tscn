@@ -258,12 +258,13 @@ min_value = 0.01
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="DieVisual" type="CharacterBody2D"]
+[node name="DieVisual" type="CharacterBody2D" groups=["die"]]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_dwiy2")
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_icm1i")
+autoplay = "default"
 
 [node name="Face" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3pw7x")

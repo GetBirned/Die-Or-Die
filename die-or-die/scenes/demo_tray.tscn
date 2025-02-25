@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfftt3ymxj4ay"]
+[gd_scene load_steps=11 format=3 uid="uid://cfftt3ymxj4ay"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/demo_tray.gd" id="1_dl2bt"]
 [ext_resource type="PackedScene" uid="uid://deuttny8qpucy" path="res://scenes/die_visual.tscn" id="2_k60uq"]
 [ext_resource type="Texture2D" uid="uid://7iuvh2yp5lqq" path="res://resources/graybox.png" id="3_rekqf"]
+[ext_resource type="PackedScene" uid="uid://6i2ors5uhxv2" path="res://scenes/hold_space.tscn" id="4_3p7wy"]
 
 [sub_resource type="Curve" id="Curve_rex32"]
 min_value = -200.0
@@ -117,6 +118,23 @@ offset_right = 180.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 32
 text = "back"
+
+[node name="HoldSpaces" type="Node2D" parent="."]
+
+[node name="HoldSpace" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(384, 600)
+
+[node name="HoldSpace2" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(512, 600)
+
+[node name="HoldSpace3" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(640, 600)
+
+[node name="HoldSpace4" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(768, 600)
+
+[node name="HoldSpace5" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(896, 600)
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
