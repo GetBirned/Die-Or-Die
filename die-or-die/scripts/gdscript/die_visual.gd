@@ -31,13 +31,6 @@ func _ready():
 	friction = 0.999
 	speed = 1500
 	do_bounce = true
-	transition = false
-	signals = CustomSignals.get_instance()
-	explosion_vfx = signals.ExplosionVFX
-
-	particle_script = load("res://scripts/utils/Dice_Particles.cs")
-	particle_controller = particle_script.new()
-	add_child(particle_controller)
 	
 func _physics_process(delta):
 	match status:
@@ -62,12 +55,9 @@ func _physics_process(delta):
 				scale = Vector2(0.75,0.75)
 				
 				# do particle effect
-				$CPUParticles2D.amount = 50 * get_value()
+				$CPUParticles2D.amount = 25 * pow(get_value(), 2)
 				$CPUParticles2D.emitting = true
 		"face":
-			if transition:
-				particle_controller.explosion_vfx(current_side)
-				transition = false
 			$Face.play(current_side)
 			$Face.visible = true
 			$Die.play("default")
