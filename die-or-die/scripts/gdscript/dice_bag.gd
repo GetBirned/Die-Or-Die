@@ -3,6 +3,7 @@ extends Node
 var full_bag = []
 var active_dice = []
 var rng
+var money = 999999;
 
 func _ready():
 	rng = RNG.get_rng()
