@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cmnig6822n6j3"]
+
+[node name="domino_visual" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

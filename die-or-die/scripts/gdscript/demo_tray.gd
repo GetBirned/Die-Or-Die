@@ -1,16 +1,22 @@
 extends Node2D
 
-
+var live_dice
+var rng
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	rng = RNG.get_rng()
+	load_dice(5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
+func load_dice(num):
+	live_dice = DiceBag.new_hand(num)
+	for die in live_dice:
+		var new_die = die.duplicate()
+		$Dice.add_child(new_die)
+		new_die.roll()
 
 func _on_roll_button_pressed():
 	var dice = $Dice.get_children()

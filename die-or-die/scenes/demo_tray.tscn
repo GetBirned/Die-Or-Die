@@ -1,19 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfftt3ymxj4ay"]
+[gd_scene load_steps=8 format=3 uid="uid://cfftt3ymxj4ay"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/demo_tray.gd" id="1_dl2bt"]
-[ext_resource type="PackedScene" uid="uid://deuttny8qpucy" path="res://scenes/die_visual.tscn" id="2_k60uq"]
-[ext_resource type="Texture2D" uid="uid://7iuvh2yp5lqq" path="res://resources/graybox.png" id="3_rekqf"]
+[ext_resource type="Texture2D" uid="uid://bbl85yjgt7k3e" path="res://resources/game_board.png" id="2_b0vf6"]
 [ext_resource type="PackedScene" uid="uid://6i2ors5uhxv2" path="res://scenes/hold_space.tscn" id="4_3p7wy"]
-
-[sub_resource type="Curve" id="Curve_rex32"]
-min_value = -200.0
-max_value = 200.0
-_data = [Vector2(0, 160.44), 0.0, 0.0, 0, 0, Vector2(0.983146, 142.857), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Curve" id="Curve_p6i7l"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.395604), 0.0, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qbjc1"]
 normal = Vector2(0, 1)
@@ -29,34 +18,15 @@ normal = Vector2(-1, 0)
 [node name="DemoTray" type="Node2D"]
 script = ExtResource("1_dl2bt")
 
-[node name="Particle_Example" type="CPUParticles2D" parent="."]
-visible = false
-amount = 800
-speed_scale = 0.9
-explosiveness = 0.88
-randomness = 0.3
-local_coords = true
-spread = 180.0
-initial_velocity_min = 25.5
-initial_velocity_max = 272.22
-linear_accel_min = 10.1
-linear_accel_max = 82.83
-linear_accel_curve = SubResource("Curve_rex32")
-angle_min = -87.3
-angle_max = 720.0
-scale_amount_min = 3.0
-scale_amount_max = 30.0
-scale_amount_curve = SubResource("Curve_p6i7l")
-
 [node name="Tray" type="Node2D" parent="."]
 position = Vector2(0, -50)
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Tray"]
 z_index = -1
-position = Vector2(640, 343)
-scale = Vector2(12, 7)
-texture = ExtResource("3_rekqf")
-metadata/_edit_lock_ = true
+position = Vector2(637.5, 350.5)
+scale = Vector2(0.65, 0.755)
+texture = ExtResource("2_b0vf6")
 
 [node name="Walls" type="Node2D" parent="Tray"]
 
@@ -88,23 +58,6 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Right"]
 shape = SubResource("WorldBoundaryShape2D_li1gd")
 
-[node name="Dice" type="Node2D" parent="."]
-
-[node name="DieVisual" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(392, 385)
-
-[node name="DieVisual2" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(509, 178)
-
-[node name="DieVisual3" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(603, 376)
-
-[node name="DieVisual4" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(766, 203)
-
-[node name="DieVisual5" parent="Dice" instance=ExtResource("2_k60uq")]
-position = Vector2(880, 348)
-
 [node name="RollButton" type="Button" parent="."]
 offset_right = 180.0
 offset_bottom = 60.0
@@ -135,6 +88,8 @@ position = Vector2(768, 600)
 
 [node name="HoldSpace5" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
 position = Vector2(896, 600)
+
+[node name="Dice" type="Node2D" parent="."]
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

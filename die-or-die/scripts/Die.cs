@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using Godot;
 
+
 public abstract partial class Die : Node2D {
 
 	protected int[] faces;
@@ -8,16 +9,16 @@ public abstract partial class Die : Node2D {
 	protected bool frozen=false;
 	protected string description;
 	protected int dieid;
+	protected PackedScene die_visual;
+
+	public override void _Ready(){
+		
+	}
 	
 	public abstract void __init__();
 
 	// doesn't handle animation only runs a random number generator
 	public int Roll() {
-		/**
-		We should probably have a global rng somewhere
-		**/
-		
-		
 		return faces[RNG.get_rng().RandiRange(1, faces.Length-1)];
 	}
 
