@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxfft1wass0ut"]
+[gd_scene load_steps=6 format=3 uid="uid://cxfft1wass0ut"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/title_screen_ui.gd" id="1_h4yye"]
 [ext_resource type="Texture2D" uid="uid://bcnngx20n6nxi" path="res://resources/DieOrDie.png" id="1_qw7xu"]
+[ext_resource type="Shader" path="res://scripts/scroll.gdshader" id="3_8tr6f"]
+[ext_resource type="Texture2D" uid="uid://c0imwgpfaj3pn" path="res://resources/dieOrdieBackground_dark.png" id="4_xfrdu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5lv1i"]
+shader = ExtResource("3_8tr6f")
 
 [node name="TitleScreenUI" type="Control"]
 layout_mode = 3
@@ -48,5 +53,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit
 "
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -2
+texture_repeat = 2
+material = SubResource("ShaderMaterial_5lv1i")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_xfrdu")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
