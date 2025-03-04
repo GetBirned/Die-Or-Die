@@ -1,0 +1,149 @@
+[gd_scene load_steps=15 format=3 uid="uid://cmnig6822n6j3"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/domino_visual.gd" id="1_klou8"]
+[ext_resource type="Texture2D" uid="uid://cf4ovx5hww6mq" path="res://resources/dominoDOD.png" id="2_umsks"]
+[ext_resource type="Texture2D" uid="uid://bjukmh02g2lua" path="res://resources/die_faces/numberfaces.png" id="3_i23xm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r78j"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kwtm"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtlsy"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rw5f"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o452v"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s7q6"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04k80"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6ng0"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4cb5"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsa31"]
+atlas = ExtResource("3_i23xm")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rpkv2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r78j")
+}],
+"loop": true,
+"name": &"1",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kwtm")
+}],
+"loop": true,
+"name": &"10",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtlsy")
+}],
+"loop": true,
+"name": &"2",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rw5f")
+}],
+"loop": true,
+"name": &"3",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o452v")
+}],
+"loop": true,
+"name": &"4",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s7q6")
+}],
+"loop": true,
+"name": &"5",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04k80")
+}],
+"loop": true,
+"name": &"6",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6ng0")
+}],
+"loop": true,
+"name": &"7",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4cb5")
+}],
+"loop": true,
+"name": &"8",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsa31")
+}],
+"loop": true,
+"name": &"9",
+"speed": 0.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"blank",
+"speed": 0.0
+}]
+
+[node name="DefaultDomino" type="Node2D"]
+script = ExtResource("1_klou8")
+
+[node name="Domino" type="Sprite2D" parent="."]
+texture = ExtResource("2_umsks")
+
+[node name="Threshold" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -64)
+sprite_frames = SubResource("SpriteFrames_rpkv2")
+animation = &"10"
+
+[node name="Rerolls" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 64)
+sprite_frames = SubResource("SpriteFrames_rpkv2")
+animation = &"1"

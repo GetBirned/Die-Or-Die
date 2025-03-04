@@ -16,7 +16,7 @@ func load_dice(num):
 	for die in live_dice:
 		var new_die = die.duplicate()
 		$Dice.add_child(new_die)
-		new_die.roll()
+		new_die.roll() # temporary solution, we need to figure out the bounds
 
 func _on_roll_button_pressed():
 	var dice = $Dice.get_children()

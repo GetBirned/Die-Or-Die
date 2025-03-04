@@ -259,18 +259,21 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="DefaultDie" type="CharacterBody2D" groups=["die"]]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_qy0e6")
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_icm1i")
 autoplay = "default"
 
 [node name="Face" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_3pw7x")
-animation = &"blank"
+animation = &"9"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_y05ou")
 
 [node name="Button" type="Button" parent="."]
