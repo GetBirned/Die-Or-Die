@@ -5,11 +5,9 @@ var held_die
 func _ready():
 	held_die = null
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
 
 func register_die(die):
 	held_die = die

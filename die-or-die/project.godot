@@ -17,9 +17,9 @@ config/icon="res://resources/DieOrDie.png"
 
 [autoload]
 
-CustomSignals="*res://scripts/utils/CustomSignals.cs"
-DiceDictionary="*res://scenes/dice_dictionary.tscn"
 RNG="*res://scripts/utils/RNG.cs"
+CustomSignals="*res://scripts/utils/CustomSignals.gd"
+DiceBag="*res://scenes/dice_bag.tscn"
 
 [display]
 
