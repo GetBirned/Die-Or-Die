@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://q7ep38vcw2ce"]
-
-[ext_resource type="Script" path="res://scripts/gdscript/dice_bag.gd" id="1_p0r2o"]
-
-[node name="DiceBag" type="Node2D"]
-script = ExtResource("1_p0r2o")
