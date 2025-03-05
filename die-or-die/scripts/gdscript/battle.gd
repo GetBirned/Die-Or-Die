@@ -4,13 +4,15 @@ var domino_stack = []
 var held_queue = []
 var live_dice = []
 var rng
+var rolls
+var top_domino
 
 func _ready() -> void:
 	rng = RNG.get_rng()
 	load_dice(5)
-	$DominoZone/DefaultDomino.calculate_difficulty()
-	domino_stack.push_front($DominoZone/DefaultDomino)
-	$DominoZone.create_dominoes(3)
+	domino_stack = $DominoZone.create_dominoes(1)
+	top_domino = domino_stack.front()
+	print(domino_stack.front())
 	
 func load_dice(num):
 	live_dice = DiceBag.new_hand(num)
@@ -20,9 +22,11 @@ func load_dice(num):
 		new_die.roll() # temporary solution, we need to figure out the bounds
 
 func _on_roll_button_pressed():
-	var dice = $Dice.get_children()
-	for die in dice:
-		die.roll()
+	if top_domino.rerolls > 0:
+		var dice = $Dice.get_children()
+		top_domino.reroll_used()
+		for die in dice:
+			die.roll()
 
 func _on_back_button_pressed():
 	live_dice.clear()
@@ -31,6 +35,8 @@ func _on_back_button_pressed():
 
 func _on_turn_locked_in() -> void:
 	var damage = 0
+	held_queue = $DiceHolder.get_dice()
 	for die in held_queue:
 		damage += die.get_value() # not ready for specials yet 
+	$DominoZone.damage_dominoes(damage)
 	

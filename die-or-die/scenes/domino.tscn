@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cmnig6822n6j3"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/domino_visual.gd" id="1_klou8"]
-[ext_resource type="Texture2D" uid="uid://cf4ovx5hww6mq" path="res://resources/dominoDOD.png" id="2_umsks"]
+[ext_resource type="Texture2D" uid="uid://bmlp1i1n6r5qd" path="res://resources/dominoDOD.png" id="2_umsks"]
 [ext_resource type="Texture2D" uid="uid://bjukmh02g2lua" path="res://resources/die_faces/numberfaces.png" id="3_i23xm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1r78j"]
@@ -133,6 +133,7 @@ animations = [{
 }]
 
 [node name="DefaultDomino" type="Node2D"]
+visible = false
 script = ExtResource("1_klou8")
 
 [node name="Domino" type="Sprite2D" parent="."]
