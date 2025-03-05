@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://c32wi6xoter6r"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
+[ext_resource type="Texture2D" uid="uid://cg7ib704ong3u" path="res://resources/DiceTray.png" id="2_abpih"]
+[ext_resource type="PackedScene" uid="uid://6i2ors5uhxv2" path="res://scenes/hold_space.tscn" id="3_v4qtq"]
+[ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_if4pf"]
+[ext_resource type="Script" path="res://scenes/domino_zone.gd" id="5_w14m2"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_inr8e"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8u48a"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_s2wek"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3j53m"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rdc6"]
+size = Vector2(192, 320)
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_eb5gq")
+
+[node name="Tray" type="Node2D" parent="."]
+position = Vector2(0, -50)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Tray"]
+z_index = -1
+position = Vector2(637.5, 350.5)
+texture = ExtResource("2_abpih")
+
+[node name="Walls" type="Node2D" parent="Tray"]
+
+[node name="Top" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(348, 210)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Top"]
+shape = SubResource("WorldBoundaryShape2D_inr8e")
+
+[node name="Left" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(331, 227)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Left"]
+shape = SubResource("WorldBoundaryShape2D_8u48a")
+
+[node name="Bottom" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(894, 491)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Bottom"]
+shape = SubResource("WorldBoundaryShape2D_s2wek")
+
+[node name="Right" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(939, 442)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Right"]
+shape = SubResource("WorldBoundaryShape2D_3j53m")
+
+[node name="RollButton" type="Button" parent="."]
+offset_right = 180.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "roll
+"
+
+[node name="BackButton" type="Button" parent="."]
+offset_top = 60.0
+offset_right = 180.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 32
+text = "back"
+
+[node name="HoldSpaces" type="Node2D" parent="."]
+
+[node name="HoldSpace" parent="HoldSpaces" instance=ExtResource("3_v4qtq")]
+position = Vector2(384, 600)
+
+[node name="HoldSpace2" parent="HoldSpaces" instance=ExtResource("3_v4qtq")]
+position = Vector2(512, 600)
+
+[node name="HoldSpace3" parent="HoldSpaces" instance=ExtResource("3_v4qtq")]
+position = Vector2(640, 600)
+
+[node name="HoldSpace4" parent="HoldSpaces" instance=ExtResource("3_v4qtq")]
+position = Vector2(768, 600)
+
+[node name="HoldSpace5" parent="HoldSpaces" instance=ExtResource("3_v4qtq")]
+position = Vector2(896, 600)
+
+[node name="Dice" type="Node2D" parent="."]
+
+[node name="LockInButton" type="Button" parent="."]
+offset_left = 1006.0
+offset_top = 559.0
+offset_right = 1188.0
+offset_bottom = 638.0
+text = "Lock In"
+
+[node name="DominoZone" type="Area2D" parent="."]
+position = Vector2(1128, 256)
+script = ExtResource("5_w14m2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DominoZone"]
+shape = SubResource("RectangleShape2D_0rdc6")
+
+[node name="DefaultDomino" parent="DominoZone" instance=ExtResource("4_if4pf")]
+
+[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="LockInButton" to="." method="_on_turn_locked_in"]

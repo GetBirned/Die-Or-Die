@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/gdscript/title_screen_ui.gd" id="1_h4yye"]
 [ext_resource type="Texture2D" uid="uid://bcnngx20n6nxi" path="res://resources/DieOrDie.png" id="1_qw7xu"]
-[ext_resource type="Shader" path="res://scripts/scroll.gdshader" id="3_8tr6f"]
+[ext_resource type="Shader" path="res://scripts/shaders/scroll.gdshader" id="3_8tr6f"]
 [ext_resource type="Texture2D" uid="uid://c0imwgpfaj3pn" path="res://resources/dieOrdieBackground_dark.png" id="4_xfrdu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5lv1i"]
