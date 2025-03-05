@@ -1,0 +1,314 @@
+[gd_scene load_steps=34 format=3 uid="uid://deuttny8qpucy"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_dwiy2"]
+[ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="2_1jmxq"]
+[ext_resource type="Texture2D" uid="uid://bjukmh02g2lua" path="res://resources/die_faces/numberfaces.png" id="3_25w1i"]
+[ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_fmseo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi1f6"]
+atlas = ExtResource("2_1jmxq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crypt"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qocx4"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhnmq"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26h0u"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxiy4"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bkpw"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukajp"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wqhk"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4hyc"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6818"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glb8i"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5av7"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uocci"]
+atlas = ExtResource("3_fmseo")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_icm1i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi1f6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crypt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qocx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhnmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26h0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxiy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bkpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukajp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wqhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4hyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6818")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glb8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5av7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uocci")
+}],
+"loop": true,
+"name": &"rolling",
+"speed": 18.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r78j"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kwtm"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtlsy"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rw5f"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o452v"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s7q6"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04k80"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6ng0"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4cb5"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsa31"]
+atlas = ExtResource("3_25w1i")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3pw7x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1r78j")
+}],
+"loop": true,
+"name": &"1",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kwtm")
+}],
+"loop": true,
+"name": &"10",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtlsy")
+}],
+"loop": true,
+"name": &"2",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rw5f")
+}],
+"loop": true,
+"name": &"3",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o452v")
+}],
+"loop": true,
+"name": &"4",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s7q6")
+}],
+"loop": true,
+"name": &"5",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04k80")
+}],
+"loop": true,
+"name": &"6",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6ng0")
+}],
+"loop": true,
+"name": &"7",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4cb5")
+}],
+"loop": true,
+"name": &"8",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsa31")
+}],
+"loop": true,
+"name": &"9",
+"speed": 0.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"blank",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
+size = Vector2(108, 108)
+
+[sub_resource type="Curve" id="Curve_1i7rn"]
+min_value = -10.0
+max_value = 80.0
+_data = [Vector2(0, 80), 0.0, 0.0, 0, 0, Vector2(1, -10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o4ekf"]
+min_value = 0.01
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="DieVisual" type="CharacterBody2D" groups=["die"]]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_dwiy2")
+
+[node name="Die" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_icm1i")
+autoplay = "default"
+
+[node name="Face" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3pw7x")
+animation = &"blank"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y05ou")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -58.0
+offset_right = 58.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+speed_scale = 0.9
+explosiveness = 1.0
+randomness = 0.21
+lifetime_randomness = 0.15
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_max = 196.97
+angular_velocity_min = -5.0
+angular_velocity_max = 10.0
+linear_accel_min = -16.16
+linear_accel_max = 14.15
+linear_accel_curve = SubResource("Curve_1i7rn")
+scale_amount_min = 5.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_o4ekf")
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
