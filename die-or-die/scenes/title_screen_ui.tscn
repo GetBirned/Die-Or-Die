@@ -17,6 +17,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h4yye")
 
+[node name="Background" type="TextureRect" parent="."]
+z_index = -2
+texture_repeat = 2
+material = SubResource("ShaderMaterial_5lv1i")
+layout_mode = 2
+offset_right = 1284.0
+offset_bottom = 702.0
+texture = ExtResource("4_xfrdu")
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -53,14 +62,5 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Quit
 "
-
-[node name="Background" type="TextureRect" parent="."]
-z_index = -2
-texture_repeat = 2
-material = SubResource("ShaderMaterial_5lv1i")
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("4_xfrdu")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
