@@ -13,11 +13,14 @@ func create_dominoes(count:int):
 		var top_domino = $DefaultDomino.duplicate()
 		top_domino.calculate_difficulty()
 		add_child(top_domino)
+		top_domino.show()
 		domino_stack.push_front(top_domino)
+		
+	domino_stack.front().active = true
+	place_dominoes()
+	return domino_stack
 	
-	place_dominoes(domino_stack)
-	
-func place_dominoes(domino_stack):
+func place_dominoes():
 	var count = domino_stack.size()
 	for i in range(count):
 		var domino = domino_stack[i]
@@ -27,12 +30,19 @@ func place_dominoes(domino_stack):
 		domino.z_index = count-i # puts the top domino on the highest layer
 
 func destroy_top():
-	pass
+	var active_domino = domino_stack.pop_front()
+	active_domino.active = false
+	remove_child(active_domino)
 		
+# damages the top domino
 func damage_dominoes(damage):
-	var top_life = domino_stack.front().get_life()
+	if domino_stack.is_empty():
+		return
+	var active_domino = domino_stack.front()
+	var top_life = active_domino.get_life()
 	if damage < top_life:
-		domino_stack.front().take_damage(damage)
+		active_domino.take_damage(damage)
+		active_domino.update_sprite()
 	else:
 		var remaining = top_life-damage
 		destroy_top()
