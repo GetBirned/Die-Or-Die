@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfftt3ymxj4ay"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/demo_tray.gd" id="1_dl2bt"]
+[ext_resource type="Texture2D" uid="uid://cg7ib704ong3u" path="res://resources/DiceTray.png" id="2_18ihy"]
+[ext_resource type="PackedScene" uid="uid://6i2ors5uhxv2" path="res://scenes/hold_space.tscn" id="4_3p7wy"]
+[ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_nx7js"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qbjc1"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oanyl"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bklka"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_li1gd"]
+normal = Vector2(-1, 0)
+
+[node name="DemoTray" type="Node2D"]
+script = ExtResource("1_dl2bt")
+
+[node name="Tray" type="Node2D" parent="."]
+position = Vector2(0, -50)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Tray"]
+z_index = -1
+position = Vector2(637.5, 350.5)
+texture = ExtResource("2_18ihy")
+
+[node name="Walls" type="Node2D" parent="Tray"]
+
+[node name="Top" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(348, 210)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Top"]
+shape = SubResource("WorldBoundaryShape2D_qbjc1")
+
+[node name="Left" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(331, 227)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Left"]
+shape = SubResource("WorldBoundaryShape2D_oanyl")
+
+[node name="Bottom" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(894, 491)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Bottom"]
+shape = SubResource("WorldBoundaryShape2D_bklka")
+
+[node name="Right" type="StaticBody2D" parent="Tray/Walls"]
+position = Vector2(939, 442)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Right"]
+shape = SubResource("WorldBoundaryShape2D_li1gd")
+
+[node name="RollButton" type="Button" parent="."]
+offset_right = 180.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "roll
+"
+
+[node name="BackButton" type="Button" parent="."]
+offset_top = 60.0
+offset_right = 180.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 32
+text = "back"
+
+[node name="HoldSpaces" type="Node2D" parent="."]
+
+[node name="HoldSpace" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(384, 600)
+
+[node name="HoldSpace2" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(512, 600)
+
+[node name="HoldSpace3" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(640, 600)
+
+[node name="HoldSpace4" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(768, 600)
+
+[node name="HoldSpace5" parent="HoldSpaces" instance=ExtResource("4_3p7wy")]
+position = Vector2(896, 600)
+
+[node name="Dice" type="Node2D" parent="."]
+
+[node name="DefaultDomino" parent="." instance=ExtResource("4_nx7js")]
+position = Vector2(1121, 219)
+
+[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
