@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://deuttny8qpucy"]
+[gd_scene load_steps=39 format=3 uid="uid://deuttny8qpucy"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_qy0e6"]
 [ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="2_24aor"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_lhxen"]
 [ext_resource type="Texture2D" uid="uid://bjukmh02g2lua" path="res://resources/die_faces/numberfaces.png" id="4_b8yw1"]
 [ext_resource type="Script" path="res://scenes/die.gd" id="5_nljec"]
+[ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="7_l1dke"]
+[ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="8_hl5ug"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qnggy"]
 shader = ExtResource("2_wrkbx")
@@ -277,8 +279,9 @@ autoplay = "default"
 script = ExtResource("5_nljec")
 
 [node name="Face" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_3pw7x")
-animation = &"9"
+animation = &"2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y05ou")
@@ -319,6 +322,27 @@ linear_accel_curve = SubResource("Curve_1i7rn")
 scale_amount_min = 5.0
 scale_amount_max = 30.0
 scale_amount_curve = SubResource("Curve_o4ekf")
+
+[node name="DieFaces" parent="." instance=ExtResource("7_l1dke")]
+
+[node name="Sides" type="Node" parent="."]
+
+[node name="Side" parent="Sides" instance=ExtResource("8_hl5ug")]
+
+[node name="Side2" parent="Sides" instance=ExtResource("8_hl5ug")]
+value = 2.0
+
+[node name="Side3" parent="Sides" instance=ExtResource("8_hl5ug")]
+value = 3.0
+
+[node name="Side4" parent="Sides" instance=ExtResource("8_hl5ug")]
+value = 4.0
+
+[node name="Side5" parent="Sides" instance=ExtResource("8_hl5ug")]
+value = 5.0
+
+[node name="Side6" parent="Sides" instance=ExtResource("8_hl5ug")]
+value = 6.0
 
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]
