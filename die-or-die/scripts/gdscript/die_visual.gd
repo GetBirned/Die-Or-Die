@@ -47,6 +47,7 @@ func roll():
 	if status != HELD:
 		$Face.visible = false
 		$Die.play("rolling")
+		$Die.enable_blur()
 		$Die.frame = rng.randi_range(0, 12)
 		scale = Vector2(.66,.66)
 		
@@ -85,6 +86,7 @@ func rolling(delta):
 		#$CollisionShape2D.disabled = true
 		status = FACE
 		scale = Vector2(0.50,0.50)
+		$Die.disable_blur()
 		
 		# do particle effect
 		$CPUParticles2D.amount = 25 * pow(get_value(), 2)

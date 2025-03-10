@@ -9,7 +9,7 @@ var top_domino
 
 func _ready() -> void:
 	rng = RNG.get_rng()
-	load_dice(5)
+	load_dice(6)
 	domino_stack = $DominoZone.create_dominoes(1)
 	top_domino = domino_stack.front()
 	print(domino_stack.front())
@@ -19,6 +19,7 @@ func load_dice(num):
 	for die in live_dice:
 		var new_die = die.duplicate()
 		$Dice.add_child(new_die)
+		new_die.position = $Tray/Sprite2D.position
 		new_die.roll() # temporary solution, we need to figure out the bounds
 
 func _on_roll_button_pressed():
