@@ -62,6 +62,9 @@ func roll_physics():
 
 func get_value():
 	current_side.get_value()
+	
+func score():
+	current_side.score()
 
 # holding logic
 func set_closest(slot: Area2D):
@@ -87,7 +90,7 @@ func rolling(delta):
 		$Die.disable_blur()
 		
 		# do particle effect
-		$CPUParticles2D.amount = 25 * pow(1, 2)
+		$CPUParticles2D.amount = 25 * pow(int(current_side.get_value()), 2)
 		$CPUParticles2D.emitting = true
 
 func face():

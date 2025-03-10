@@ -9,3 +9,6 @@ enum GameStates {BATTLE, SHOP}
 @onready var money = 0
 
 @onready var blank_value = 0
+
+func reset_score():
+	current_score = 0
