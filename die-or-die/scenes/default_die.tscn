@@ -195,8 +195,6 @@ animation = &"multiplier"
 [node name="Sides" type="Node" parent="."]
 
 [node name="Side" parent="Sides" instance=ExtResource("8_hl5ug")]
-value = 10.0
-type = 3
 
 [node name="Side2" parent="Sides" instance=ExtResource("8_hl5ug")]
 value = 2.0
