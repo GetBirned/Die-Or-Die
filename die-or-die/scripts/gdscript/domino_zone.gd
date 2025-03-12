@@ -3,6 +3,7 @@ extends Area2D
 var zone_bounds: Rect2
 var rng: RandomNumberGenerator
 var domino_stack = []
+var rerolls
 
 func _ready() -> void:
 	zone_bounds = $CollisionShape2D.shape.get_rect()
@@ -33,11 +34,15 @@ func destroy_top():
 	var active_domino = domino_stack.pop_front()
 	active_domino.active = false
 	remove_child(active_domino)
+	
+	rerolls = domino_stack.front()
 		
 # damages the top domino
 func damage_dominoes(damage):
 	if domino_stack.is_empty():
+		get_tree().change_scene_to_file("res://scenes/shop.tscn")
 		return
+		
 	var active_domino = domino_stack.front()
 	var top_life = active_domino.get_life()
 	if damage < top_life:
@@ -48,3 +53,10 @@ func damage_dominoes(damage):
 		destroy_top()
 		if remaining > 0:
 			damage_dominoes(remaining)
+			
+		elif domino_stack.is_empty():
+			get_tree().change_scene_to_file("res://scenes/shop.tscn")
+			return
+
+func get_rerolls():
+	return rerolls

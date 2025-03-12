@@ -9,7 +9,7 @@ var top_domino
 
 func _ready() -> void:
 	rng = RNG.get_rng()
-	load_dice(6)
+	load_dice(5)
 	domino_stack = $DominoZone.create_dominoes(1)
 	top_domino = domino_stack.front()
 	print(domino_stack.front())
@@ -35,10 +35,16 @@ func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
 func _on_turn_locked_in() -> void:
+	var num = 0
 	held_queue = $DiceHolder.get_dice()
 	GameInfo.reset_score()
 	for die in held_queue:
 		die.score()
+		DiceBag.discard_die(die) # moves dice from active to used
+		die.queue_free() # removes dice from the scene
+		num += 1
 	print(GameInfo.current_score)
 	$DominoZone.damage_dominoes(GameInfo.current_score)
+	
+	load_dice(num)
 	
