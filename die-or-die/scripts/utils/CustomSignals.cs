@@ -17,5 +17,5 @@ public partial class CustomSignals : Node
     }
 
 	// make new signals down here
-	[Signal] public delegate void ExplosionVFXEventHandler();
+	[Signal] public delegate void DiceLockedInEventHandler();
 }
