@@ -49,7 +49,7 @@ func roll():
 		$DieFaces.visible = false
 		$Die.play("rolling")
 		$Die.enable_blur()
-		$Die.frame = rng.randi_range(0, 12)
+		$Die.set_frame(rng.randi_range(0, $Die.sprite_frames.get_frame_count("rolling")-1)) 
 		scale = Vector2(.66,.66)
 		
 		current_side = $Sides.get_children().pick_random()
