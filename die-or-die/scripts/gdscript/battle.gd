@@ -35,16 +35,16 @@ func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
 func _on_turn_locked_in() -> void:
-	var damage = 0
 	var num = 0
 	held_queue = $DiceHolder.get_dice()
+	GameInfo.reset_score()
 	for die in held_queue:
-		damage += die.get_value() # not ready for specials yet 
+		die.score()
 		DiceBag.discard_die(die) # moves dice from active to used
 		die.queue_free() # removes dice from the scene
 		num += 1
-		
-	$DominoZone.damage_dominoes(damage)
+	print(GameInfo.current_score)
+	$DominoZone.damage_dominoes(GameInfo.current_score)
 	
 	load_dice(num)
 	
