@@ -1,10 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://deuttny8qpucy"]
+[gd_scene load_steps=27 format=3 uid="uid://deuttny8qpucy"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_qy0e6"]
 [ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="2_24aor"]
 [ext_resource type="Shader" path="res://scripts/shaders/blur.gdshader" id="2_wrkbx"]
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_lhxen"]
-[ext_resource type="Texture2D" uid="uid://bjukmh02g2lua" path="res://resources/die_faces/numberfaces.png" id="4_b8yw1"]
 [ext_resource type="Script" path="res://scenes/die.gd" id="5_nljec"]
 [ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="7_l1dke"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="8_hl5ug"]
@@ -127,134 +126,6 @@ animations = [{
 "speed": 18.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1r78j"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kwtm"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(128, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qtlsy"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8rw5f"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o452v"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2s7q6"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_04k80"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w6ng0"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s4cb5"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xsa31"]
-atlas = ExtResource("4_b8yw1")
-region = Rect2(0, 256, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3pw7x"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1r78j")
-}],
-"loop": true,
-"name": &"1",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1kwtm")
-}],
-"loop": true,
-"name": &"10",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qtlsy")
-}],
-"loop": true,
-"name": &"2",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8rw5f")
-}],
-"loop": true,
-"name": &"3",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o452v")
-}],
-"loop": true,
-"name": &"4",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2s7q6")
-}],
-"loop": true,
-"name": &"5",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_04k80")
-}],
-"loop": true,
-"name": &"6",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w6ng0")
-}],
-"loop": true,
-"name": &"7",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s4cb5")
-}],
-"loop": true,
-"name": &"8",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xsa31")
-}],
-"loop": true,
-"name": &"9",
-"speed": 0.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"blank",
-"speed": 0.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
 size = Vector2(108, 108)
 
@@ -277,11 +148,6 @@ material = SubResource("ShaderMaterial_qnggy")
 sprite_frames = SubResource("SpriteFrames_icm1i")
 autoplay = "default"
 script = ExtResource("5_nljec")
-
-[node name="Face" type="AnimatedSprite2D" parent="."]
-visible = false
-sprite_frames = SubResource("SpriteFrames_3pw7x")
-animation = &"2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y05ou")
@@ -324,10 +190,13 @@ scale_amount_max = 30.0
 scale_amount_curve = SubResource("Curve_o4ekf")
 
 [node name="DieFaces" parent="." instance=ExtResource("7_l1dke")]
+animation = &"multiplier"
 
 [node name="Sides" type="Node" parent="."]
 
 [node name="Side" parent="Sides" instance=ExtResource("8_hl5ug")]
+value = 10.0
+type = 3
 
 [node name="Side2" parent="Sides" instance=ExtResource("8_hl5ug")]
 value = 2.0
