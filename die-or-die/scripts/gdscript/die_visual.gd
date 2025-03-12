@@ -13,7 +13,7 @@ var closest_space
 var die_name
 
 var sides = ["1", "2", "3", "4", "5", "6"]
-var current_side = sides[0]
+var current_side;
 
 func _ready():
 	die_name = "D6"
@@ -22,6 +22,7 @@ func _ready():
 	friction = 0.999
 	speed = 1500
 	do_bounce = true
+	current_side = $Sides.get_child(0)
 	
 func _physics_process(delta):
 	match status:
@@ -45,12 +46,13 @@ func _physics_process(delta):
 
 func roll():
 	if status != HELD:
-		$Face.visible = false
+		$DieFaces.visible = false
 		$Die.play("rolling")
+		$Die.enable_blur()
 		$Die.frame = rng.randi_range(0, 12)
 		scale = Vector2(.66,.66)
 		
-		current_side = sides[rng.randi_range(0, sides.size()-1)]
+		current_side = $Sides.get_children().pick_random()
 		roll_physics()
 
 func roll_physics():
@@ -59,10 +61,10 @@ func roll_physics():
 	status = ROLLING
 
 func get_value():
-	if current_side.is_valid_int():
-		return current_side.to_int()
-	else:
-		return 0
+	current_side.get_value()
+	
+func score():
+	current_side.score()
 
 # holding logic
 func set_closest(slot: Area2D):
@@ -85,14 +87,16 @@ func rolling(delta):
 		#$CollisionShape2D.disabled = true
 		status = FACE
 		scale = Vector2(0.50,0.50)
+		$Die.disable_blur()
 		
 		# do particle effect
-		$CPUParticles2D.amount = 25 * pow(get_value(), 2)
+		$CPUParticles2D.amount = 25 * pow(int(current_side.get_value()), 2)
 		$CPUParticles2D.emitting = true
 
 func face():
-	$Face.play(current_side)
-	$Face.visible = true
+	$DieFaces.play(current_side.get_sprite())
+	$DieFaces.set_frame(current_side.get_value())
+	$DieFaces.visible = true
 	$Die.play("default")
 
 
