@@ -211,5 +211,8 @@ value = 5.0
 [node name="Side6" parent="Sides" instance=ExtResource("8_hl5ug")]
 value = 6.0
 
+[node name="Special" type="Node" parent="."]
+
+[connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]

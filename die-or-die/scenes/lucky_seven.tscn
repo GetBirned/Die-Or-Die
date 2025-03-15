@@ -214,5 +214,7 @@ value = 7.0
 [node name="Side6" parent="Sides" instance=ExtResource("7_vun1u")]
 type = 1
 
+[node name="Special" type="Node" parent="."]
+
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]

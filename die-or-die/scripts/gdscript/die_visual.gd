@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal connect_special
+signal rolled
+
 enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD}
 
 var rng
@@ -23,6 +26,7 @@ func _ready():
 	speed = 1500
 	do_bounce = true
 	current_side = $Sides.get_child(0)
+	connect_special.emit()
 	
 func _physics_process(delta):
 	match status:
@@ -44,7 +48,7 @@ func _physics_process(delta):
 		HELD:
 			position = closest_space.global_position
 
-func roll():
+func roll(initial = false):
 	if status != HELD:
 		$DieFaces.visible = false
 		$Die.play("rolling")
@@ -53,6 +57,10 @@ func roll():
 		scale = Vector2(.66,.66)
 		
 		current_side = $Sides.get_children().pick_random()
+		
+		if not initial:
+			rolled.emit()
+			
 		roll_physics()
 
 func roll_physics():

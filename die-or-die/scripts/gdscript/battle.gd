@@ -20,7 +20,7 @@ func load_dice(num):
 		var new_die = die.duplicate()
 		$Dice.add_child(new_die)
 		new_die.position = $Tray/Sprite2D.position
-		new_die.roll() # temporary solution, we need to figure out the bounds
+		new_die.roll(true) # temporary solution, we need to figure out the bounds
 
 func _on_roll_button_pressed():
 	if top_domino.rerolls > 0:
