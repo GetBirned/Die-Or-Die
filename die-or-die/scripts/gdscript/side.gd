@@ -2,7 +2,7 @@ extends Node
 
 enum Types {NUMBER, BLANK, MONEY, MULTIPLIER}
 
-@export var value: float = 1
+@export var value: int = 1
 
 @export var type: Types
 

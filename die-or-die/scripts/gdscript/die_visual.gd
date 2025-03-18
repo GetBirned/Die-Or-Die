@@ -54,7 +54,6 @@ func roll(initial = false):
 		$Die.play("rolling")
 		$Die.enable_blur()
 		$Die.frame = rng.randi_range(0, 12)
-		scale = Vector2(.66,.66)
 		
 		current_side = $Sides.get_children().pick_random()
 		
@@ -94,7 +93,6 @@ func rolling(delta):
 		velocity = Vector2(0,0)
 		#$CollisionShape2D.disabled = true
 		status = FACE
-		scale = Vector2(0.50,0.50)
 		$Die.disable_blur()
 		
 		# do particle effect
@@ -102,8 +100,7 @@ func rolling(delta):
 		$CPUParticles2D.emitting = true
 
 func face():
-	$DieFaces.play(current_side.get_sprite())
-	$DieFaces.set_frame(current_side.get_value())
+	$DieFaces.set_face(current_side)
 	$DieFaces.visible = true
 	$Die.play("default")
 
