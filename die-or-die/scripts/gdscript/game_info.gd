@@ -12,6 +12,7 @@ signal dice_locked
 @onready var state = GameStates.BATTLE
 @onready var money = 0
 @onready var blank_value = 0
+@onready var last_scored_side = null
 
 func reset_score():
 	current_score = 0

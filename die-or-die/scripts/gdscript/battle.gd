@@ -39,7 +39,7 @@ func _on_turn_locked_in() -> void:
 	held_queue = $DiceHolder.get_dice()
 	GameInfo.reset_score()
 	for die in held_queue:
-		die.score()
+		await die.score()
 		DiceBag.discard_die(die) # moves dice from active to used
 		die.queue_free() # removes dice from the scene
 		num += 1

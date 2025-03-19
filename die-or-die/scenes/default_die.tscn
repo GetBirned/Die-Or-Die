@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://deuttny8qpucy"]
+[gd_scene load_steps=28 format=3 uid="uid://deuttny8qpucy"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_qy0e6"]
 [ext_resource type="Shader" path="res://scripts/shaders/blur.gdshader" id="2_wrkbx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_lhxen"]
 [ext_resource type="Script" path="res://scenes/die.gd" id="5_nljec"]
 [ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="7_l1dke"]
+[ext_resource type="Script" path="res://scripts/gdscript/no_special.gd" id="8_5vvr3"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="8_hl5ug"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qnggy"]
@@ -211,6 +212,7 @@ value = 5
 value = 6
 
 [node name="Special" type="Node" parent="."]
+script = ExtResource("8_5vvr3")
 
 [connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]

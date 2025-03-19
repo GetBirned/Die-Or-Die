@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal connect_special
 signal rolled
 
-enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD}
+enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
 
 var rng
 var status
@@ -47,6 +47,8 @@ func _physics_process(delta):
 				global_position.y += (return_position.y - global_position.y) * 0.2
 		HELD:
 			position = closest_space.global_position
+		SHAKE:
+			shake(delta)
 
 func roll(initial = false):
 	if status != HELD:
@@ -62,6 +64,28 @@ func roll(initial = false):
 			
 		roll_physics()
 
+@onready var shake_index = 0
+@onready var shake_speed = 300
+signal shake_done
+func shake(delta):
+	if shake_index == 0:
+		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
+		if get_rotation_degrees() < -10:
+			shake_index = 1
+	elif shake_index == 1:
+		set_rotation_degrees(get_rotation_degrees() + (shake_speed*delta))
+		if get_rotation_degrees() > 10:
+			shake_index = 2
+	else:
+		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
+		if get_rotation_degrees() < 0:
+			shake_index = 0
+			status = HELD
+			set_rotation_degrees(0)
+			shake_done.emit()
+			
+	
+
 func roll_physics():
 	friction = 0.999
 	velocity = Vector2(rng.randf_range(-1,1), rng.randf_range(-1,1)).normalized() * speed
@@ -71,7 +95,14 @@ func get_value():
 	current_side.get_value()
 	
 func score():
+	print("scoring")
 	current_side.score()
+	status = SHAKE
+	await shake_done
+
+	
+func call_special():
+	return $Special.manual_special()
 
 # holding logic
 func set_closest(slot: Area2D):

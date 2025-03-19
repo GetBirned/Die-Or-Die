@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cjalsskb3awuk"]
+[gd_scene load_steps=28 format=3 uid="uid://cjalsskb3awuk"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_aahar"]
 [ext_resource type="Shader" path="res://scripts/shaders/blur.gdshader" id="2_avnku"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/die.gd" id="5_a8obp"]
 [ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="6_0ogy3"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="7_vun1u"]
+[ext_resource type="Script" path="res://scripts/gdscript/no_special.gd" id="8_aqek5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qnggy"]
 shader = ExtResource("2_avnku")
@@ -215,6 +216,7 @@ value = 7
 type = 1
 
 [node name="Special" type="Node" parent="."]
+script = ExtResource("8_aqek5")
 
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]
