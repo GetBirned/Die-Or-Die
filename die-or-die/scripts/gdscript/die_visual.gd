@@ -65,16 +65,15 @@ func roll(initial = false):
 		roll_physics()
 
 @onready var shake_index = 0
-@onready var shake_speed = 300
-signal shake_done
+@onready var shake_speed = 400
 func shake(delta):
 	if shake_index == 0:
 		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
-		if get_rotation_degrees() < -10:
+		if get_rotation_degrees() < -20:
 			shake_index = 1
 	elif shake_index == 1:
 		set_rotation_degrees(get_rotation_degrees() + (shake_speed*delta))
-		if get_rotation_degrees() > 10:
+		if get_rotation_degrees() > 20:
 			shake_index = 2
 	else:
 		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
@@ -82,9 +81,8 @@ func shake(delta):
 			shake_index = 0
 			status = HELD
 			set_rotation_degrees(0)
-			shake_done.emit()
 			
-	
+
 
 func roll_physics():
 	friction = 0.999
@@ -97,10 +95,13 @@ func get_value():
 func score():
 	print("scoring")
 	current_side.score()
-	status = SHAKE
-	await shake_done
+	do_shake()
 
-	
+func do_shake():
+	if status == HELD:
+		set_rotation_degrees(0)
+		status = SHAKE
+
 func call_special():
 	return $Special.manual_special()
 

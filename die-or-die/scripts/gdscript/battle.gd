@@ -39,12 +39,19 @@ func _on_turn_locked_in() -> void:
 	held_queue = $DiceHolder.get_dice()
 	GameInfo.reset_score()
 	for die in held_queue:
-		await die.score()
+		die.score()
+		$Timer.start()
+		await $Timer.timeout
 		DiceBag.discard_die(die) # moves dice from active to used
-		die.queue_free() # removes dice from the scene
+		#die.queue_free() # removes dice from the scene
+		
+		for special in held_queue:
+			if special.call_special():
+				$Timer.start()
+				await $Timer.timeout
 		num += 1
 	print(GameInfo.current_score)
-	$DominoZone.damage_dominoes(GameInfo.current_score)
+	#$DominoZone.damage_dominoes(GameInfo.current_score)
 	
-	load_dice(num)
+	#load_dice(num)
 	

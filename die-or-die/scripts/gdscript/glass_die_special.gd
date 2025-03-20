@@ -9,4 +9,4 @@ func signal_special():
 		get_parent().queue_free()
 
 func manual_special():
-	return true
+	return false

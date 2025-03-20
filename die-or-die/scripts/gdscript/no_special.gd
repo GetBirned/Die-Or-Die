@@ -5,4 +5,4 @@ extends Node
 # Instead create a new script and attach it to this node instead
 
 func manual_special():
-	return true
+	return false
