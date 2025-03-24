@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_lhxen"]
 [ext_resource type="Texture2D" uid="uid://bjukmh02g2lua" path="res://resources/die_faces/numberfaces.png" id="4_b8yw1"]
 [ext_resource type="Script" path="res://scenes/die.gd" id="5_nljec"]
-[ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="7_l1dke"]
-[ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="8_hl5ug"]
+[ext_resource type="PackedScene" path="res://scenes/die_faces.tscn" id="7_l1dke"]
+[ext_resource type="PackedScene" path="res://scenes/side.tscn" id="8_hl5ug"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qnggy"]
 shader = ExtResource("2_wrkbx")
@@ -275,6 +275,7 @@ script = ExtResource("1_qy0e6")
 [node name="Die" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_qnggy")
 sprite_frames = SubResource("SpriteFrames_icm1i")
+animation = &"rolling"
 autoplay = "default"
 script = ExtResource("5_nljec")
 
