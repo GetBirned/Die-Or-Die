@@ -97,6 +97,9 @@ shape = SubResource("RectangleShape2D_0rdc6")
 [node name="DiceHolder" parent="." instance=ExtResource("5_beojd")]
 position = Vector2(640, 600)
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="LockInButton" to="." method="_on_turn_locked_in"]

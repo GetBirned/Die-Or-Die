@@ -47,3 +47,7 @@ func get_closest() -> Area2D:
 			closest = slot
 			distance = slot_distance
 	return closest
+	
+func clear_dice():
+	for slot in slots:
+		slot.clear_die()

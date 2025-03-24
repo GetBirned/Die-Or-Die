@@ -2,7 +2,7 @@ extends Node
 
 enum Types {NUMBER, BLANK, MONEY, MULTIPLIER}
 
-@export var value: float = 1
+@export var value: int = 1
 
 @export var type: Types
 
@@ -23,6 +23,7 @@ func get_sprite():
 			return "multiplier"
 	
 func score():
+	GameInfo.last_scored_side = self
 	if type == Types.NUMBER:
 		GameInfo.current_score += value
 		return value
@@ -38,3 +39,14 @@ func score():
 	else:
 		return -1
 		
+func is_number():
+	return type == Types.NUMBER
+
+func is_blank():
+	return type == Types.BLANK
+	
+func is_money():
+	return type == Types.MONEY
+	
+func is_multiplier():
+	return type == Types.MULTIPLIER
