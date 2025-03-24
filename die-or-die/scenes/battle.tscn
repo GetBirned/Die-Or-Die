@@ -94,6 +94,9 @@ shape = SubResource("RectangleShape2D_0rdc6")
 
 [node name="DefaultDomino" parent="DominoZone" instance=ExtResource("4_if4pf")]
 
+[node name="Timer" type="Timer" parent="DominoZone"]
+wait_time = 0.2
+
 [node name="DiceHolder" parent="." instance=ExtResource("5_beojd")]
 position = Vector2(640, 600)
 

@@ -50,7 +50,7 @@ func _on_turn_locked_in() -> void:
 	held_queue = []
 	
 	print(GameInfo.current_score)
-	#$DominoZone.damage_dominoes(GameInfo.current_score)
+	await $DominoZone.damage_dominoes(GameInfo.current_score)
 	
 	if domino_stack.is_empty():
 		SceneManager.switch_scene("shop")

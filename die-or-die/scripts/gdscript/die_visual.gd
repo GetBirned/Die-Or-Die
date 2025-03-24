@@ -128,8 +128,9 @@ func rolling(delta):
 		$Die.disable_blur()
 		
 		# do particle effect
-		$CPUParticles2D.amount = 25 * pow(int(current_side.get_value()), 2)
-		$CPUParticles2D.emitting = true
+		if current_side.get_value() > 0:
+			$CPUParticles2D.amount = 25 * pow(int(current_side.get_value()), 2)
+			$CPUParticles2D.emitting = true
 
 func face():
 	$DieFaces.set_face(current_side)
