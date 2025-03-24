@@ -43,6 +43,14 @@ func _on_turn_locked_in() -> void:
 		die.score()
 		$Timer.start()
 		await $Timer.timeout
+		
+		for special in held_queue:
+			if special.call_special():
+				$Timer.start()
+				await $Timer.timeout
+		
+	
+	for die in held_queue:
 		DiceBag.discard_die(die) # moves dice from active to used
 		$Dice.remove_child(die)
 		num += 1
