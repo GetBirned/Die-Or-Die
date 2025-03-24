@@ -34,13 +34,10 @@ func destroy_top():
 	var active_domino = domino_stack.pop_front()
 	active_domino.active = false
 	remove_child(active_domino)
-	
-	rerolls = domino_stack.front()
 		
 # damages the top domino
 func damage_dominoes(damage):
 	if domino_stack.is_empty():
-		get_tree().change_scene_to_file("res://scenes/shop.tscn")
 		return
 		
 	var active_domino = domino_stack.front()
@@ -51,12 +48,9 @@ func damage_dominoes(damage):
 	else:
 		var remaining = top_life-damage
 		destroy_top()
+		rerolls = domino_stack.front()
 		if remaining > 0:
 			damage_dominoes(remaining)
-			
-		elif domino_stack.is_empty():
-			get_tree().change_scene_to_file("res://scenes/shop.tscn")
-			return
 
 func get_rerolls():
 	return rerolls

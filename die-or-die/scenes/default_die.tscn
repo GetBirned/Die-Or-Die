@@ -147,6 +147,7 @@ script = ExtResource("1_qy0e6")
 [node name="Die" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_qnggy")
 sprite_frames = SubResource("SpriteFrames_icm1i")
+animation = &"rolling"
 autoplay = "default"
 script = ExtResource("5_nljec")
 
