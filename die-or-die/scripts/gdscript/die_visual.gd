@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
-enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD}
+signal connect_special
+signal rolled
+
+enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
 
 var rng
 var status
@@ -23,6 +26,7 @@ func _ready():
 	speed = 1500
 	do_bounce = true
 	current_side = $Sides.get_child(0)
+	connect_special.emit()
 	
 func _physics_process(delta):
 	match status:
@@ -43,17 +47,42 @@ func _physics_process(delta):
 				global_position.y += (return_position.y - global_position.y) * 0.2
 		HELD:
 			position = closest_space.global_position
+		SHAKE:
+			shake(delta)
 
-func roll():
+func roll(initial = false):
 	if status != HELD:
 		$DieFaces.visible = false
 		$Die.play("rolling")
 		$Die.enable_blur()
 		$Die.set_frame(rng.randi_range(0, $Die.sprite_frames.get_frame_count("rolling")-1)) 
-		scale = Vector2(.66,.66)
 		
 		current_side = $Sides.get_children().pick_random()
+		
+		if not initial:
+			rolled.emit()
+			
 		roll_physics()
+
+@onready var shake_index = 0
+@onready var shake_speed = 400
+func shake(delta):
+	if shake_index == 0:
+		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
+		if get_rotation_degrees() < -20:
+			shake_index = 1
+	elif shake_index == 1:
+		set_rotation_degrees(get_rotation_degrees() + (shake_speed*delta))
+		if get_rotation_degrees() > 20:
+			shake_index = 2
+	else:
+		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
+		if get_rotation_degrees() < 0:
+			shake_index = 0
+			status = HELD
+			set_rotation_degrees(0)
+			
+
 
 func roll_physics():
 	friction = 0.999
@@ -64,7 +93,17 @@ func get_value():
 	current_side.get_value()
 	
 func score():
+	print("scoring")
 	current_side.score()
+	do_shake()
+
+func do_shake():
+	if status == HELD:
+		set_rotation_degrees(0)
+		status = SHAKE
+
+func call_special():
+	return $Special.manual_special()
 
 # holding logic
 func set_closest(slot: Area2D):
@@ -86,7 +125,6 @@ func rolling(delta):
 		velocity = Vector2(0,0)
 		#$CollisionShape2D.disabled = true
 		status = FACE
-		scale = Vector2(0.50,0.50)
 		$Die.disable_blur()
 		
 		# do particle effect
@@ -94,8 +132,7 @@ func rolling(delta):
 		$CPUParticles2D.emitting = true
 
 func face():
-	$DieFaces.play(current_side.get_sprite())
-	$DieFaces.set_frame(current_side.get_value())
+	$DieFaces.set_face(current_side)
 	$DieFaces.visible = true
 	$Die.play("default")
 

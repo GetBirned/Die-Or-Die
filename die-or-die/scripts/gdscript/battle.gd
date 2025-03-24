@@ -20,7 +20,7 @@ func load_dice(num):
 		var new_die = die.duplicate()
 		$Dice.add_child(new_die)
 		new_die.position = $Tray/Sprite2D.position
-		new_die.roll() # temporary solution, we need to figure out the bounds
+		new_die.roll(true) # temporary solution, we need to figure out the bounds
 
 func _on_roll_button_pressed():
 	if top_domino.rerolls > 0:
@@ -41,6 +41,8 @@ func _on_turn_locked_in() -> void:
 	GameInfo.reset_score()
 	for die in held_queue:
 		die.score()
+		$Timer.start()
+		await $Timer.timeout
 		DiceBag.discard_die(die) # moves dice from active to used
 		$Dice.remove_child(die)
 		num += 1
@@ -48,7 +50,7 @@ func _on_turn_locked_in() -> void:
 	held_queue = []
 	
 	print(GameInfo.current_score)
-	$DominoZone.damage_dominoes(GameInfo.current_score)
+	#$DominoZone.damage_dominoes(GameInfo.current_score)
 	
 	if domino_stack.is_empty():
 		SceneManager.switch_scene("shop")

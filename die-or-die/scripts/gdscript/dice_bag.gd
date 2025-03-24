@@ -11,7 +11,7 @@ func _ready():
 	CustomSignals.die_held.connect(Callable(self, "die_held"))
 	rng = RNG.get_rng()
 	for i in range(100):
-		full_bag.append($DiceDictionary.dice_dict["D6"])
+		full_bag.append($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()])
 
 func add_die(key):
 	full_bag.append($DiceDictionary.dice_dict[key])
