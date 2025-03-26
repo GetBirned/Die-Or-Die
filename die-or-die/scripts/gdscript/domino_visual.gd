@@ -30,8 +30,8 @@ func take_damage(damage):
 	life -= damage
 
 func update_sprite():
-	$Threshold.play(str(life))
-	$Rerolls.play(str(rerolls))
+	$Threshold.update(life)
+	$Rerolls.update(rerolls)
 
 
 @onready var shake_index = 0

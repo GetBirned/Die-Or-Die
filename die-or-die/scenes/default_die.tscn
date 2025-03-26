@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="3_b3j6t"]
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_lhxen"]
 [ext_resource type="Script" path="res://scenes/die.gd" id="5_nljec"]
-[ext_resource type="PackedScene" path="res://scenes/die_faces.tscn" id="7_l1dke"]
+[ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/die_faces.tscn" id="7_l1dke"]
 [ext_resource type="Script" path="res://scripts/gdscript/no_special.gd" id="8_5vvr3"]
 [ext_resource type="PackedScene" path="res://scenes/side.tscn" id="8_hl5ug"]
 
