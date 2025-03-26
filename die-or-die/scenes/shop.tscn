@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=4 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
+[ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
 [ext_resource type="Texture2D" uid="uid://dyxjkb2jd5n3n" path="res://resources/shop.png" id="3_pc574"]
 
 [node name="Shop" type="Node2D"]
@@ -12,6 +13,8 @@ texture_repeat = 1
 offset_right = 1284.0
 offset_bottom = 702.0
 texture = ExtResource("3_pc574")
+
+[node name="DiceDictionary" parent="." instance=ExtResource("3_6w0dc")]
 
 [node name="Back" type="Button" parent="."]
 offset_right = 180.0

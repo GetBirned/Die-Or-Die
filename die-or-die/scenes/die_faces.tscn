@@ -405,6 +405,7 @@ animations = [{
 }]
 
 [node name="DieFaces" type="AnimatedSprite2D"]
+visible = false
 sprite_frames = SubResource("SpriteFrames_jm478")
 animation = &"number"
 script = ExtResource("5_3nawv")
