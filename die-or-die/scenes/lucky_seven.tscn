@@ -1,20 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://cjalsskb3awuk"]
+[gd_scene load_steps=25 format=3 uid="uid://cjalsskb3awuk"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_aahar"]
-[ext_resource type="Shader" path="res://scripts/shaders/blur.gdshader" id="2_avnku"]
 [ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="3_65u7s"]
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="4_pmts4"]
-[ext_resource type="Script" path="res://scenes/die.gd" id="5_a8obp"]
-[ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="6_0ogy3"]
+[ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/die_faces.tscn" id="6_0ogy3"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="7_vun1u"]
 [ext_resource type="Script" path="res://scripts/gdscript/no_special.gd" id="8_aqek5"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnggy"]
-shader = ExtResource("2_avnku")
-shader_parameter/enabled = true
-shader_parameter/blur_amount = Vector2(0.01, 0.01)
-shader_parameter/focus_point = Vector2(0.5, 0.5)
-shader_parameter/focus_radius = 0.1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71c2k"]
 atlas = ExtResource("3_65u7s")
@@ -146,10 +137,8 @@ script = ExtResource("1_aahar")
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.180392, 0.733333, 0.262745, 1)
-material = SubResource("ShaderMaterial_qnggy")
 sprite_frames = SubResource("SpriteFrames_icm1i")
 autoplay = "default"
-script = ExtResource("5_a8obp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y05ou")

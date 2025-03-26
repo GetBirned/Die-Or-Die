@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_e1xbk"]
 [ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="3_cqyds"]
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="4_ljv5h"]
-[ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="6_vpji1"]
+[ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/die_faces.tscn" id="6_vpji1"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="7_150gu"]
 [ext_resource type="Script" path="res://scripts/gdscript/blank_special.gd" id="7_hube8"]
 
@@ -211,7 +211,7 @@ type = 1
 [node name="Special" type="Node" parent="."]
 script = ExtResource("7_hube8")
 
-[connection signal="connect_special" from="." to="Special" method="_on_connect_special"]
 [connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
+[connection signal="connect_special" from="." to="Special" method="_on_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]
