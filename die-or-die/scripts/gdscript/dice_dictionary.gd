@@ -5,7 +5,9 @@ extends Node
 	"Seven":
 	preload("res://scenes/lucky_seven.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED),
 	"Twoless":
-	preload("res://scenes/twoless_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED),	
+	preload("res://scenes/twoless_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED),
+	"Blank":
+	preload("res://scenes/blank_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED),
 	"Glass":
 	preload("res://scenes/glass_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)}
 						#"Marble": {

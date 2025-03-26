@@ -54,7 +54,7 @@ func roll(initial = false):
 	if status != HELD:
 		$DieFaces.visible = false
 		$Die.play("rolling")
-		$Die.enable_blur()
+		#$Die.enable_blur()
 		$Die.set_frame(rng.randi_range(0, $Die.sprite_frames.get_frame_count("rolling")-1)) 
 		
 		current_side = $Sides.get_children().pick_random()
@@ -125,7 +125,7 @@ func rolling(delta):
 		velocity = Vector2(0,0)
 		#$CollisionShape2D.disabled = true
 		status = FACE
-		$Die.disable_blur()
+		#$Die.disable_blur()
 		
 		# do particle effect
 		if current_side.get_value() > 0:
@@ -160,3 +160,6 @@ func _on_die_face_released() -> void:
 			closest_space.register_die(self)
 			held_by = closest_space
 			status = HELD
+
+func get_sides():
+	return $Sides.get_children()
