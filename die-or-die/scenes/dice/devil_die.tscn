@@ -1,66 +1,66 @@
 [gd_scene load_steps=25 format=3 uid="uid://demiwn2pg2bee"]
 
-[ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_6ysde"]
-[ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="2_rdoys"]
-[ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_7qdgr"]
-[ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/die_faces.tscn" id="4_vggb6"]
-[ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="5_4bfy5"]
-[ext_resource type="Script" path="res://scripts/gdscript/specials/devil_special.gd" id="6_nky5w"]
+[ext_resource type="Script" path="res://scripts/gdscript/dice/die_visual.gd" id="1_cdf21"]
+[ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="2_2ewg1"]
+[ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_uoyap"]
+[ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/dice/die parts/die_faces.tscn" id="4_d6kbi"]
+[ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/dice/die parts/side.tscn" id="5_0kxio"]
+[ext_resource type="Script" path="res://scripts/gdscript/dice/specials/devil_special.gd" id="6_kmrni"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4wbc"]
-atlas = ExtResource("2_rdoys")
+atlas = ExtResource("2_2ewg1")
 region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ptxux"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ktif"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_145rf"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(192, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kv04e"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(288, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1gm7o"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(0, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hf8o2"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(96, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3b0lb"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(192, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7i5yd"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(288, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sbf55"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(0, 192, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cxtkj"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(96, 192, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ehw7o"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(192, 192, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx33x"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(288, 192, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8cvg"]
-atlas = ExtResource("3_7qdgr")
+atlas = ExtResource("3_uoyap")
 region = Rect2(0, 288, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_icm1i"]
@@ -133,7 +133,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="DevilDie" type="CharacterBody2D" groups=["die"]]
-script = ExtResource("1_6ysde")
+script = ExtResource("1_cdf21")
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.733002, 1.64848e-06, 3.85046e-07, 1)
@@ -181,27 +181,27 @@ scale_amount_min = 5.0
 scale_amount_max = 30.0
 scale_amount_curve = SubResource("Curve_o4ekf")
 
-[node name="DieFaces" parent="." instance=ExtResource("4_vggb6")]
+[node name="DieFaces" parent="." instance=ExtResource("4_d6kbi")]
 
 [node name="Sides" type="Node" parent="."]
 
-[node name="Side" parent="Sides" instance=ExtResource("5_4bfy5")]
+[node name="Side" parent="Sides" instance=ExtResource("5_0kxio")]
 value = 6
 
-[node name="Side2" parent="Sides" instance=ExtResource("5_4bfy5")]
+[node name="Side2" parent="Sides" instance=ExtResource("5_0kxio")]
 value = 6
 
-[node name="Side3" parent="Sides" instance=ExtResource("5_4bfy5")]
+[node name="Side3" parent="Sides" instance=ExtResource("5_0kxio")]
 value = 6
 
-[node name="Side4" parent="Sides" instance=ExtResource("5_4bfy5")]
+[node name="Side4" parent="Sides" instance=ExtResource("5_0kxio")]
 
-[node name="Side5" parent="Sides" instance=ExtResource("5_4bfy5")]
+[node name="Side5" parent="Sides" instance=ExtResource("5_0kxio")]
 
-[node name="Side6" parent="Sides" instance=ExtResource("5_4bfy5")]
+[node name="Side6" parent="Sides" instance=ExtResource("5_0kxio")]
 
 [node name="Special" type="Node" parent="."]
-script = ExtResource("6_nky5w")
+script = ExtResource("6_kmrni")
 
 [connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
