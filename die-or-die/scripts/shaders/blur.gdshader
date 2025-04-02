@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform bool enabled = true;
+uniform bool enabled = false;
 
 uniform vec2 blur_amount = vec2(0.01, 0.01);
 uniform vec2 focus_point = vec2(0.5, 0.5);

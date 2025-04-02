@@ -3,12 +3,11 @@ extends Node2D
 var domino_stack = []
 var held_queue = []
 var live_dice = []
-var rng
 var rolls
 var top_domino
 
 func _ready() -> void:
-	rng = RNG.get_rng()
+	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
 	load_dice(5)
 	domino_stack = $DominoZone.create_dominoes(4)
 	top_domino = domino_stack.front()
@@ -21,6 +20,7 @@ func load_dice(num):
 		$Dice.add_child(new_die)
 		new_die.position = $Tray/Sprite2D.position
 		new_die.roll(true) # temporary solution, we need to figure out the bounds
+
 
 func _on_roll_button_pressed():
 	if top_domino.rerolls > 0:
@@ -35,8 +35,9 @@ func _on_back_button_pressed():
 	SceneManager.switch_scene("title_screen")
 
 func _on_turn_locked_in() -> void:
-	var num = 0 # number to track how many new dice need to be loaded
+	
 	held_queue = $DiceHolder.get_dice()
+	var num = held_queue.size() # number to track how many new dice need to be loaded 
 	$DiceHolder.clear_dice()
 	GameInfo.reset_score()
 	for die in held_queue:
@@ -48,20 +49,31 @@ func _on_turn_locked_in() -> void:
 			if special.call_special():
 				$Timer.start()
 				await $Timer.timeout
-		
-	
-	for die in held_queue:
-		DiceBag.discard_die(die) # moves dice from active to used
-		$Dice.remove_child(die)
-		num += 1
-	
-	held_queue = []
 	
 	print(GameInfo.current_score)
-	#$DominoZone.damage_dominoes(GameInfo.current_score)
+	await $DominoZone.damage_dominoes(GameInfo.current_score)
+	
+	for die in held_queue:
+		$Dice.remove_child(die)
+	
+	held_queue = []
 	
 	if domino_stack.is_empty():
 		SceneManager.switch_scene("shop")
 	else:
-		load_dice(num)
+		if top_domino == domino_stack.front():
+			SceneManager.switch_scene("title_screen")
+		else:	
+			top_domino = domino_stack.front()
+			load_dice(num)
+			DiceBag.replace_dice()
 	
+func kill_die(die):
+	for d in held_queue:
+		if die == d:
+			held_queue.remove_at(held_queue.find(die))
+	
+	for d in live_dice:
+		if d == die:
+			live_dice.remove_at(live_dice.find(die))
+		

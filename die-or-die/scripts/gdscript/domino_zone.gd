@@ -1,13 +1,11 @@
 extends Area2D
 
 var zone_bounds: Rect2
-var rng: RandomNumberGenerator
 var domino_stack = []
 var rerolls
 
 func _ready() -> void:
 	zone_bounds = $CollisionShape2D.shape.get_rect()
-	rng = RNG.get_rng()
 	
 func create_dominoes(count:int):
 	for i in range(count):
@@ -41,16 +39,20 @@ func damage_dominoes(damage):
 		return
 		
 	var active_domino = domino_stack.front()
-	var top_life = active_domino.get_life()
-	if damage < top_life:
-		active_domino.take_damage(damage)
+	
+	for i in range(damage):
+		if active_domino.get_life() == 0:
+			destroy_top()
+			active_domino = domino_stack.front()
+	
+		active_domino.take_damage(1)
+		active_domino.shake(0)
 		active_domino.update_sprite()
-	else:
-		var remaining = top_life-damage
+		$Timer.start()
+		await $Timer.timeout
+		
+	if active_domino.get_life() == 0:
 		destroy_top()
-		rerolls = domino_stack.front()
-		if remaining > 0:
-			damage_dominoes(remaining)
 
 func get_rerolls():
 	return rerolls
