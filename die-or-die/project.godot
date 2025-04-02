@@ -17,7 +17,7 @@ config/icon="res://resources/DieOrDie.png"
 
 [autoload]
 
-RNG="*res://scripts/utils/RNG.cs"
+RNG="*res://scripts/gdscript/RNG.gd"
 CustomSignals="*res://scripts/utils/CustomSignals.gd"
 DiceBag="*res://scenes/dice_bag.tscn"
 GameInfo="*res://scenes/game_info.tscn"
