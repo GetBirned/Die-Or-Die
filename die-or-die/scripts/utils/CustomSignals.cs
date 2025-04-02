@@ -12,9 +12,9 @@ public partial class CustomSignals : Node
 		Instance = this;
 	}
 
-    public static CustomSignals get_instance() {
-        return Instance;
-    }
+	public static CustomSignals get_instance() {
+		return Instance;
+	}
 
 	// make new signals down here
 	[Signal] public delegate void DiceLockedInEventHandler();
