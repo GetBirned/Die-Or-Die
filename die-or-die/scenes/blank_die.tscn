@@ -1,0 +1,217 @@
+[gd_scene load_steps=25 format=3 uid="uid://cfj7f7yx40kds"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_e1xbk"]
+[ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="3_cqyds"]
+[ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="4_ljv5h"]
+[ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/die_faces.tscn" id="6_vpji1"]
+[ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="7_150gu"]
+[ext_resource type="Script" path="res://scripts/gdscript/blank_special.gd" id="7_hube8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4wbc"]
+atlas = ExtResource("3_cqyds")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptxux"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ktif"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_145rf"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kv04e"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gm7o"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf8o2"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3b0lb"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i5yd"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(288, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbf55"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(0, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxtkj"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(96, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehw7o"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(192, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx33x"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(288, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8cvg"]
+atlas = ExtResource("4_ljv5h")
+region = Rect2(0, 288, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_icm1i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4wbc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptxux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ktif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_145rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv04e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gm7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf8o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3b0lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i5yd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbf55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxtkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehw7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx33x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8cvg")
+}],
+"loop": true,
+"name": &"rolling",
+"speed": 18.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
+size = Vector2(62, 62)
+
+[sub_resource type="Curve" id="Curve_1i7rn"]
+min_value = -10.0
+max_value = 80.0
+_data = [Vector2(0, 80), 0.0, 0.0, 0, 0, Vector2(1, -10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o4ekf"]
+min_value = 0.01
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BlankDie" type="CharacterBody2D" groups=["die"]]
+script = ExtResource("1_e1xbk")
+
+[node name="Die" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.82606, 0.82606, 0.82606, 1)
+sprite_frames = SubResource("SpriteFrames_icm1i")
+animation = &"rolling"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y05ou")
+
+[node name="DieFace" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+speed_scale = 0.9
+explosiveness = 1.0
+randomness = 0.21
+lifetime_randomness = 0.15
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_max = 196.97
+angular_velocity_min = -5.0
+angular_velocity_max = 10.0
+linear_accel_min = -16.16
+linear_accel_max = 14.15
+linear_accel_curve = SubResource("Curve_1i7rn")
+scale_amount_min = 5.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_o4ekf")
+
+[node name="DieFaces" parent="." instance=ExtResource("6_vpji1")]
+
+[node name="Sides" type="Node" parent="."]
+
+[node name="Side" parent="Sides" instance=ExtResource("7_150gu")]
+type = 1
+
+[node name="Side2" parent="Sides" instance=ExtResource("7_150gu")]
+value = 2
+type = 1
+
+[node name="Side3" parent="Sides" instance=ExtResource("7_150gu")]
+value = 3
+type = 1
+
+[node name="Side4" parent="Sides" instance=ExtResource("7_150gu")]
+value = 4
+type = 1
+
+[node name="Side5" parent="Sides" instance=ExtResource("7_150gu")]
+value = 5
+type = 1
+
+[node name="Side6" parent="Sides" instance=ExtResource("7_150gu")]
+value = 6
+type = 1
+
+[node name="Special" type="Node" parent="."]
+script = ExtResource("7_hube8")
+
+[connection signal="connect_special" from="." to="Special" method="_on_connect_special"]
+[connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
+[connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
+[connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]

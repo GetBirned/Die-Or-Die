@@ -6,6 +6,7 @@ signal rolling
 signal battle
 signal money_changed
 signal dice_locked
+signal bag_updated
 
 
 @onready var current_score: float = 1
@@ -22,6 +23,9 @@ func emit_rolling():
 	
 func emit_battle():
 	battle.emit()
+
+func emit_bag_updated():
+	bag_updated.emit()
 
 func add_money(value):
 	money += value
