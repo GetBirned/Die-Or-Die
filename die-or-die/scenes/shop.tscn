@@ -1,18 +1,80 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=13 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
 [ext_resource type="Texture2D" uid="uid://dyxjkb2jd5n3n" path="res://resources/shop.png" id="3_pc574"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8e7b"]
+atlas = ExtResource("3_pc574")
+region = Rect2(0, 0, 1280, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_864et"]
+atlas = ExtResource("3_pc574")
+region = Rect2(1280, 0, 1280, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j30h1"]
+atlas = ExtResource("3_pc574")
+region = Rect2(2560, 0, 1280, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u0xk"]
+atlas = ExtResource("3_pc574")
+region = Rect2(3840, 0, 1280, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8x8j"]
+atlas = ExtResource("3_pc574")
+region = Rect2(5120, 0, 1280, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqe7k"]
+atlas = ExtResource("3_pc574")
+region = Rect2(6400, 0, 1280, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gll48"]
+atlas = ExtResource("3_pc574")
+region = Rect2(7680, 0, 1280, 750)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dikgo"]
+atlas = ExtResource("3_pc574")
+region = Rect2(8960, 0, 1280, 750)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r37p2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8e7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_864et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j30h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u0xk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8x8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqe7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gll48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dikgo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_bptpf")
 
-[node name="Background" type="TextureRect" parent="."]
-z_index = -2
-texture_repeat = 1
-offset_right = 1284.0
-offset_bottom = 702.0
-texture = ExtResource("3_pc574")
+[node name="BackgroundAnimated" type="AnimatedSprite2D" parent="."]
+position = Vector2(640, 375)
+sprite_frames = SubResource("SpriteFrames_r37p2")
+frame_progress = 0.154096
 
 [node name="DiceDictionary" parent="." instance=ExtResource("3_6w0dc")]
 
@@ -27,7 +89,7 @@ offset_top = 180.0
 offset_right = 180.0
 offset_bottom = 240.0
 theme_override_font_sizes/font_size = 32
-text = "reorder"
+text = "cleanup"
 
 [node name="Add" type="Button" parent="."]
 offset_top = 60.0
