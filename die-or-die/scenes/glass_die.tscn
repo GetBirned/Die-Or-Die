@@ -205,7 +205,7 @@ value = 10
 [node name="Special" type="Node" parent="."]
 script = ExtResource("8_w8e3t")
 
-[connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="connect_special" from="." to="Special" method="_on_glass_die_connect_special"]
+[connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]
