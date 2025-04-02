@@ -17,6 +17,8 @@ var die_name
 var sides = ["1", "2", "3", "4", "5", "6"]
 var current_side;
 
+@export var description: String = ""
+
 func _ready():
 	die_name = "D6"
 	status = DISPLAY
