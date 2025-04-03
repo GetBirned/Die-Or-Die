@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=15 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="3_i1s5t"]
 [ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_if4pf"]
 [ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
 [ext_resource type="Script" path="res://scripts/gdscript/domino_zone.gd" id="5_w14m2"]
@@ -17,6 +18,11 @@ shader_parameter/noise_scale = 20.0
 shader_parameter/contrast = 5.0
 shader_parameter/intensity = 5.0
 shader_parameter/mouse_position = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dx0xn"]
+shader = ExtResource("3_i1s5t")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_inr8e"]
 normal = Vector2(0, 1)
@@ -49,6 +55,12 @@ grow_vertical = 2
 [node name="Tray" type="Node2D" parent="."]
 position = Vector2(0, -50)
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D_Shadow" type="Sprite2D" parent="Tray"]
+z_index = -1
+material = SubResource("ShaderMaterial_dx0xn")
+position = Vector2(637.5, 350.5)
+texture = ExtResource("2_dlx0y")
 
 [node name="Sprite2D" type="Sprite2D" parent="Tray"]
 z_index = -1

@@ -38,7 +38,7 @@ public abstract partial class Die : Node2D {
 		frozen = true;
 	}
 
-    private void Unfreeze() {
+	private void Unfreeze() {
 		frozen = false;
 	}
 
