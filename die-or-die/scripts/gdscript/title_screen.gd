@@ -12,4 +12,8 @@ func _process(delta):
 
 
 func _on_rolldebug_pressed():
-	get_tree().change_scene_to_file("res://scenes/demo_tray.tscn")
+	SceneManager.switch_scene("battle")
+
+
+func _on_shopdebug_pressed():
+	SceneManager.switch_scene("shop")

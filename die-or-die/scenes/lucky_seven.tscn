@@ -1,0 +1,222 @@
+[gd_scene load_steps=28 format=3 uid="uid://cjalsskb3awuk"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/die_visual.gd" id="1_aahar"]
+[ext_resource type="Shader" path="res://scripts/shaders/blur.gdshader" id="2_avnku"]
+[ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="3_65u7s"]
+[ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="4_pmts4"]
+[ext_resource type="Script" path="res://scenes/die.gd" id="5_a8obp"]
+[ext_resource type="PackedScene" uid="uid://cmrmtg3x1qiq5" path="res://scenes/die_faces.tscn" id="6_0ogy3"]
+[ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/side.tscn" id="7_vun1u"]
+[ext_resource type="Script" path="res://scripts/gdscript/no_special.gd" id="8_aqek5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnggy"]
+shader = ExtResource("2_avnku")
+shader_parameter/enabled = true
+shader_parameter/blur_amount = Vector2(0.01, 0.01)
+shader_parameter/focus_point = Vector2(0.5, 0.5)
+shader_parameter/focus_radius = 0.1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71c2k"]
+atlas = ExtResource("3_65u7s")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl6h2"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu2nt"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxpvw"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oov45"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaiom"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkhm7"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br0x6"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uveea"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(288, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjhs1"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(0, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgb04"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(96, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m18y"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(192, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7gjm"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(288, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ntvm"]
+atlas = ExtResource("4_pmts4")
+region = Rect2(0, 288, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_icm1i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71c2k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl6h2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu2nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxpvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oov45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaiom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkhm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br0x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uveea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjhs1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgb04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m18y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7gjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ntvm")
+}],
+"loop": true,
+"name": &"rolling",
+"speed": 18.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
+size = Vector2(62, 62)
+
+[sub_resource type="Curve" id="Curve_1i7rn"]
+min_value = -10.0
+max_value = 80.0
+_data = [Vector2(0, 80), 0.0, 0.0, 0, 0, Vector2(1, -10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o4ekf"]
+min_value = 0.01
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Lucky Seven" type="CharacterBody2D" groups=["die"]]
+script = ExtResource("1_aahar")
+
+[node name="Die" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.180392, 0.733333, 0.262745, 1)
+material = SubResource("ShaderMaterial_qnggy")
+sprite_frames = SubResource("SpriteFrames_icm1i")
+autoplay = "default"
+script = ExtResource("5_a8obp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y05ou")
+
+[node name="DieFace" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+speed_scale = 0.9
+explosiveness = 1.0
+randomness = 0.21
+lifetime_randomness = 0.15
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_max = 196.97
+angular_velocity_min = -5.0
+angular_velocity_max = 10.0
+linear_accel_min = -16.16
+linear_accel_max = 14.15
+linear_accel_curve = SubResource("Curve_1i7rn")
+scale_amount_min = 5.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_o4ekf")
+
+[node name="DieFaces" parent="." instance=ExtResource("6_0ogy3")]
+animation = &"multiplier"
+
+[node name="Sides" type="Node" parent="."]
+
+[node name="Side" parent="Sides" instance=ExtResource("7_vun1u")]
+type = 1
+
+[node name="Side2" parent="Sides" instance=ExtResource("7_vun1u")]
+value = 7
+
+[node name="Side3" parent="Sides" instance=ExtResource("7_vun1u")]
+value = 7
+
+[node name="Side4" parent="Sides" instance=ExtResource("7_vun1u")]
+value = 7
+
+[node name="Side5" parent="Sides" instance=ExtResource("7_vun1u")]
+value = 7
+
+[node name="Side6" parent="Sides" instance=ExtResource("7_vun1u")]
+value = 7
+type = 1
+
+[node name="Special" type="Node" parent="."]
+script = ExtResource("8_aqek5")
+
+[connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
+[connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]
