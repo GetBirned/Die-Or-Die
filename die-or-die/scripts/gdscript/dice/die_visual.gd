@@ -5,7 +5,6 @@ signal rolled
 
 enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
 
-var rng
 var status
 var friction
 var speed
@@ -18,9 +17,10 @@ var die_name
 var sides = ["1", "2", "3", "4", "5", "6"]
 var current_side;
 
+@export var description: String = ""
+
 func _ready():
 	die_name = "D6"
-	rng = RNG.get_rng()
 	status = DISPLAY
 	friction = 0.999
 	speed = 1500
@@ -54,8 +54,8 @@ func roll(initial = false):
 	if status != HELD:
 		$DieFaces.visible = false
 		$Die.play("rolling")
-		$Die.enable_blur()
-		$Die.set_frame(rng.randi_range(0, $Die.sprite_frames.get_frame_count("rolling")-1)) 
+		#$Die.enable_blur()
+		$Die.set_frame(RNG.randi_range(0, $Die.sprite_frames.get_frame_count("rolling")-1))
 		
 		current_side = $Sides.get_children().pick_random()
 		
@@ -79,14 +79,13 @@ func shake(delta):
 		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
 		if get_rotation_degrees() < 0:
 			shake_index = 0
-			status = HELD
+			status = DISPLAY
 			set_rotation_degrees(0)
-			
 
 
 func roll_physics():
 	friction = 0.999
-	velocity = Vector2(rng.randf_range(-1,1), rng.randf_range(-1,1)).normalized() * speed
+	velocity = Vector2(RNG.randf_range(-1,1), RNG.randf_range(-1,1)).normalized() * 1500
 	status = ROLLING
 
 func get_value():
@@ -125,7 +124,7 @@ func rolling(delta):
 		velocity = Vector2(0,0)
 		#$CollisionShape2D.disabled = true
 		status = FACE
-		$Die.disable_blur()
+		#$Die.disable_blur()
 		
 		# do particle effect
 		if current_side.get_value() > 0:
@@ -136,7 +135,6 @@ func face():
 	$DieFaces.set_face(current_side)
 	$DieFaces.visible = true
 	$Die.play("default")
-
 
 func _on_die_face_pressed() -> void:
 	if status == FACE:
@@ -160,3 +158,6 @@ func _on_die_face_released() -> void:
 			closest_space.register_die(self)
 			held_by = closest_space
 			status = HELD
+
+func get_sides():
+	return $Sides.get_children()

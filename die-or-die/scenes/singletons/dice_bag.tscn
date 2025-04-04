@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://q7ep38vcw2ce"]
 
-[ext_resource type="Script" path="res://scripts/gdscript/dice_bag.gd" id="1_p0r2o"]
+[ext_resource type="Script" path="res://scripts/gdscript/singletons/dice_bag.gd" id="1_p0r2o"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="2_osq17"]
 
 [node name="DiceBag" type="Node2D"]
