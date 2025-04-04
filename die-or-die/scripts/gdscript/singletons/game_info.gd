@@ -7,6 +7,7 @@ signal battle
 signal money_changed
 signal dice_locked
 signal bag_updated
+signal score_updated
 
 
 @onready var current_score: float = 1
@@ -30,3 +31,11 @@ func emit_bag_updated():
 func add_money(value):
 	money += value
 	money_changed.emit()
+	
+func add_score(value):
+	current_score += value
+	score_updated.emit()
+	
+func mult_score(value):
+	current_score *= value
+	score_updated.emit()

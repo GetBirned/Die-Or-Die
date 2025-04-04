@@ -11,7 +11,6 @@ func _ready() -> void:
 	load_dice(5)
 	domino_stack = $DominoZone.create_dominoes(4)
 	top_domino = domino_stack.front()
-	print(domino_stack.front())
 	
 func load_dice(num):
 	live_dice = DiceBag.new_hand(num)

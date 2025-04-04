@@ -79,7 +79,7 @@ func shake(delta):
 		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
 		if get_rotation_degrees() < 0:
 			shake_index = 0
-			status = DISPLAY
+			status = HELD
 			set_rotation_degrees(0)
 
 
@@ -92,7 +92,6 @@ func get_value():
 	current_side.get_value()
 	
 func score():
-	print("scoring")
 	current_side.score()
 	do_shake()
 

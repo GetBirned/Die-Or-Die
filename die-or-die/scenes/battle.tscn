@@ -101,7 +101,7 @@ wait_time = 0.2
 position = Vector2(640, 600)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.3
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
