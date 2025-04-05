@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1kxg1rkxuqhp"]
+
+[sub_resource type="GDScript" id="GDScript_gkg68"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	GameInfo.connect(\"score_updated\", on_score_updated)
+
+func on_score_updated():
+	var score = int(GameInfo.current_score)
+	
+	if score < 1:
+		hide()
+		return
+		
+	var digits = 0
+	while score >= 1:
+		score = score / 10
+		digits += 1
+		
+	var children = get_children()
+		
+	if digits > children.size():
+		for i in range(children.size(), digits):
+			add_child(load(\"res://scenes/digit.tscn\").instantiate())
+	elif digits < children.size():
+		for i in range(children.size(), digits, -1):
+			remove_child(children[i])
+			children[i].queue_free()
+			
+	children = get_children()
+	
+	var offset = (children.size() - 1) * 32
+	var interval = 48
+	score = int(GameInfo.current_score)
+	
+	for i in range(children.size()):
+		children[i].set_value(score % 10)
+		score = score / 10
+		children[i].position.x = offset - (interval * i)
+"
+
+[node name="ScoreCounter" type="Node2D"]
+script = SubResource("GDScript_gkg68")

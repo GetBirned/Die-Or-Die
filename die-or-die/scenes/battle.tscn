@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=12 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
 [ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_if4pf"]
 [ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
 [ext_resource type="Script" path="res://scripts/gdscript/domino_zone.gd" id="5_w14m2"]
+[ext_resource type="PackedScene" uid="uid://b1kxg1rkxuqhp" path="res://scenes/score_counter.tscn" id="6_s1lek"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_inr8e"]
 normal = Vector2(0, 1)
@@ -102,6 +103,9 @@ position = Vector2(640, 600)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="ScoreCounter" parent="." instance=ExtResource("6_s1lek")]
+position = Vector2(634, 58)
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
