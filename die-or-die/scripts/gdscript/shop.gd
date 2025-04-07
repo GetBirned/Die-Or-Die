@@ -23,7 +23,6 @@ func _on_back_pressed():
 
 
 func _order_dice():
-	var x = increment / 2
 	var num_dice = dice_in_shelf.size()
 	for die_index in num_dice:
 		order_die(die_index)
