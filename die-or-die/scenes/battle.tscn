@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=11 format=3 uid="uid://dax3yfsg7klng"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
-[ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_if4pf"]
-[ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
+[ext_resource type="PackedScene" path="res://scenes/domino.tscn" id="4_if4pf"]
+[ext_resource type="PackedScene" uid="uid://c4r6htmqbxv4r" path="res://scenes/dice_holder.tscn" id="5_beojd"]
 [ext_resource type="Script" path="res://scripts/gdscript/domino_zone.gd" id="5_w14m2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_inr8e"]

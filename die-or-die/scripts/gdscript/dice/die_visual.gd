@@ -13,11 +13,12 @@ var return_position
 var held_by = null
 var closest_space
 var die_name
+var hover_count = 0
 
 var sides = ["1", "2", "3", "4", "5", "6"]
 var current_side;
 
-@export var description: String = ""
+@export var description: String = "Basic 6 sided die."
 
 func _ready():
 	die_name = "D6"
@@ -49,7 +50,7 @@ func _physics_process(delta):
 			position = closest_space.global_position
 		SHAKE:
 			shake(delta)
-
+			
 func roll(initial = false):
 	if status != HELD:
 		$DieFaces.visible = false
@@ -161,3 +162,6 @@ func _on_die_face_released() -> void:
 
 func get_sides():
 	return $Sides.get_children()
+	
+func get_rect():
+	return Rect2(global_position.x-32, global_position.y-32, 64, 64)

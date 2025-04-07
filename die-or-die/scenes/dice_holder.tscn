@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjijg2tbsmngs"]
+[gd_scene load_steps=5 format=3 uid="uid://c4r6htmqbxv4r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/dice_holder.gd" id="1_o7nx7"]
 [ext_resource type="Texture2D" uid="uid://h2mvsopf54v3" path="res://resources/DiceHolder.png" id="2_7qrcu"]
