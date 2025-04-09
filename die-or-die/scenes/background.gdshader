@@ -31,7 +31,7 @@ float noise(vec2 p) {
 
 void fragment() {
     // Snap screen UV to a pixel grid
-	float pixel_resolution = 300.0; // lower = chunkier
+	float pixel_resolution = 300.0; // lower = more pixelized
 	vec2 pixel_uv = floor(UV * pixel_resolution) / pixel_resolution;
 
 	vec2 uv = pixel_uv * noise_scale;
@@ -44,7 +44,7 @@ void fragment() {
         distorted_uv += vec2(sin(t + distorted_uv.y), cos(t - distorted_uv.x)) * 0.2;
     }
 
-    // Mouse-based distortion (displaces the UVs!)
+    // Mouse distortion 
     float dist = distance(UV, mouse_position);
     float influence = smoothstep(0.3, 0.0, dist); // falloff
     vec2 warp = (UV - mouse_position) * influence * 0.2;
@@ -52,7 +52,7 @@ void fragment() {
 	
     distorted_uv = floor(distorted_uv * 25.0) / 25.0;
 
-    // Sample noisy background
+    // noisy background
     float n = noise(distorted_uv);
     n = pow(n, contrast);
 
