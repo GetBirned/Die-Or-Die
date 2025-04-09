@@ -18,6 +18,7 @@ signal score_updated
 
 func reset_score():
 	current_score = 0
+	score_updated.emit()
 
 func emit_rolling():
 	rolling.emit()

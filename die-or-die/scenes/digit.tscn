@@ -1,93 +1,119 @@
 [gd_scene load_steps=14 format=3 uid="uid://cng7qwisd3s53"]
 
-[ext_resource type="Texture2D" uid="uid://darjtrwkwmgf7" path="res://resources/die_faces/new_single_numbers.png" id="1_582hf"]
+[ext_resource type="Texture2D" uid="uid://ctqx8gnmckqku" path="res://resources/WhiteboardNumbers.png" id="1_s5s1b"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5loho"]
-atlas = ExtResource("1_582hf")
-region = Rect2(0, 0, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_shqwv"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_acew1"]
-atlas = ExtResource("1_582hf")
-region = Rect2(96, 0, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5lri"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mqky1"]
-atlas = ExtResource("1_582hf")
-region = Rect2(192, 0, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mwfb"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrglt"]
-atlas = ExtResource("1_582hf")
-region = Rect2(288, 0, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrtq0"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nrup2"]
-atlas = ExtResource("1_582hf")
-region = Rect2(0, 96, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbumv"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(0, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbm35"]
-atlas = ExtResource("1_582hf")
-region = Rect2(96, 96, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo7qx"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(64, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ierwn"]
-atlas = ExtResource("1_582hf")
-region = Rect2(192, 96, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k62p"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(128, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mjkxi"]
-atlas = ExtResource("1_582hf")
-region = Rect2(288, 96, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrx0f"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(192, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1lyav"]
-atlas = ExtResource("1_582hf")
-region = Rect2(0, 192, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hv7qc"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(0, 128, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kn7ow"]
-atlas = ExtResource("1_582hf")
-region = Rect2(96, 192, 96, 96)
+[sub_resource type="AtlasTexture" id="AtlasTexture_p60t4"]
+atlas = ExtResource("1_s5s1b")
+region = Rect2(64, 128, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d74qh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5loho")
+"texture": SubResource("AtlasTexture_shqwv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_acew1")
+"texture": SubResource("AtlasTexture_c5lri")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mqky1")
+"texture": SubResource("AtlasTexture_4mwfb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qrglt")
+"texture": SubResource("AtlasTexture_lrtq0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nrup2")
+"texture": SubResource("AtlasTexture_xbumv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bbm35")
+"texture": SubResource("AtlasTexture_qo7qx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ierwn")
+"texture": SubResource("AtlasTexture_6k62p")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mjkxi")
+"texture": SubResource("AtlasTexture_wrx0f")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1lyav")
+"texture": SubResource("AtlasTexture_hv7qc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kn7ow")
+"texture": SubResource("AtlasTexture_p60t4")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [sub_resource type="GDScript" id="GDScript_8rcid"]
 script/source = "extends AnimatedSprite2D
 
-
 func set_value(value):
 	set_frame(value % 10)
+
+func get_spacing():
+	var gap = 4
+	match frame:
+		0:
+			return 35 + gap
+		1:
+			return 25 + gap
+		2:
+			return 31 + gap
+		3:
+			return 33 + gap
+		4:
+			return 35 + gap
+		5:
+			return 33 + gap
+		6:
+			return 34 + gap
+		7:
+			return 35 + gap
+		8:
+			return 36 + gap
+		9:
+			return 34 + gap
+	
 "
 
 [node name="Digit" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_d74qh")
+frame = 9
+frame_progress = 0.367207
 script = SubResource("GDScript_8rcid")

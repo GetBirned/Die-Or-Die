@@ -105,7 +105,7 @@ position = Vector2(640, 600)
 wait_time = 0.3
 
 [node name="ScoreCounter" parent="." instance=ExtResource("6_s1lek")]
-position = Vector2(634, 58)
+position = Vector2(879, 64)
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
