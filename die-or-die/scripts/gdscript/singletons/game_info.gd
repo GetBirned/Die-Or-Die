@@ -8,6 +8,7 @@ signal money_changed
 signal dice_locked
 signal bag_updated
 signal score_updated
+signal holder_updated
 
 
 @onready var current_score: float = 1
@@ -40,3 +41,6 @@ func add_score(value):
 func mult_score(value):
 	current_score *= value
 	score_updated.emit()
+
+func emit_holder_updated():
+	holder_updated.emit(SceneManager.get_die_scores())

@@ -50,7 +50,7 @@ func _on_turn_locked_in() -> void:
 				$Timer.start()
 				await $Timer.timeout
 	
-	print(GameInfo.current_score)
+	#print(GameInfo.current_score)
 	await $DominoZone.damage_dominoes(GameInfo.current_score)
 	
 	for die in held_queue:

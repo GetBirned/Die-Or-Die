@@ -15,9 +15,11 @@ func get_die():
 
 func register_die(die):
 	held_die = die
+	GameInfo.emit_holder_updated()
 	
 func is_free():
 	return held_die == null
 	
 func clear_die():
 	held_die = null
+	GameInfo.emit_holder_updated()

@@ -89,7 +89,7 @@ func roll_physics():
 	status = ROLLING
 
 func get_value():
-	current_side.get_value()
+	return current_side.get_value()
 	
 func score():
 	current_side.score()

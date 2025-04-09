@@ -35,8 +35,8 @@ func detect_closest_free():
 	var dist = Vector2(1000000, 100000)
 	
 	for slot in slots:
-		print(slot)
-		print(dist)
+		#print(slot)
+		#print(dist)
 		if slot.is_free(): # if not free then not considered
 			if close == null:
 				dist = abs(pos - slot.global_position)

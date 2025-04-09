@@ -10,6 +10,10 @@ script/source = "extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameInfo.connect(\"score_updated\", on_score_updated)
+	GameInfo.connect(\"holder_updated\", on_holder_updated)
+
+func on_holder_updated(faces):
+	print(faces)
 
 func on_score_updated():
 	var score = int(GameInfo.current_score)
