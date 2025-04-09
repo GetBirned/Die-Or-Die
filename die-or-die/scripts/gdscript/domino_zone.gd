@@ -44,7 +44,11 @@ func damage_dominoes(damage):
 		if active_domino.get_life() == 0:
 			destroy_top()
 			active_domino = domino_stack.front()
-	
+		
+		if active_domino == null:
+			SceneManager.switch_scene("shop")
+			return
+			
 		active_domino.take_damage(1)
 		active_domino.shake(0)
 		active_domino.update_sprite()
