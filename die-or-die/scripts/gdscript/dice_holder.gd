@@ -5,7 +5,7 @@ var die_in_body = null
 
 func _ready() -> void:
 	setup_slots()
-	print(slots)
+	#print(slots)
 	
 func _process(delta: float) -> void:
 	if die_in_body != null and die_in_body.get_status() == 3:
