@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=16 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
 [ext_resource type="Script" path="res://scripts/gdscript/domino_zone.gd" id="5_w14m2"]
 [ext_resource type="Shader" path="res://scenes/background.gdshader" id="6_gasix"]
-[ext_resource type="PackedScene" path="res://path/to/ScoreCounter.tscn" id="6_s1lek"]
+[ext_resource type="PackedScene" path="res://scenes/score_counter.tscn" id="6_s1lek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_omnb8"]
 shader = ExtResource("6_gasix")
