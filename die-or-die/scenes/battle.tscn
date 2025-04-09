@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
 [ext_resource type="Script" path="res://scripts/gdscript/domino_zone.gd" id="5_w14m2"]
 [ext_resource type="Shader" path="res://scenes/background.gdshader" id="6_gasix"]
+[ext_resource type="PackedScene" path="res://path/to/ScoreCounter.tscn" id="6_s1lek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_omnb8"]
 shader = ExtResource("6_gasix")
