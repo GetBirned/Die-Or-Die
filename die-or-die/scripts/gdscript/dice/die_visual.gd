@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal connect_special
 signal rolled
 
-enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
+enum {DISPLAY = 0, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
 
 var status
 var friction
@@ -104,10 +104,6 @@ func do_shake():
 func call_special():
 	return $Special.manual_special()
 
-# holding logic
-func set_closest(slot: Area2D):
-	closest_space = slot
-
 # rolling logic
 func rolling(delta):
 	var collision_info = move_and_collide(velocity * delta)
@@ -136,6 +132,10 @@ func face():
 	$DieFaces.visible = true
 	$Die.play("default")
 
+# holding logic
+func set_closest(slot: Area2D):
+	closest_space = slot
+
 func _on_die_face_pressed() -> void:
 	if status == FACE:
 		return_position = global_position
@@ -158,6 +158,9 @@ func _on_die_face_released() -> void:
 			closest_space.register_die(self)
 			held_by = closest_space
 			status = HELD
+
+func get_status():
+	return status
 
 func get_sides():
 	return $Sides.get_children()
