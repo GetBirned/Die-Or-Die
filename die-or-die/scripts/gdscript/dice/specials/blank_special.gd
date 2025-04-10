@@ -12,5 +12,5 @@ func signal_special():
 	#print(blank_total)
 	GameInfo.blank_value = blank_total/2
 
-func manual_special():
+func manual_special(this_being_scored: bool):
 	return false
