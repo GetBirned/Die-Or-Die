@@ -12,6 +12,29 @@ func _ready():
 	GameInfo.connect(\"score_updated\", on_score_updated)
 	GameInfo.connect(\"holder_updated\", on_holder_updated)
 
+var mutex = Mutex.new()
+var numbers = []
+var x = 0
+var score = 0
+
+var delay = 0
+
+func _process(delta):
+	mutex.lock()
+	if not numbers.is_empty():
+		if delay > 0:
+			delay -= 1
+		else:
+			var number = numbers.pop_front()
+			number.set_value(score % 10)
+			score = score / 10
+			number.position.x = x
+			x -= number.get_spacing()
+			number.modulate = Color(\"#000000\")
+			number.appear()
+			delay = 60 * delta
+	mutex.unlock()
+
 func on_holder_updated(faces):
 	if faces.size() == 0:
 		$Label.text = \"\"
@@ -59,37 +82,42 @@ func on_holder_updated(faces):
 		
 
 func on_score_updated():
-	var score = int(GameInfo.current_score)
+	mutex.lock()
+	
+	var score_temp = int(GameInfo.current_score)
 	
 	for child in $Numbers.get_children():
 		$Numbers.remove_child(child)
 		child.queue_free()
 		
-	if score < 1:
+	if score_temp < 1:
 		$Numbers.hide()
-		return
 	else:
 		$Numbers.show()
 		
-	var digits = 0
-	while score >= 1:
-		score = score / 10
-		digits += 1
+		var digits = 0
+		while score_temp >= 1:
+			score_temp = score_temp / 10
+			digits += 1
+		
+		for i in range(digits):
+			$Numbers.add_child(load(\"res://scenes/digit.tscn\").instantiate())
+				
+		var children = $Numbers.get_children()
+		
+		x = 0
+		score = int(GameInfo.current_score)
+		numbers = children
 	
-	for i in range(digits):
-		$Numbers.add_child(load(\"res://scenes/digit.tscn\").instantiate())
-			
-	var children = $Numbers.get_children()
-	
-	var x = 0
-	score = int(GameInfo.current_score)
-	
-	for i in range(children.size()):
-		children[i].set_value(score % 10)
-		score = score / 10
-		children[i].position.x = x
-		x -= children[i].get_spacing()
-		children[i].modulate = Color(\"#000000\")
+	mutex.unlock()
+		#
+		#for i in range(children.size()):
+			#children[i].set_value(score % 10)
+			#score = score / 10
+			#children[i].position.x = x
+			#x -= children[i].get_spacing()
+			#children[i].modulate = Color(\"#000000\")
+			#children[i].appear()
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8sxs3"]
