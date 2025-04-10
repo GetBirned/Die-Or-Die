@@ -13,7 +13,50 @@ func _ready():
 	GameInfo.connect(\"holder_updated\", on_holder_updated)
 
 func on_holder_updated(faces):
-	print(faces)
+	if faces.size() == 0:
+		$Label.text = \"\"
+		return
+		
+	var hand = \"high number\"
+	var counts = {}
+	for face in faces:
+		if counts.has(face):
+			counts[face] = counts[face] + 1
+		else:
+			counts[face] = 1
+	var pairs = 0
+	var triples = 0
+	var quads = 0
+	var quint = 0
+	
+	for key in counts.keys():
+		if counts[key] >= 2:
+			pairs += 1
+		if counts[key] >= 3:
+			triples += 1
+		if counts[key] >= 4:
+			quads += 1
+		if counts[key] >= 5:
+			quint += 1
+			
+	if quint > 0:
+		hand = \"five of a kind\"
+	elif quads > 0:
+		hand = \"four of a kind\"
+	elif triples > 0:
+		if pairs > 0:
+			hand = \"full house\"
+		else:
+			hand = \"three of a kind\"
+	elif pairs > 1:
+		hand = \"two pair\"
+	elif pairs > 0:
+		hand = \"pair\"
+	else:
+		hand = \"high number\"
+	
+	$Label.text = hand
+		
 
 func on_score_updated():
 	var score = int(GameInfo.current_score)
@@ -70,3 +113,11 @@ texture = ExtResource("1_yogd4")
 z_index = -1
 position = Vector2(-235, 0)
 texture = ExtResource("1_yogd4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -498.0
+offset_top = -37.0
+offset_right = -283.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
