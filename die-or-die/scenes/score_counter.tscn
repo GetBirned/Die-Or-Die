@@ -44,7 +44,7 @@ func on_holder_updated(faces):
 	elif quads > 0:
 		hand = \"four of a kind\"
 	elif triples > 0:
-		if pairs > 0:
+		if pairs > 1:
 			hand = \"full house\"
 		else:
 			hand = \"three of a kind\"
