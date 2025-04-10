@@ -11,9 +11,9 @@ func _ready() -> void:
 	load_dice(5)
 	domino_stack = $DominoZone.create_dominoes(4)
 	top_domino = domino_stack.front()
-	print(domino_stack.front())
 	
 func load_dice(num):
+	GameInfo.reset_score()
 	live_dice = DiceBag.new_hand(num)
 	for die in live_dice:
 		var new_die = die.duplicate()

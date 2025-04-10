@@ -1,10 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://dax3yfsg7klng"]
+[gd_scene load_steps=16 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
-[ext_resource type="PackedScene" path="res://scenes/domino.tscn" id="4_if4pf"]
-[ext_resource type="PackedScene" uid="uid://c4r6htmqbxv4r" path="res://scenes/dice_holder.tscn" id="5_beojd"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="3_i1s5t"]
+[ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_if4pf"]
+[ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
 [ext_resource type="Script" path="res://scripts/gdscript/domino_zone.gd" id="5_w14m2"]
+[ext_resource type="Shader" path="res://scenes/background.gdshader" id="6_gasix"]
+[ext_resource type="PackedScene" uid="uid://b1kxg1rkxuqhp" path="res://scenes/score_counter.tscn" id="8_3hxqj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omnb8"]
+shader = ExtResource("6_gasix")
+shader_parameter/color_a = Color(0.520459, 0.514701, 0, 1)
+shader_parameter/color_b = Color(0.984314, 0.972549, 0.215686, 1)
+shader_parameter/color_c = Color(1, 1, 1, 1)
+shader_parameter/spin_speed = 0.5
+shader_parameter/noise_scale = 20.0
+shader_parameter/contrast = 5.0
+shader_parameter/intensity = 5.0
+shader_parameter/mouse_position = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dx0xn"]
+shader = ExtResource("3_i1s5t")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_inr8e"]
 normal = Vector2(0, 1)
@@ -23,9 +42,26 @@ size = Vector2(192, 320)
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_eb5gq")
 
+[node name="Background" type="ColorRect" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_omnb8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 750.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Tray" type="Node2D" parent="."]
 position = Vector2(0, -50)
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D_Shadow" type="Sprite2D" parent="Tray"]
+z_index = -1
+material = SubResource("ShaderMaterial_dx0xn")
+position = Vector2(637.5, 350.5)
+texture = ExtResource("2_dlx0y")
 
 [node name="Sprite2D" type="Sprite2D" parent="Tray"]
 z_index = -1
@@ -101,7 +137,10 @@ wait_time = 0.2
 position = Vector2(640, 600)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.3
+
+[node name="ScoreCounter" parent="." instance=ExtResource("8_3hxqj")]
+position = Vector2(872, 64)
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

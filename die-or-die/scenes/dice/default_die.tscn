@@ -1,13 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://deuttny8qpucy"]
+[gd_scene load_steps=30 format=3 uid="uid://deuttny8qpucy"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/dice/die_visual.gd" id="1_vfs2y"]
 [ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="2_wp1o6"]
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_kbkft"]
 [ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/dice/die parts/die_faces.tscn" id="4_gneeq"]
-[ext_resource type="Script" path="res://scenes/dice/tool_tip.gd" id="5_7k2mi"]
-[ext_resource type="Texture2D" uid="uid://djxp0jfkj6rwj" path="res://resources/TextBox.png" id="5_aqp2u"]
+[ext_resource type="Script" path="res://scripts/tool_tip.gd" id="5_7k2mi"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/dice/die parts/side.tscn" id="5_c26ik"]
+[ext_resource type="Texture2D" uid="uid://ugglhsaxidr0" path="res://resources/sticky-note.png" id="5_qbjyt"]
 [ext_resource type="Script" path="res://scripts/gdscript/dice/specials/no_special.gd" id="6_rxiil"]
+[ext_resource type="FontFile" uid="uid://b4tcp7fpoh2mm" path="res://resources/PermanentMarker.ttf" id="7_1oclx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
 size = Vector2(62, 62)
@@ -134,8 +135,19 @@ min_value = 0.01
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="LabelSettings" id="LabelSettings_euwtt"]
+font = ExtResource("7_1oclx")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2whuj"]
+font = ExtResource("7_1oclx")
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
 [node name="DefaultDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_vfs2y")
+die_name = "D6"
+description = "Basic 6 sided die."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y05ou")
@@ -185,15 +197,40 @@ scale_amount_curve = SubResource("Curve_o4ekf")
 [node name="DieFaces" parent="." instance=ExtResource("4_gneeq")]
 
 [node name="ToolTip" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_aqp2u")
+position = Vector2(62, 44)
+rotation = -0.0872665
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_qbjyt")
+offset = Vector2(65, 80)
 script = ExtResource("5_7k2mi")
 
-[node name="Label" type="Label" parent="ToolTip"]
-offset_left = -178.0
-offset_top = -72.0
-offset_right = 178.0
-offset_bottom = 72.0
+[node name="NameLabel" type="Label" parent="ToolTip"]
+offset_left = 6.0
+offset_right = 94.0
+offset_bottom = 24.0
+rotation = 0.122173
+label_settings = SubResource("LabelSettings_euwtt")
+horizontal_alignment = 1
+
+[node name="ToolTip" type="Sprite2D" parent="ToolTip"]
+modulate = Color(0.996078, 0.996078, 0.996078, 0.490196)
+self_modulate = Color(0.019554, 0.0195542, 0.0195541, 1)
+show_behind_parent = true
+clip_children = 2
+visibility_layer = 512
+position = Vector2(46.7745, 10.3661)
+texture = ExtResource("5_qbjyt")
+offset = Vector2(60, 80)
+
+[node name="DescLabel" type="Label" parent="ToolTip"]
+offset_left = -19.5654
+offset_top = 37.1863
+offset_right = 102.435
+offset_bottom = 139.186
+rotation = 0.226893
+label_settings = SubResource("LabelSettings_2whuj")
+autowrap_mode = 2
+justification_flags = 64
 
 [node name="Sides" type="Node" parent="."]
 

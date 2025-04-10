@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal connect_special
 signal rolled
 
-enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
+enum {DISPLAY = 0, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
 
 var status
 var friction
@@ -12,22 +12,25 @@ var do_bounce
 var return_position
 var held_by = null
 var closest_space
-var die_name
 var hover_count = 0
 
 var sides = ["1", "2", "3", "4", "5", "6"]
 var current_side;
 
-@export var description: String = "Basic 6 sided die."
+@export var die_name: String
+@export var description: String
 
 func _ready():
-	die_name = "D6"
+	
 	status = DISPLAY
 	friction = 0.999
 	speed = 1500
 	do_bounce = true
 	current_side = $Sides.get_child(0)
 	connect_special.emit()
+
+func name_description():
+	return [die_name, description]
 	
 func _physics_process(delta):
 	match status:
@@ -80,7 +83,7 @@ func shake(delta):
 		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
 		if get_rotation_degrees() < 0:
 			shake_index = 0
-			status = DISPLAY
+			status = HELD
 			set_rotation_degrees(0)
 
 
@@ -93,7 +96,6 @@ func get_value():
 	current_side.get_value()
 	
 func score():
-	print("scoring")
 	current_side.score()
 	do_shake()
 
@@ -104,10 +106,6 @@ func do_shake():
 
 func call_special():
 	return $Special.manual_special()
-
-# holding logic
-func set_closest(slot: Area2D):
-	closest_space = slot
 
 # rolling logic
 func rolling(delta):
@@ -137,6 +135,10 @@ func face():
 	$DieFaces.visible = true
 	$Die.play("default")
 
+# holding logic
+func set_closest(slot: Area2D):
+	closest_space = slot
+
 func _on_die_face_pressed() -> void:
 	if status == FACE:
 		return_position = global_position
@@ -159,6 +161,9 @@ func _on_die_face_released() -> void:
 			closest_space.register_die(self)
 			held_by = closest_space
 			status = HELD
+
+func get_status():
+	return status
 
 func get_sides():
 	return $Sides.get_children()

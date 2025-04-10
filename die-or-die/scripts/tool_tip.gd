@@ -8,7 +8,6 @@ var area_rect: Rect2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	parent = get_parent()
-	init_tooltip()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -28,12 +27,18 @@ func _process(delta: float) -> void:
 			hovering_counter += 1
 			
 		DISPLAYING:
-			show()
-			if !hover:
+			init_tooltip()
+			if parent.get_status() == 1 or parent.get_status() == 3:
 				state = NONE
+			else:
+				global_position = get_global_mouse_position()
+				show()
+				if !hover:
+					state = NONE
 
 func init_tooltip():
-	$Label.text = parent.description
+	$NameLabel.text = parent.name_description()[0]
+	$DescLabel.text = parent.name_description()[1]
 
 func detect_hover():
 	var mouse_pos = get_global_mouse_position()
