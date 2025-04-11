@@ -16,6 +16,7 @@ signal holder_updated
 @onready var money = 0
 @onready var blank_value = 0
 @onready var last_scored_side = null
+@onready var hand_multiplier = 1
 
 func reset_score():
 	current_score = 0
@@ -36,7 +37,8 @@ func add_money(value):
 	
 func add_score(value):
 	current_score += value
-	score_updated.emit()
+	if value != 0:
+		score_updated.emit()
 	
 func mult_score(value):
 	current_score *= value

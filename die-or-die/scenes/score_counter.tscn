@@ -13,28 +13,28 @@ func _ready():
 	GameInfo.connect(\"score_updated\", on_score_updated)
 	GameInfo.connect(\"holder_updated\", on_holder_updated)
 
-var mutex = Mutex.new()
+#var mutex = Mutex.new()
 var numbers = []
 var x = 0
 var score = 0
 
-var delay = 0
+#var delay = 0
 
-func _process(delta):
-	mutex.lock()
-	if not numbers.is_empty():
-		if delay > 0:
-			delay -= 1
-		else:
-			var number = numbers.pop_front()
-			number.set_value(score % 10)
-			score = score / 10
-			number.position.x = x
-			x -= number.get_spacing()
-			number.modulate = Color(\"#000000\")
-			number.appear()
-			delay = 60 * delta
-	mutex.unlock()
+#func _process(delta):
+	#mutex.lock()
+	#if not numbers.is_empty():
+		#if delay > 0:
+			#delay -= 1
+		#else:
+			#var number = numbers.pop_front()
+			#number.set_value(score % 10)
+			#score = score / 10
+			#number.position.x = x
+			#x -= number.get_spacing()
+			#number.modulate = Color(\"#000000\")
+			#number.appear()
+			#delay = 60 * delta
+	#mutex.unlock()
 
 func on_holder_updated(faces):
 	if faces.size() == 0:
@@ -42,6 +42,8 @@ func on_holder_updated(faces):
 		return
 		
 	var hand = \"high number\"
+	GameInfo.hand_multiplier = 1
+	
 	var counts = {}
 	for face in faces:
 		if counts.has(face):
@@ -65,25 +67,32 @@ func on_holder_updated(faces):
 			
 	if quint > 0:
 		hand = \"five of a kind\"
+		GameInfo.hand_multiplier = 10
 	elif quads > 0:
 		hand = \"four of a kind\"
+		GameInfo.hand_multiplier = 6
 	elif triples > 0:
 		if pairs > 1:
 			hand = \"full house\"
+			GameInfo.hand_multiplier = 4
 		else:
 			hand = \"three of a kind\"
+			GameInfo.hand_multiplier = 3
 	elif pairs > 1:
 		hand = \"two pair\"
+		GameInfo.hand_multiplier = 2
 	elif pairs > 0:
 		hand = \"pair\"
+		GameInfo.hand_multiplier = 2
 	else:
 		hand = \"high number\"
+		GameInfo.hand_multiplier = 1
 	
 	$HandSprite.play(hand)
 		
 
 func on_score_updated():
-	mutex.lock()
+	#mutex.lock()
 	
 	var score_temp = int(GameInfo.current_score)
 	
@@ -109,16 +118,14 @@ func on_score_updated():
 		x = 0
 		score = int(GameInfo.current_score)
 		numbers = children
-	
-	mutex.unlock()
-		#
-		#for i in range(children.size()):
-			#children[i].set_value(score % 10)
-			#score = score / 10
-			#children[i].position.x = x
-			#x -= children[i].get_spacing()
-			#children[i].modulate = Color(\"#000000\")
-			#children[i].appear()
+		
+		for i in range(children.size()):
+			children[i].set_value(score % 10)
+			score = score / 10
+			children[i].position.x = x
+			x -= children[i].get_spacing()
+			children[i].modulate = Color(\"#000000\")
+			children[i].appear()
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8sxs3"]

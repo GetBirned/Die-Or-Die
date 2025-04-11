@@ -49,6 +49,10 @@ func _on_turn_locked_in() -> void:
 				$Timer.start()
 				await $Timer.timeout
 	
+	GameInfo.mult_score(GameInfo.hand_multiplier)
+	$Timer.start()
+	await $Timer.timeout
+	
 	#print(GameInfo.current_score)
 	await $DominoZone.damage_dominoes(GameInfo.current_score)
 	
