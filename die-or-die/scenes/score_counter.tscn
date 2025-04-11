@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1kxg1rkxuqhp"]
+[gd_scene load_steps=12 format=3 uid="uid://b1kxg1rkxuqhp"]
 
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="1_ak0so"]
 [ext_resource type="Texture2D" uid="uid://dx2a35cp72tds" path="res://resources/Whiteboard.png" id="1_yogd4"]
+[ext_resource type="Texture2D" uid="uid://d3e15b4tbsb84" path="res://resources/Hands.png" id="3_bbl1x"]
 
 [sub_resource type="GDScript" id="GDScript_gkg68"]
 script/source = "extends Node2D
@@ -37,7 +38,7 @@ func _process(delta):
 
 func on_holder_updated(faces):
 	if faces.size() == 0:
-		$Label.text = \"\"
+		$HandSprite.play(\"default\")
 		return
 		
 	var hand = \"high number\"
@@ -78,7 +79,7 @@ func on_holder_updated(faces):
 	else:
 		hand = \"high number\"
 	
-	$Label.text = hand
+	$HandSprite.play(hand)
 		
 
 func on_score_updated():
@@ -125,6 +126,89 @@ shader = ExtResource("1_ak0so")
 shader_parameter/shadow_offset = Vector2(10, 10)
 shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3itb"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(300, 0, 150, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o2xf"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 0, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tns1b"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 120, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkrjl"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 360, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yofp"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 240, 600, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wliw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3itb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"five of a kind",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"four of a kind",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"full house",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o2xf")
+}],
+"loop": true,
+"name": &"high number",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tns1b")
+}],
+"loop": true,
+"name": &"pair",
+"speed": 0.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"straight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkrjl")
+}],
+"loop": true,
+"name": &"three of a kind",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yofp")
+}],
+"loop": true,
+"name": &"two pair",
+"speed": 0.0
+}]
+
 [node name="ScoreCounter" type="Node2D"]
 script = SubResource("GDScript_gkg68")
 
@@ -143,9 +227,16 @@ position = Vector2(-235, 0)
 texture = ExtResource("1_yogd4")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -498.0
 offset_top = -37.0
 offset_right = -283.0
 offset_bottom = 33.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
+
+[node name="HandSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-235, 0)
+sprite_frames = SubResource("SpriteFrames_4wliw")
+animation = &"five of a kind"
+autoplay = "default"
