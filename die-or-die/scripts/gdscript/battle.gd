@@ -42,7 +42,6 @@ func _on_turn_locked_in() -> void:
 	top_domino.lock_in_used()
 	held_queue = $DiceHolder.get_dice()
 	var num = held_queue.size() # number to track how many new dice need to be loaded 
-	$DiceHolder.clear_dice()
 	GameInfo.reset_score()
 	for die in held_queue:
 		die.score()
@@ -50,12 +49,18 @@ func _on_turn_locked_in() -> void:
 		await $Timer.timeout
 		
 		for special in held_queue:
-			if special.call_special():
+			if special.call_special(die == special):
 				$Timer.start()
 				await $Timer.timeout
 	
-	print(GameInfo.current_score)
+	GameInfo.mult_score(GameInfo.hand_multiplier)
+	$Timer.start()
+	await $Timer.timeout
+	
+	#print(GameInfo.current_score)
 	await $DominoZone.damage_dominoes(GameInfo.current_score)
+	
+	$DiceHolder.clear_dice()
 	
 	for die in held_queue:
 		$Dice.remove_child(die)

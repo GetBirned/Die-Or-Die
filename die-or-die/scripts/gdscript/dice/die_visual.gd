@@ -93,7 +93,7 @@ func roll_physics():
 	status = ROLLING
 
 func get_value():
-	current_side.get_value()
+	return current_side.get_value()
 	
 func score():
 	current_side.score()
@@ -104,8 +104,8 @@ func do_shake():
 		set_rotation_degrees(0)
 		status = SHAKE
 
-func call_special():
-	return $Special.manual_special()
+func call_special(this_being_scored):
+	return $Special.manual_special(this_being_scored)
 
 # rolling logic
 func rolling(delta):
