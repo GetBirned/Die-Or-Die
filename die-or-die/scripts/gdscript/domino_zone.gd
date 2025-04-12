@@ -31,6 +31,7 @@ func place_dominoes():
 func destroy_top():
 	var active_domino = domino_stack.pop_front()
 	active_domino.active = false
+	$DominoDeathPlayer.play() # play a noise when the domino is destroyed.
 	remove_child(active_domino)
 		
 # damages the top domino
@@ -50,6 +51,14 @@ func damage_dominoes(damage):
 			return
 			
 		active_domino.take_damage(1)
+		
+		# damage noise for domino
+		var pitch_base = 1.0
+		var pitch_scale = 0.01  # tune pitch here
+		$DamagePlayer.stop()
+		$DamagePlayer.pitch_scale = pitch_base + i * pitch_scale # pitch will increase as more damage is taken
+		$DamagePlayer.play()
+		
 		active_domino.shake(0)
 		active_domino.update_sprite()
 		$Timer.start()

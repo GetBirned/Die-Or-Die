@@ -7,6 +7,7 @@ var rolls
 var top_domino
 
 func _ready() -> void:
+	$BattleMusicPlayer.play()
 	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
 	load_dice(5)
 	domino_stack = $DominoZone.create_dominoes(4)
@@ -15,6 +16,8 @@ func _ready() -> void:
 func load_dice(num):
 	GameInfo.reset_score()
 	live_dice = DiceBag.new_hand(num)
+	$RollDicePlayer.stop()
+	$RollDicePlayer.play() # dice rolling sound effect
 	for die in live_dice:
 		var new_die = die.duplicate()
 		$Dice.add_child(new_die)
@@ -26,6 +29,8 @@ func _on_roll_button_pressed():
 	if top_domino.rerolls > 0:
 		var dice = $Dice.get_children()
 		top_domino.reroll_used()
+		$RollDicePlayer.stop()
+		$RollDicePlayer.play() # dice rolling sound effect
 		for die in dice:
 			die.roll()
 

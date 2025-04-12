@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c35x6ihsiifu5"]
+[gd_scene load_steps=4 format=3 uid="uid://c35x6ihsiifu5"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/title_screen.gd" id="1_kqayp"]
 [ext_resource type="PackedScene" uid="uid://cxfft1wass0ut" path="res://scenes/title_screen_ui.tscn" id="1_m3o0d"]
+[ext_resource type="AudioStream" uid="uid://bbvdav7hvlst3" path="res://resources/menuMusic.mp3" id="3_ebknj"]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_kqayp")
@@ -38,6 +39,9 @@ offset_right = 180.0
 offset_bottom = 180.0
 theme_override_font_sizes/font_size = 32
 text = "roll tray"
+
+[node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ebknj")
 
 [connection signal="pressed" from="debugbuttons/shopdebug" to="." method="_on_shopdebug_pressed"]
 [connection signal="pressed" from="debugbuttons/rolldebug" to="." method="_on_rolldebug_pressed"]
