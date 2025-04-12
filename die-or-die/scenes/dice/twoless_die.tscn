@@ -1,14 +1,21 @@
-[gd_scene load_steps=30 format=3 uid="uid://c5mlmy4kna120"]
+[gd_scene load_steps=33 format=3 uid="uid://c5mlmy4kna120"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/dice/die_visual.gd" id="1_5tmnc"]
 [ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="2_cchgn"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_v17ya"]
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_eswp1"]
+[ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="3_u88nn"]
 [ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/dice/die parts/die_faces.tscn" id="4_hlshv"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/dice/die parts/side.tscn" id="5_py7td"]
 [ext_resource type="Script" path="res://scripts/gdscript/dice/specials/twoless_die_special.gd" id="6_881nf"]
 [ext_resource type="Texture2D" uid="uid://ugglhsaxidr0" path="res://resources/sticky-note.png" id="7_ywig8"]
 [ext_resource type="Script" path="res://scripts/tool_tip.gd" id="8_vkm3m"]
 [ext_resource type="FontFile" uid="uid://b4tcp7fpoh2mm" path="res://resources/PermanentMarker.ttf" id="9_0v18t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7fi1"]
+shader = ExtResource("2_v17ya")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4wbc"]
 atlas = ExtResource("2_cchgn")
@@ -146,6 +153,12 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="TwolessDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_5tmnc")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_i7fi1")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_u88nn")
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.156863, 0.772549, 0.960784, 1)

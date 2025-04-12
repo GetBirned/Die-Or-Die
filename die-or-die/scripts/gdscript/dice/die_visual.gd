@@ -20,18 +20,21 @@ var current_side;
 @export var die_name: String
 @export var description: String
 
+@onready var shadow = $Shadow
+var last_mouse_position := Vector2.ZERO
+
 func _ready():
-	
 	status = DISPLAY
 	friction = 0.999
 	speed = 1500
 	do_bounce = true
 	current_side = $Sides.get_child(0)
 	connect_special.emit()
+	shadow.visible = false
 
 func name_description():
 	return [die_name, description]
-	
+
 func _physics_process(delta):
 	match status:
 		DISPLAY:
@@ -41,7 +44,13 @@ func _physics_process(delta):
 		FACE:
 			face()
 		DRAGGING:
-			position = get_global_mouse_position()
+			global_position = get_global_mouse_position()
+			
+			# sway based on mouse movement
+			var velocity = get_global_mouse_position() - last_mouse_position
+			rotation = clamp(velocity.x * 0.01, -0.5, 0.5)
+			last_mouse_position = get_global_mouse_position()
+			
 		RETURNING:
 			if abs(global_position.distance_to(return_position)) < 10:
 				global_position = return_position
@@ -53,12 +62,15 @@ func _physics_process(delta):
 			position = closest_space.global_position
 		SHAKE:
 			shake(delta)
-			
+	
+	# restore rotation slowly when not dragging
+	if status != DRAGGING:
+		rotation = lerp_angle(rotation, 0.0, 0.1)
+
 func roll(initial = false):
 	if status != HELD:
 		$DieFaces.visible = false
 		$Die.play("rolling")
-		#$Die.enable_blur()
 		$Die.set_frame(RNG.randi_range(0, $Die.sprite_frames.get_frame_count("rolling")-1))
 		
 		current_side = $Sides.get_children().pick_random()
@@ -72,20 +84,19 @@ func roll(initial = false):
 @onready var shake_speed = 400
 func shake(delta):
 	if shake_index == 0:
-		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
+		set_rotation_degrees(get_rotation_degrees() - (shake_speed * delta))
 		if get_rotation_degrees() < -20:
 			shake_index = 1
 	elif shake_index == 1:
-		set_rotation_degrees(get_rotation_degrees() + (shake_speed*delta))
+		set_rotation_degrees(get_rotation_degrees() + (shake_speed * delta))
 		if get_rotation_degrees() > 20:
 			shake_index = 2
 	else:
-		set_rotation_degrees(get_rotation_degrees() - (shake_speed*delta))
+		set_rotation_degrees(get_rotation_degrees() - (shake_speed * delta))
 		if get_rotation_degrees() < 0:
 			shake_index = 0
 			status = HELD
 			set_rotation_degrees(0)
-
 
 func roll_physics():
 	friction = 0.999
@@ -107,7 +118,6 @@ func do_shake():
 func call_special(this_being_scored):
 	return $Special.manual_special(this_being_scored)
 
-# rolling logic
 func rolling(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info and do_bounce:
@@ -116,16 +126,13 @@ func rolling(delta):
 	else:
 		do_bounce = true
 		
-	velocity = velocity * friction
+	velocity *= friction
 	friction -= 0.001
 		
 	if velocity.length() <= 200:
 		velocity = Vector2(0,0)
-		#$CollisionShape2D.disabled = true
 		status = FACE
-		#$Die.disable_blur()
 		
-		# do particle effect
 		if current_side.get_value() > 0:
 			$CPUParticles2D.amount = 25 * pow(int(current_side.get_value()), 2)
 			$CPUParticles2D.emitting = true
@@ -135,7 +142,6 @@ func face():
 	$DieFaces.visible = true
 	$Die.play("default")
 
-# holding logic
 func set_closest(slot: Area2D):
 	closest_space = slot
 
@@ -143,6 +149,8 @@ func _on_die_face_pressed() -> void:
 	if status == FACE:
 		return_position = global_position
 		status = DRAGGING
+		shadow.visible = true
+		last_mouse_position = get_global_mouse_position()
 	elif status == HELD:
 		if held_by != null:
 			held_by.clear_die()
@@ -150,9 +158,12 @@ func _on_die_face_pressed() -> void:
 			
 		return_position = Vector2(0,0)
 		status = DRAGGING
+		shadow.visible = true
+		last_mouse_position = get_global_mouse_position()
 
 func _on_die_face_released() -> void:
 	if status == DRAGGING:
+		shadow.visible = false
 		if closest_space == null:
 			move_and_collide(Vector2(0,0))
 			status = FACE
