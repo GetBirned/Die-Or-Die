@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1kxg1rkxuqhp"]
+[gd_scene load_steps=17 format=3 uid="uid://b1kxg1rkxuqhp"]
 
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="1_ak0so"]
 [ext_resource type="Texture2D" uid="uid://dx2a35cp72tds" path="res://resources/Whiteboard.png" id="1_yogd4"]
 [ext_resource type="Texture2D" uid="uid://d3e15b4tbsb84" path="res://resources/Hands.png" id="3_bbl1x"]
+[ext_resource type="Texture2D" uid="uid://7eiihs4tgr6u" path="res://resources/whiteboardX.png" id="4_wmsq3"]
 
 [sub_resource type="GDScript" id="GDScript_gkg68"]
 script/source = "extends Node2D
@@ -64,8 +65,11 @@ func on_holder_updated(faces):
 			quads += 1
 		if counts[key] >= 5:
 			quint += 1
-			
-	if quint > 0:
+	
+	if is_straight(faces):
+		hand = \"straight\"
+		GameInfo.hand_multiplier = 4	
+	elif quint > 0:
 		hand = \"five of a kind\"
 		GameInfo.hand_multiplier = 10
 	elif quads > 0:
@@ -89,6 +93,19 @@ func on_holder_updated(faces):
 		GameInfo.hand_multiplier = 1
 	
 	$HandSprite.play(hand)
+	
+func is_straight(values):
+	if values.size() == 5:
+		values.sort()
+		
+		var previous = values[0] - 1
+		for value in values:
+			if value != previous + 1:
+				return false
+			previous = value
+		
+		return true
+	return false
 		
 
 func on_score_updated():
@@ -137,6 +154,18 @@ shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 atlas = ExtResource("3_bbl1x")
 region = Rect2(300, 0, 150, 120)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3v0q"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 840, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p312"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 720, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu7h7"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 600, 600, 120)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7o2xf"]
 atlas = ExtResource("3_bbl1x")
 region = Rect2(0, 0, 600, 120)
@@ -144,6 +173,10 @@ region = Rect2(0, 0, 600, 120)
 [sub_resource type="AtlasTexture" id="AtlasTexture_tns1b"]
 atlas = ExtResource("3_bbl1x")
 region = Rect2(0, 120, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15dr2"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 480, 600, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkrjl"]
 atlas = ExtResource("3_bbl1x")
@@ -163,20 +196,29 @@ animations = [{
 "name": &"default",
 "speed": 0.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3v0q")
+}],
 "loop": true,
 "name": &"five of a kind",
-"speed": 5.0
+"speed": 0.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p312")
+}],
 "loop": true,
 "name": &"four of a kind",
-"speed": 5.0
+"speed": 0.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nu7h7")
+}],
 "loop": true,
 "name": &"full house",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -194,10 +236,13 @@ animations = [{
 "name": &"pair",
 "speed": 0.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15dr2")
+}],
 "loop": true,
 "name": &"straight",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -245,5 +290,8 @@ theme_override_font_sizes/font_size = 32
 [node name="HandSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-235, 0)
 sprite_frames = SubResource("SpriteFrames_4wliw")
-animation = &"five of a kind"
 autoplay = "default"
+
+[node name="X" type="Sprite2D" parent="."]
+position = Vector2(-235, 0)
+texture = ExtResource("4_wmsq3")
