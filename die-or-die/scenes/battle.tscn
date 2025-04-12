@@ -1,13 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=20 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="3_i1s5t"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="3_ir6n5"]
 [ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_if4pf"]
 [ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
-[ext_resource type="Script" path="res://scripts/gdscript/domino_zone.gd" id="5_w14m2"]
 [ext_resource type="Shader" path="res://scenes/background.gdshader" id="6_gasix"]
-[ext_resource type="PackedScene" path="res://scenes/score_counter.tscn" id="6_s1lek"]
+[ext_resource type="PackedScene" uid="uid://b1kxg1rkxuqhp" path="res://scenes/score_counter.tscn" id="8_3hxqj"]
+[ext_resource type="AudioStream" uid="uid://doxuvyr88igso" path="res://resources/blip.wav" id="8_324rl"]
+[ext_resource type="AudioStream" uid="uid://b0ut5gauhcj2q" path="res://resources/diceroll.wav" id="11_r5o66"]
+[ext_resource type="AudioStream" uid="uid://rhfdyp0708f8" path="res://resources/battleMusic.mp3" id="12_p4e7e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_omnb8"]
 shader = ExtResource("6_gasix")
@@ -36,6 +39,76 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3j53m"]
 normal = Vector2(-1, 0)
 
+[sub_resource type="GDScript" id="GDScript_ihc73"]
+script/source = "extends Area2D
+
+var zone_bounds: Rect2
+var domino_stack = []
+var rerolls
+
+func _ready() -> void:
+	zone_bounds = $CollisionShape2D.shape.get_rect()
+	
+func create_dominoes(count:int):
+	for i in range(count):
+		var top_domino = $DefaultDomino.duplicate()
+		top_domino.calculate_difficulty(count-i)
+		top_domino.update_sprite()
+		add_child(top_domino)
+		top_domino.show()
+		domino_stack.push_front(top_domino)
+		
+	domino_stack.front().active = true
+	place_dominoes()
+	return domino_stack
+	
+func place_dominoes():
+	var count = domino_stack.size()
+	for i in range(count):
+		var domino = domino_stack[i]
+		var offset = Vector2(count-i*5, count-i*(-3)) # gives the illusion of layers
+	
+		domino.position = zone_bounds.get_center() + offset
+		domino.z_index = count-i # puts the top domino on the highest layer
+
+func destroy_top():
+	var active_domino = domino_stack.pop_front()
+	active_domino.active = false
+	remove_child(active_domino)
+		
+# damages the top domino
+func damage_dominoes(damage):
+	if domino_stack.is_empty():
+		return
+		
+	var active_domino = domino_stack.front()
+	
+	for i in range(damage):
+		if active_domino.get_life() == 0:
+			destroy_top()
+			active_domino = domino_stack.front()
+	
+		active_domino.take_damage(1)
+		
+		# damage noise for domino
+		var pitch_base = 1.0
+		var pitch_scale = 0.05  # tune pitch here
+		$DamagePlayer.stop()
+		$DamagePlayer.pitch_scale = pitch_base + i * pitch_scale # pitch will increase as more damage is taken
+		$DamagePlayer.play()
+		
+		active_domino.shake(0)
+		active_domino.update_sprite()
+		$Timer.start()
+		await $Timer.timeout
+		
+	if active_domino.get_life() == 0:
+		destroy_top()
+
+func get_rerolls():
+	return rerolls
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rdc6"]
 size = Vector2(192, 320)
 
@@ -55,6 +128,7 @@ grow_vertical = 2
 
 [node name="Tray" type="Node2D" parent="."]
 position = Vector2(0, -50)
+script = ExtResource("3_ir6n5")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D_Shadow" type="Sprite2D" parent="Tray"]
@@ -112,8 +186,6 @@ offset_bottom = 120.0
 theme_override_font_sizes/font_size = 32
 text = "back"
 
-[node name="Dice" type="Node2D" parent="."]
-
 [node name="LockInButton" type="Button" parent="."]
 offset_left = 1006.0
 offset_top = 559.0
@@ -121,9 +193,11 @@ offset_right = 1188.0
 offset_bottom = 638.0
 text = "Lock In"
 
+[node name="Dice" type="Node2D" parent="."]
+
 [node name="DominoZone" type="Area2D" parent="."]
 position = Vector2(1128, 256)
-script = ExtResource("5_w14m2")
+script = SubResource("GDScript_ihc73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DominoZone"]
 shape = SubResource("RectangleShape2D_0rdc6")
@@ -133,14 +207,24 @@ shape = SubResource("RectangleShape2D_0rdc6")
 [node name="Timer" type="Timer" parent="DominoZone"]
 wait_time = 0.2
 
+[node name="DamagePlayer" type="AudioStreamPlayer" parent="DominoZone"]
+stream = ExtResource("8_324rl")
+
 [node name="DiceHolder" parent="." instance=ExtResource("5_beojd")]
 position = Vector2(640, 600)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="ScoreCounter" parent="." instance=ExtResource("6_s1lek")]
-position = Vector2(879, 64)
+[node name="ScoreCounter" parent="." instance=ExtResource("8_3hxqj")]
+position = Vector2(872, 64)
+
+[node name="RollDicePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_r5o66")
+
+[node name="BattleMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_p4e7e")
+volume_db = -12.495
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

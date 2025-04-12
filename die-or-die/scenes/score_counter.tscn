@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1kxg1rkxuqhp"]
+[gd_scene load_steps=7 format=3 uid="uid://b1kxg1rkxuqhp"]
 
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="1_ak0so"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="1_d7vh3"]
 [ext_resource type="Texture2D" uid="uid://dx2a35cp72tds" path="res://resources/Whiteboard.png" id="1_yogd4"]
+[ext_resource type="AudioStream" uid="uid://doxuvyr88igso" path="res://resources/blip.wav" id="4_roysv"]
 
 [sub_resource type="GDScript" id="GDScript_gkg68"]
 script/source = "extends Node2D
 
+@onready var numbers_container := $Hover/Numbers
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,15 +17,21 @@ func _ready():
 func on_score_updated():
 	var score = int(GameInfo.current_score)
 	
-	for child in $Numbers.get_children():
-		$Numbers.remove_child(child)
+	for child in numbers_container.get_children():
+		numbers_container.remove_child(child)
 		child.queue_free()
 		
 	if score < 1:
-		$Numbers.hide()
+		numbers_container.hide()
 		return
 	else:
-		$Numbers.show()
+		numbers_container.show()
+		
+	var pitch_base = 1.0
+	var pitch_scale = 0.05  # tune pitch here
+	$BlipPlayer.stop()
+	$BlipPlayer.pitch_scale = pitch_base + GameInfo.current_score * pitch_scale
+	$BlipPlayer.play()
 		
 	var digits = 0
 	while score >= 1:
@@ -29,9 +39,9 @@ func on_score_updated():
 		digits += 1
 	
 	for i in range(digits):
-		$Numbers.add_child(load(\"res://scenes/digit.tscn\").instantiate())
+		numbers_container.add_child(load(\"res://scenes/digit.tscn\").instantiate())
 			
-	var children = $Numbers.get_children()
+	var children = numbers_container.get_children()
 	
 	var x = 0
 	score = int(GameInfo.current_score)
@@ -44,13 +54,30 @@ func on_score_updated():
 		children[i].modulate = Color(\"#000000\")
 "
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sxs3"]
+shader = ExtResource("1_ak0so")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
 [node name="ScoreCounter" type="Node2D"]
 script = SubResource("GDScript_gkg68")
 
-[node name="Numbers" type="Node2D" parent="."]
-z_index = 1
+[node name="Hover" type="Node2D" parent="."]
+script = ExtResource("1_d7vh3")
 
-[node name="Whiteboard" type="Sprite2D" parent="."]
+[node name="Whiteboard_Shadow" type="Sprite2D" parent="Hover"]
+z_index = -1
+material = SubResource("ShaderMaterial_8sxs3")
+position = Vector2(-235, 0)
+texture = ExtResource("1_yogd4")
+
+[node name="Whiteboard" type="Sprite2D" parent="Hover"]
 z_index = -1
 position = Vector2(-235, 0)
 texture = ExtResource("1_yogd4")
+
+[node name="Numbers" type="Node2D" parent="Hover"]
+z_index = 1
+
+[node name="BlipPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_roysv")

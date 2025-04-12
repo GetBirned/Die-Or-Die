@@ -2,7 +2,7 @@ extends Area2D
 
 var zone_bounds: Rect2
 var domino_stack = []
-var rerolls
+var lock_ins
 
 func _ready() -> void:
 	zone_bounds = $CollisionShape2D.shape.get_rect()
@@ -10,7 +10,8 @@ func _ready() -> void:
 func create_dominoes(count:int):
 	for i in range(count):
 		var top_domino = $DefaultDomino.duplicate()
-		top_domino.calculate_difficulty()
+		top_domino.calculate_difficulty(count-i)
+		top_domino.update_sprite()
 		add_child(top_domino)
 		top_domino.show()
 		domino_stack.push_front(top_domino)
@@ -31,6 +32,7 @@ func place_dominoes():
 func destroy_top():
 	var active_domino = domino_stack.pop_front()
 	active_domino.active = false
+	$DominoDeathPlayer.play() # play a noise when the domino is destroyed.
 	remove_child(active_domino)
 		
 # damages the top domino
@@ -43,13 +45,25 @@ func damage_dominoes(damage):
 	for i in range(damage):
 		if active_domino.get_life() == 0:
 			destroy_top()
+			if domino_stack.is_empty():
+				SceneManager.switch_scene("shop")
+				return
 			active_domino = domino_stack.front()
+			
 		
 		if active_domino == null:
 			SceneManager.switch_scene("shop")
 			return
 			
 		active_domino.take_damage(1)
+		
+		# damage noise for domino
+		var pitch_base = 1.0
+		var pitch_scale = 0.01  # tune pitch here
+		$DamagePlayer.stop()
+		$DamagePlayer.pitch_scale = pitch_base + i * pitch_scale # pitch will increase as more damage is taken
+		$DamagePlayer.play()
+		
 		active_domino.shake(0)
 		active_domino.update_sprite()
 		$Timer.start()
@@ -58,5 +72,5 @@ func damage_dominoes(damage):
 	if active_domino.get_life() == 0:
 		destroy_top()
 
-func get_rerolls():
-	return rerolls
+func get_lock_ins():
+	return lock_ins

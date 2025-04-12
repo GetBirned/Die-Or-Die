@@ -1,12 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxfft1wass0ut"]
+[gd_scene load_steps=7 format=3 uid="uid://cxfft1wass0ut"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/title_screen_ui.gd" id="1_h4yye"]
 [ext_resource type="Texture2D" uid="uid://bcnngx20n6nxi" path="res://resources/DieOrDie.png" id="1_qw7xu"]
-[ext_resource type="Shader" path="res://scripts/shaders/scroll.gdshader" id="3_prxei"]
+[ext_resource type="Shader" path="res://scenes/background.gdshader" id="2_xwyo5"]
 [ext_resource type="Texture2D" uid="uid://c0imwgpfaj3pn" path="res://resources/dieOrdieBackground_dark.png" id="4_xfrdu"]
+[ext_resource type="Script" path="res://scripts/gdscript/titleSway.gd" id="5_4j02x"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5lv1i"]
-shader = ExtResource("3_prxei")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rj6f8"]
+shader = ExtResource("2_xwyo5")
+shader_parameter/color_a = Color(1, 0, 0, 1)
+shader_parameter/color_b = Color(0, 0, 0, 1)
+shader_parameter/color_c = Color(0.960784, 0, 0, 1)
+shader_parameter/spin_speed = 0.5
+shader_parameter/noise_scale = 20.0
+shader_parameter/contrast = 1.0
+shader_parameter/intensity = 1.0
+shader_parameter/mouse_position = null
 
 [node name="TitleScreenUI" type="Control"]
 layout_mode = 3
@@ -20,7 +29,7 @@ script = ExtResource("1_h4yye")
 [node name="Background" type="TextureRect" parent="."]
 z_index = -2
 texture_repeat = 2
-material = SubResource("ShaderMaterial_5lv1i")
+material = SubResource("ShaderMaterial_rj6f8")
 layout_mode = 2
 offset_right = 1284.0
 offset_bottom = 702.0
@@ -40,6 +49,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_qw7xu")
+script = ExtResource("5_4j02x")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2

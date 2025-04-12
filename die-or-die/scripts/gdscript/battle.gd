@@ -7,6 +7,7 @@ var rolls
 var top_domino
 
 func _ready() -> void:
+	$BattleMusicPlayer.play()
 	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
 	load_dice(5)
 	domino_stack = $DominoZone.create_dominoes(4)
@@ -15,6 +16,8 @@ func _ready() -> void:
 func load_dice(num):
 	GameInfo.reset_score()
 	live_dice = DiceBag.new_hand(num)
+	$RollDicePlayer.stop()
+	$RollDicePlayer.play() # dice rolling sound effect
 	for die in live_dice:
 		var new_die = die.duplicate()
 		$Dice.add_child(new_die)
@@ -23,9 +26,10 @@ func load_dice(num):
 
 
 func _on_roll_button_pressed():
-	if top_domino.rerolls > 0:
+	if top_domino.lock_ins > 0:
 		var dice = $Dice.get_children()
-		top_domino.reroll_used()
+		$RollDicePlayer.stop()
+		$RollDicePlayer.play() # dice rolling sound effect
 		for die in dice:
 			die.roll()
 
@@ -35,7 +39,7 @@ func _on_back_button_pressed():
 	SceneManager.switch_scene("title_screen")
 
 func _on_turn_locked_in() -> void:
-	
+	top_domino.lock_in_used()
 	held_queue = $DiceHolder.get_dice()
 	var num = held_queue.size() # number to track how many new dice need to be loaded 
 	$DiceHolder.clear_dice()
@@ -62,8 +66,7 @@ func _on_turn_locked_in() -> void:
 		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:
-		if top_domino == domino_stack.front():
-			await SceneManager.shrink_transition(self)
+		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
 			SceneManager.switch_scene("title_screen")
 		else:	
 			top_domino = domino_stack.front()
