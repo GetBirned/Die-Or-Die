@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=24 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
@@ -7,14 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://cmnig6822n6j3" path="res://scenes/domino.tscn" id="4_if4pf"]
 [ext_resource type="PackedScene" uid="uid://cjijg2tbsmngs" path="res://scenes/dice_holder.tscn" id="5_beojd"]
 [ext_resource type="Shader" path="res://scenes/background.gdshader" id="6_gasix"]
+[ext_resource type="Script" path="res://scenes/dice.gd" id="6_sn7cq"]
 [ext_resource type="PackedScene" uid="uid://b1kxg1rkxuqhp" path="res://scenes/score_counter.tscn" id="8_3hxqj"]
 [ext_resource type="AudioStream" uid="uid://doxuvyr88igso" path="res://resources/blip.wav" id="8_324rl"]
 [ext_resource type="AudioStream" uid="uid://b0ut5gauhcj2q" path="res://resources/diceroll.wav" id="11_r5o66"]
 [ext_resource type="AudioStream" uid="uid://rhfdyp0708f8" path="res://resources/battleMusic.mp3" id="12_p4e7e"]
+[ext_resource type="Texture2D" uid="uid://p7ojfit0a8w8" path="res://resources/lock.png" id="13_bb3br"]
+[ext_resource type="Texture2D" uid="uid://bgni2uab6nny1" path="res://resources/roll.png" id="14_hjqby"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_omnb8"]
 shader = ExtResource("6_gasix")
-shader_parameter/color_a = Color(0.520459, 0.514701, 0, 1)
+shader_parameter/color_a = Color(0.854134, 0.216057, 0.337154, 1)
 shader_parameter/color_b = Color(0.984314, 0.972549, 0.215686, 1)
 shader_parameter/color_c = Color(1, 1, 1, 1)
 shader_parameter/spin_speed = 0.5
@@ -111,6 +114,11 @@ func get_rerolls():
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rdc6"]
 size = Vector2(192, 320)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qy1w8"]
+shader = ExtResource("3_i1s5t")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_eb5gq")
 
@@ -171,13 +179,6 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tray/Walls/Right"]
 shape = SubResource("WorldBoundaryShape2D_3j53m")
 
-[node name="RollButton" type="Button" parent="."]
-offset_right = 180.0
-offset_bottom = 60.0
-theme_override_font_sizes/font_size = 32
-text = "roll
-"
-
 [node name="BackButton" type="Button" parent="."]
 offset_top = 60.0
 offset_right = 180.0
@@ -185,14 +186,8 @@ offset_bottom = 120.0
 theme_override_font_sizes/font_size = 32
 text = "back"
 
-[node name="LockInButton" type="Button" parent="."]
-offset_left = 1006.0
-offset_top = 559.0
-offset_right = 1188.0
-offset_bottom = 638.0
-text = "Lock In"
-
 [node name="Dice" type="Node2D" parent="."]
+script = ExtResource("6_sn7cq")
 
 [node name="DominoZone" type="Area2D" parent="."]
 position = Vector2(1128, 256)
@@ -225,6 +220,40 @@ stream = ExtResource("11_r5o66")
 stream = ExtResource("12_p4e7e")
 volume_db = -12.495
 
-[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
+[node name="LockNode" type="Node2D" parent="."]
+script = ExtResource("3_ir6n5")
+
+[node name="LockInShadow" type="Sprite2D" parent="LockNode"]
+material = SubResource("ShaderMaterial_qy1w8")
+position = Vector2(1099, 559)
+texture = ExtResource("13_bb3br")
+
+[node name="LockInButton" type="Button" parent="LockNode"]
+offset_left = 1023.0
+offset_top = 524.0
+offset_right = 1175.0
+offset_bottom = 594.0
+icon = ExtResource("13_bb3br")
+flat = true
+
+[node name="RollNode" type="Node2D" parent="."]
+script = ExtResource("3_ir6n5")
+
+[node name="RollShadow" type="Sprite2D" parent="RollNode"]
+material = SubResource("ShaderMaterial_qy1w8")
+position = Vector2(1099, 641)
+texture = ExtResource("13_bb3br")
+
+[node name="RollButton" type="Button" parent="RollNode"]
+offset_left = 1023.0
+offset_top = 606.0
+offset_right = 1175.0
+offset_bottom = 676.0
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("14_hjqby")
+flat = true
+icon_alignment = 1
+
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="LockInButton" to="." method="_on_turn_locked_in"]
+[connection signal="pressed" from="LockNode/LockInButton" to="." method="_on_turn_locked_in"]
+[connection signal="pressed" from="RollNode/RollButton" to="." method="_on_roll_button_pressed"]

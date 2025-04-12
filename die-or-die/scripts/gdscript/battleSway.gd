@@ -5,6 +5,11 @@ var origin_position: Vector2
 func _ready():
 	origin_position = position  # Save the original position
 	sway()
+	
+func _on_tray_area_entered(body):
+	if body.is_in_group("die"):
+		body.update_sway_anchor(self)  # Set sway to Tray
+
 
 func sway():
 	var duration = randf_range(1.5, 2.5)
