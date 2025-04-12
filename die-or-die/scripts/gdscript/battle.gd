@@ -26,9 +26,8 @@ func load_dice(num):
 
 
 func _on_roll_button_pressed():
-	if top_domino.rerolls > 0:
+	if top_domino.lock_ins > 0:
 		var dice = $Dice.get_children()
-		top_domino.reroll_used()
 		$RollDicePlayer.stop()
 		$RollDicePlayer.play() # dice rolling sound effect
 		for die in dice:
@@ -40,7 +39,7 @@ func _on_back_button_pressed():
 	SceneManager.switch_scene("title_screen")
 
 func _on_turn_locked_in() -> void:
-	
+	top_domino.lock_in_used()
 	held_queue = $DiceHolder.get_dice()
 	var num = held_queue.size() # number to track how many new dice need to be loaded 
 	$DiceHolder.clear_dice()
@@ -66,7 +65,7 @@ func _on_turn_locked_in() -> void:
 	if domino_stack.is_empty():
 		SceneManager.switch_scene("shop")
 	else:
-		if top_domino == domino_stack.front():
+		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
 			SceneManager.switch_scene("title_screen")
 		else:	
 			top_domino = domino_stack.front()

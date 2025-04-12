@@ -2,7 +2,7 @@ extends Area2D
 
 var zone_bounds: Rect2
 var domino_stack = []
-var rerolls
+var lock_ins
 
 func _ready() -> void:
 	zone_bounds = $CollisionShape2D.shape.get_rect()
@@ -10,7 +10,8 @@ func _ready() -> void:
 func create_dominoes(count:int):
 	for i in range(count):
 		var top_domino = $DefaultDomino.duplicate()
-		top_domino.calculate_difficulty()
+		top_domino.calculate_difficulty(count-i)
+		top_domino.update_sprite()
 		add_child(top_domino)
 		top_domino.show()
 		domino_stack.push_front(top_domino)
@@ -44,7 +45,11 @@ func damage_dominoes(damage):
 	for i in range(damage):
 		if active_domino.get_life() == 0:
 			destroy_top()
+			if domino_stack.is_empty():
+				SceneManager.switch_scene("shop")
+				return
 			active_domino = domino_stack.front()
+			
 		
 		if active_domino == null:
 			SceneManager.switch_scene("shop")
@@ -67,5 +72,5 @@ func damage_dominoes(damage):
 	if active_domino.get_life() == 0:
 		destroy_top()
 
-func get_rerolls():
-	return rerolls
+func get_lock_ins():
+	return lock_ins
