@@ -181,15 +181,15 @@ sprite_frames = SubResource("SpriteFrames_xj5jv")
 sprite_frames = SubResource("SpriteFrames_btlou")
 frame = 2
 
-[node name="Rerolls" type="Node2D" parent="."]
+[node name="LockIns" type="Node2D" parent="."]
 position = Vector2(0, 64)
 scale = Vector2(2, 2)
 script = ExtResource("3_u0nfp")
 
-[node name="Ones" type="AnimatedSprite2D" parent="Rerolls"]
+[node name="Ones" type="AnimatedSprite2D" parent="LockIns"]
 position = Vector2(-18, 0)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_xj5jv")
 
-[node name="Tens" type="AnimatedSprite2D" parent="Rerolls"]
+[node name="Tens" type="AnimatedSprite2D" parent="LockIns"]
 sprite_frames = SubResource("SpriteFrames_btlou")

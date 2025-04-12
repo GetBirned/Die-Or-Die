@@ -52,7 +52,8 @@ func _ready() -> void:
 func create_dominoes(count:int):
 	for i in range(count):
 		var top_domino = $DefaultDomino.duplicate()
-		top_domino.calculate_difficulty()
+		top_domino.calculate_difficulty(count-i)
+		top_domino.update_sprite()
 		add_child(top_domino)
 		top_domino.show()
 		domino_stack.push_front(top_domino)

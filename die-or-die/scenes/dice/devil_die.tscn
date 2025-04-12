@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://demiwn2pg2bee"]
+[gd_scene load_steps=30 format=3 uid="uid://demiwn2pg2bee"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/dice/die_visual.gd" id="1_cdf21"]
 [ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="2_2ewg1"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/dice/die parts/die_faces.tscn" id="4_d6kbi"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/dice/die parts/side.tscn" id="5_0kxio"]
 [ext_resource type="Script" path="res://scripts/gdscript/dice/specials/devil_special.gd" id="6_kmrni"]
+[ext_resource type="Texture2D" uid="uid://ugglhsaxidr0" path="res://resources/sticky-note.png" id="7_50swu"]
+[ext_resource type="Script" path="res://scripts/tool_tip.gd" id="8_q71m8"]
+[ext_resource type="FontFile" uid="uid://b4tcp7fpoh2mm" path="res://resources/PermanentMarker.ttf" id="9_amsjx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4wbc"]
 atlas = ExtResource("2_2ewg1")
@@ -132,8 +135,18 @@ min_value = 0.01
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="LabelSettings" id="LabelSettings_3ye6r"]
+font = ExtResource("9_amsjx")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qxttf"]
+font = ExtResource("9_amsjx")
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
 [node name="DevilDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_cdf21")
+die_name = "D666"
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.733002, 1.64848e-06, 3.85046e-07, 1)
@@ -202,6 +215,43 @@ value = 6
 
 [node name="Special" type="Node" parent="."]
 script = ExtResource("6_kmrni")
+
+[node name="ToolTip" type="Sprite2D" parent="."]
+position = Vector2(62, 44)
+rotation = -0.0872665
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_50swu")
+offset = Vector2(60, 80)
+script = ExtResource("8_q71m8")
+
+[node name="NameLabel" type="Label" parent="ToolTip"]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 94.0
+offset_bottom = 23.0
+rotation = 0.122173
+label_settings = SubResource("LabelSettings_3ye6r")
+horizontal_alignment = 1
+
+[node name="ToolTip" type="Sprite2D" parent="ToolTip"]
+modulate = Color(0.996078, 0.996078, 0.996078, 0.490196)
+self_modulate = Color(0.019554, 0.0195542, 0.0195541, 1)
+show_behind_parent = true
+clip_children = 2
+visibility_layer = 512
+position = Vector2(46.7745, 10.3661)
+texture = ExtResource("7_50swu")
+offset = Vector2(60, 80)
+
+[node name="DescLabel" type="Label" parent="ToolTip"]
+offset_left = -17.0
+offset_top = 36.0
+offset_right = 105.0
+offset_bottom = 138.0
+rotation = 0.226893
+label_settings = SubResource("LabelSettings_qxttf")
+autowrap_mode = 2
+justification_flags = 64
 
 [connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
