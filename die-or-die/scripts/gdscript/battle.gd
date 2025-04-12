@@ -63,6 +63,7 @@ func _on_turn_locked_in() -> void:
 	held_queue = []
 	
 	if domino_stack.is_empty():
+		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:
 		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
@@ -80,4 +81,5 @@ func kill_die(die):
 	for d in live_dice:
 		if d == die:
 			live_dice.remove_at(live_dice.find(die))
+			
 		
