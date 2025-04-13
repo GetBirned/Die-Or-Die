@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxfft1wass0ut"]
+[gd_scene load_steps=10 format=3 uid="uid://cxfft1wass0ut"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/title_screen_ui.gd" id="1_h4yye"]
 [ext_resource type="Texture2D" uid="uid://bcnngx20n6nxi" path="res://resources/DieOrDie.png" id="1_qw7xu"]
 [ext_resource type="Shader" path="res://scenes/background.gdshader" id="2_xwyo5"]
 [ext_resource type="Texture2D" uid="uid://c0imwgpfaj3pn" path="res://resources/dieOrdieBackground_dark.png" id="4_xfrdu"]
 [ext_resource type="Script" path="res://scripts/gdscript/titleSway.gd" id="5_4j02x"]
+[ext_resource type="Texture2D" uid="uid://dcmc87w5twse4" path="res://resources/PLAY.png" id="8_qsa4d"]
+[ext_resource type="Texture2D" uid="uid://0ulfcqh0421i" path="res://resources/SETTINGS.png" id="9_fer2y"]
+[ext_resource type="Texture2D" uid="uid://jo6s52xs04vo" path="res://resources/QUIT.png" id="10_0xx63"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rj6f8"]
 shader = ExtResource("2_xwyo5")
@@ -33,6 +36,7 @@ material = SubResource("ShaderMaterial_rj6f8")
 layout_mode = 2
 offset_right = 1284.0
 offset_bottom = 702.0
+scale = Vector2(0.99617, 1.02433)
 texture = ExtResource("4_xfrdu")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -49,6 +53,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_qw7xu")
+stretch_mode = 3
 script = ExtResource("5_4j02x")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -58,19 +63,23 @@ alignment = 1
 [node name="Play" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Play
-"
+icon = ExtResource("8_qsa4d")
+flat = true
+metadata/_edit_use_anchors_ = true
 
-[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Settings
-"
+icon = ExtResource("9_fer2y")
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Quit
-"
+icon = ExtResource("10_0xx63")
+flat = true
+metadata/_edit_use_anchors_ = true
 
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
