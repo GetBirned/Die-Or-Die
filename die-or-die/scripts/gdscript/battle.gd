@@ -72,7 +72,8 @@ func _on_turn_locked_in() -> void:
 		SceneManager.switch_scene("shop")
 	else:
 		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
-			SceneManager.switch_scene("title_screen")
+			await SceneManager.swipe_transition(self)
+			#SceneManager.switch_scene("title_screen")
 		else:	
 			top_domino = domino_stack.front()
 			load_dice(num)

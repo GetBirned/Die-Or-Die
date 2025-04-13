@@ -23,10 +23,10 @@ func swipe_transition(source_root: Node):
 		if child is Node2D:
 			children.append(child)
 		
-	var shift = Vector2(-20, 0)
+	var shift = Vector2(-10, 0)
 	for i in range(100):
 		for child in children:
-			child.global_position += shift+Vector2(2*i, 0)
+			child.position += shift*Vector2(i, i)
 		$Timer.start()
 		await $Timer.timeout
 		
