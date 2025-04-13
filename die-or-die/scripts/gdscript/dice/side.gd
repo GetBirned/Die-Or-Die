@@ -25,16 +25,16 @@ func get_sprite():
 func score():
 	GameInfo.last_scored_side = self
 	if type == Types.NUMBER:
-		GameInfo.current_score += value
+		GameInfo.add_score(value)
 		return value
 	elif type == Types.BLANK:
-		GameInfo.current_score += GameInfo.blank_value
+		GameInfo.add_score(GameInfo.blank_value)
 		return GameInfo.blank_value
 	elif type == Types.MONEY:
-		GameInfo.money += value
+		GameInfo.add_money(value)
 		return 0
 	elif type == Types.MULTIPLIER:
-		GameInfo.current_score *= value
+		GameInfo.mult_score(value)
 		return value
 	else:
 		return -1

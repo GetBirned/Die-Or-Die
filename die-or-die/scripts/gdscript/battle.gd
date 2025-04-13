@@ -7,14 +7,17 @@ var rolls
 var top_domino
 
 func _ready() -> void:
+	$BattleMusicPlayer.play()
 	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
 	load_dice(5)
 	domino_stack = $DominoZone.create_dominoes(4)
 	top_domino = domino_stack.front()
-	print(domino_stack.front())
 	
 func load_dice(num):
+	GameInfo.reset_score()
 	live_dice = DiceBag.new_hand(num)
+	$RollDicePlayer.stop()
+	$RollDicePlayer.play() # dice rolling sound effect
 	for die in live_dice:
 		var new_die = die.duplicate()
 		$Dice.add_child(new_die)
@@ -23,9 +26,10 @@ func load_dice(num):
 
 
 func _on_roll_button_pressed():
-	if top_domino.rerolls > 0:
+	if top_domino.lock_ins > 0:
 		var dice = $Dice.get_children()
-		top_domino.reroll_used()
+		$RollDicePlayer.stop()
+		$RollDicePlayer.play() # dice rolling sound effect
 		for die in dice:
 			die.roll()
 
@@ -35,10 +39,9 @@ func _on_back_button_pressed():
 	SceneManager.switch_scene("title_screen")
 
 func _on_turn_locked_in() -> void:
-	
+	top_domino.lock_in_used()
 	held_queue = $DiceHolder.get_dice()
 	var num = held_queue.size() # number to track how many new dice need to be loaded 
-	$DiceHolder.clear_dice()
 	GameInfo.reset_score()
 	for die in held_queue:
 		die.score()
@@ -46,12 +49,18 @@ func _on_turn_locked_in() -> void:
 		await $Timer.timeout
 		
 		for special in held_queue:
-			if special.call_special():
+			if special.call_special(die == special):
 				$Timer.start()
 				await $Timer.timeout
 	
-	print(GameInfo.current_score)
+	GameInfo.mult_score(GameInfo.hand_multiplier)
+	$Timer.start()
+	await $Timer.timeout
+	
+	#print(GameInfo.current_score)
 	await $DominoZone.damage_dominoes(GameInfo.current_score)
+	
+	$DiceHolder.clear_dice()
 	
 	for die in held_queue:
 		$Dice.remove_child(die)
@@ -59,9 +68,10 @@ func _on_turn_locked_in() -> void:
 	held_queue = []
 	
 	if domino_stack.is_empty():
+		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:
-		if top_domino == domino_stack.front():
+		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
 			SceneManager.switch_scene("title_screen")
 		else:	
 			top_domino = domino_stack.front()
@@ -76,4 +86,5 @@ func kill_die(die):
 	for d in live_dice:
 		if d == die:
 			live_dice.remove_at(live_dice.find(die))
+			
 		

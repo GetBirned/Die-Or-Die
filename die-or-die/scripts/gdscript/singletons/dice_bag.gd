@@ -5,7 +5,7 @@ var active_dice = []
 var money = 999999;
 
 func _ready():
-	for i in range(100):
+	for i in range(10):
 		full_bag.append($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()])
 
 func add_die(key):

@@ -1,0 +1,293 @@
+[gd_scene load_steps=19 format=3 uid="uid://b1kxg1rkxuqhp"]
+
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="1_ak0so"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="1_d7vh3"]
+[ext_resource type="Texture2D" uid="uid://dx2a35cp72tds" path="res://resources/Whiteboard.png" id="1_yogd4"]
+[ext_resource type="Texture2D" uid="uid://d3e15b4tbsb84" path="res://resources/Hands.png" id="3_bbl1x"]
+[ext_resource type="AudioStream" uid="uid://doxuvyr88igso" path="res://resources/blip.wav" id="4_roysv"]
+[ext_resource type="Texture2D" uid="uid://7eiihs4tgr6u" path="res://resources/whiteboardX.png" id="4_wmsq3"]
+
+[sub_resource type="GDScript" id="GDScript_gkg68"]
+script/source = "extends Node2D
+
+@onready var numbers_container := $Hover/Numbers
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	GameInfo.connect(\"score_updated\", on_score_updated)
+	GameInfo.connect(\"holder_updated\", on_holder_updated)
+
+var numbers = []
+var x = 0
+var score = 0
+
+
+func on_holder_updated(faces):
+	if faces.size() == 0:
+		$Hover/HandSprite.play(\"default\")
+		return
+		
+	var hand = \"high number\"
+	GameInfo.hand_multiplier = 1
+	
+	var counts = {}
+	for face in faces:
+		if counts.has(face):
+			counts[face] = counts[face] + 1
+		else:
+			counts[face] = 1
+	var pairs = 0
+	var triples = 0
+	var quads = 0
+	var quint = 0
+	
+	for key in counts.keys():
+		if counts[key] >= 2:
+			pairs += 1
+		if counts[key] >= 3:
+			triples += 1
+		if counts[key] >= 4:
+			quads += 1
+		if counts[key] >= 5:
+			quint += 1
+	
+	if is_straight(faces):
+		hand = \"straight\"
+		GameInfo.hand_multiplier = 4	
+	elif quint > 0:
+		hand = \"five of a kind\"
+		GameInfo.hand_multiplier = 10
+	elif quads > 0:
+		hand = \"four of a kind\"
+		GameInfo.hand_multiplier = 6
+	elif triples > 0:
+		if pairs > 1:
+			hand = \"full house\"
+			GameInfo.hand_multiplier = 4
+		else:
+			hand = \"three of a kind\"
+			GameInfo.hand_multiplier = 3
+	elif pairs > 1:
+		hand = \"two pair\"
+		GameInfo.hand_multiplier = 2
+	elif pairs > 0:
+		hand = \"pair\"
+		GameInfo.hand_multiplier = 2
+	else:
+		hand = \"high number\"
+		GameInfo.hand_multiplier = 1
+	
+	$Hover/HandSprite.play(hand)
+	
+func is_straight(values):
+	if values.size() == 5:
+		values.sort()
+		
+		var previous = values[0] - 1
+		for value in values:
+			if value != previous + 1:
+				return false
+			previous = value
+		
+		return true
+	return false
+		
+
+func on_score_updated():
+	
+	var score_temp = int(GameInfo.current_score)
+	
+	for child in numbers_container.get_children():
+		numbers_container.remove_child(child)
+		child.queue_free()
+		
+	if score_temp < 1:
+		numbers_container.hide()
+		return
+	else:
+		numbers_container.show()
+		
+	var pitch_base = 1.0
+	var pitch_scale = 0.05  # tune pitch here
+	$BlipPlayer.stop()
+	$BlipPlayer.pitch_scale = pitch_base + GameInfo.current_score * pitch_scale
+	$BlipPlayer.play()
+		
+	var digits = 0
+	while score_temp >= 1:
+		score_temp = score_temp / 10
+		digits += 1
+	
+	for i in range(digits):
+		numbers_container.add_child(load(\"res://scenes/digit.tscn\").instantiate())
+			
+	var children = numbers_container.get_children()
+	
+	x = 0
+	score = int(GameInfo.current_score)
+	
+	for digit in children:
+		digit.set_value(score % 10)
+		score = score / 10
+		digit.position.x = x
+		x -= digit.get_spacing()
+		digit.modulate = Color(\"#000000\")
+		digit.appear()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3itb"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(300, 0, 150, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3v0q"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 840, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p312"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 720, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu7h7"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 600, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o2xf"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 0, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tns1b"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 120, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15dr2"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 480, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkrjl"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 360, 600, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yofp"]
+atlas = ExtResource("3_bbl1x")
+region = Rect2(0, 240, 600, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wliw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3itb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3v0q")
+}],
+"loop": true,
+"name": &"five of a kind",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p312")
+}],
+"loop": true,
+"name": &"four of a kind",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nu7h7")
+}],
+"loop": true,
+"name": &"full house",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o2xf")
+}],
+"loop": true,
+"name": &"high number",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tns1b")
+}],
+"loop": true,
+"name": &"pair",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15dr2")
+}],
+"loop": true,
+"name": &"straight",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkrjl")
+}],
+"loop": true,
+"name": &"three of a kind",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yofp")
+}],
+"loop": true,
+"name": &"two pair",
+"speed": 0.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sxs3"]
+shader = ExtResource("1_ak0so")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[node name="ScoreCounter" type="Node2D"]
+script = SubResource("GDScript_gkg68")
+
+[node name="Hover" type="Node2D" parent="."]
+script = ExtResource("1_d7vh3")
+
+[node name="X" type="Sprite2D" parent="Hover"]
+position = Vector2(-235, 0)
+texture = ExtResource("4_wmsq3")
+
+[node name="HandSprite" type="AnimatedSprite2D" parent="Hover"]
+position = Vector2(-235, 0)
+sprite_frames = SubResource("SpriteFrames_4wliw")
+autoplay = "default"
+
+[node name="Whiteboard_Shadow" type="Sprite2D" parent="Hover"]
+z_index = -1
+material = SubResource("ShaderMaterial_8sxs3")
+position = Vector2(-235, 0)
+texture = ExtResource("1_yogd4")
+
+[node name="Whiteboard" type="Sprite2D" parent="Hover"]
+z_index = -1
+position = Vector2(-235, 0)
+texture = ExtResource("1_yogd4")
+
+[node name="Numbers" type="Node2D" parent="Hover"]
+z_index = 1
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -498.0
+offset_top = -37.0
+offset_right = -283.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="BlipPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_roysv")

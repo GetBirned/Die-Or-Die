@@ -1,14 +1,12 @@
 extends Node2D
 
 var life
-var rerolls
+var lock_ins
 var active
 var SHAKING = false
 
 func _ready() -> void:
 	active = false
-	calculate_difficulty()
-	update_sprite()
 
 func _process(delta: float) -> void:
 	if SHAKING:
@@ -17,22 +15,21 @@ func _process(delta: float) -> void:
 func get_life():
 	return life
 
-func reroll_used():
-	rerolls -= 1
+func lock_in_used():
+	lock_ins -= 1
 	update_sprite()
 
-func calculate_difficulty():
+func calculate_difficulty(domino_num):
 	# difficulty calculation
-	life = 10 # just for now
-	rerolls = 2
+	life = (DiceBag.full_bag.size()+DiceBag.active_dice.size())*domino_num 
+	lock_ins = roundi(life/6)+1
 
 func take_damage(damage):
 	life -= damage
 
 func update_sprite():
 	$Threshold.update(life)
-	$Rerolls.update(rerolls)
-
+	$LockIns.update(lock_ins)
 
 @onready var shake_index = 0
 @onready var shake_speed = 300
