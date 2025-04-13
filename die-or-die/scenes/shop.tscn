@@ -119,6 +119,7 @@ position = Vector2(359, 421)
 position = Vector2(921, 421)
 
 [node name="DiceBag" parent="." instance=ExtResource("4_uk3x2")]
+visible = false
 position = Vector2(1126, 407)
 scale = Vector2(0.7, 0.7)
 
