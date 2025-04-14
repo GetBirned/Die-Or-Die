@@ -153,6 +153,8 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="BlankDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_r1kjc")
+die_name = "Blank Die"
+description = "Blank sides are worth 1 value for every 2 blank sides in full bag"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false
