@@ -154,7 +154,7 @@ font_color = Color(0, 0, 0, 1)
 [node name="GlassDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_ucb4w")
 die_name = "Glass Die"
-description = "Chance to shatter on each roll."
+description = "10% chance to destroy this die on a reroll"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false

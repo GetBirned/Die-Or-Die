@@ -154,6 +154,7 @@ font_color = Color(0, 0, 0, 1)
 [node name="DevilDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_cdf21")
 die_name = "D666"
+description = "Gives x4 when scored if hand contains exactly 3 6s"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false

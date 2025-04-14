@@ -153,6 +153,8 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="TwolessDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_5tmnc")
+die_name = "Twoless Die"
+description = "Gives x2 when a 2 is scored"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false
