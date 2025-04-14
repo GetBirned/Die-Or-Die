@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 			if hover:
 				state = HOVERING
 		HOVERING:
-			if hovering_counter >= 15:
+			if hovering_counter >= 25:
 				state = DISPLAYING
 				global_position = area_rect.end + Vector2(75, 30)
 			hovering_counter += 1

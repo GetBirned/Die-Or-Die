@@ -233,6 +233,7 @@ value = 10
 script = ExtResource("6_cuvue")
 
 [node name="ToolTip" type="Sprite2D" parent="."]
+z_index = 10
 position = Vector2(62, 44)
 rotation = -0.0872665
 scale = Vector2(0.8, 0.8)
