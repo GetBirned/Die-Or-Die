@@ -1,10 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://cmnig6822n6j3"]
+[gd_scene load_steps=31 format=3 uid="uid://cmnig6822n6j3"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/domino_visual.gd" id="1_klou8"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="2_edrvp"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_qnlko"]
 [ext_resource type="Texture2D" uid="uid://bmlp1i1n6r5qd" path="res://resources/dominoDOD.png" id="2_umsks"]
 [ext_resource type="Script" path="res://scripts/gdscript/num_display.gd" id="3_u0nfp"]
 [ext_resource type="Texture2D" uid="uid://8a7fx0aq5b5b" path="res://resources/die_faces/new_ones_numbers.png" id="4_3ldec"]
 [ext_resource type="Texture2D" uid="uid://cquqmdg1xeqw" path="res://resources/die_faces/new_tens_numbers.png" id="5_ijpg8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dasmd"]
+shader = ExtResource("2_qnlko")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vr3j7"]
 atlas = ExtResource("4_3ldec")
@@ -166,30 +173,37 @@ animations = [{
 visible = false
 script = ExtResource("1_klou8")
 
-[node name="Domino" type="Sprite2D" parent="."]
+[node name="Sway" type="Node2D" parent="."]
+script = ExtResource("2_edrvp")
+
+[node name="DominoShadow" type="Sprite2D" parent="Sway"]
+material = SubResource("ShaderMaterial_dasmd")
 texture = ExtResource("2_umsks")
 
-[node name="Threshold" type="Node2D" parent="."]
+[node name="Domino" type="Sprite2D" parent="Sway"]
+texture = ExtResource("2_umsks")
+
+[node name="Threshold" type="Node2D" parent="Sway"]
 position = Vector2(0, -64)
 scale = Vector2(2, 2)
 script = ExtResource("3_u0nfp")
 
-[node name="Ones" type="AnimatedSprite2D" parent="Threshold"]
+[node name="Ones" type="AnimatedSprite2D" parent="Sway/Threshold"]
 sprite_frames = SubResource("SpriteFrames_xj5jv")
 
-[node name="Tens" type="AnimatedSprite2D" parent="Threshold"]
+[node name="Tens" type="AnimatedSprite2D" parent="Sway/Threshold"]
 sprite_frames = SubResource("SpriteFrames_btlou")
 frame = 2
 
-[node name="LockIns" type="Node2D" parent="."]
+[node name="LockIns" type="Node2D" parent="Sway"]
 position = Vector2(0, 64)
 scale = Vector2(2, 2)
 script = ExtResource("3_u0nfp")
 
-[node name="Ones" type="AnimatedSprite2D" parent="LockIns"]
+[node name="Ones" type="AnimatedSprite2D" parent="Sway/LockIns"]
 position = Vector2(-18, 0)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_xj5jv")
 
-[node name="Tens" type="AnimatedSprite2D" parent="LockIns"]
+[node name="Tens" type="AnimatedSprite2D" parent="Sway/LockIns"]
 sprite_frames = SubResource("SpriteFrames_btlou")
