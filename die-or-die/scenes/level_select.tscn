@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsgpjbpjba31a"]
+
+[ext_resource type="Shader" path="res://scenes/background.gdshader" id="1_cyfw4"]
+[ext_resource type="Script" path="res://scripts/gdscript/levelSelect.gd" id="1_ltpm6"]
+[ext_resource type="Texture2D" uid="uid://c0imwgpfaj3pn" path="res://resources/dieOrdieBackground_dark.png" id="2_0x1tl"]
+[ext_resource type="FontFile" uid="uid://b6rmwmt2r11oe" path="res://resources/VCR_OSD_MONO_1.001.ttf" id="2_fa27o"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="3_sa353"]
+[ext_resource type="Texture2D" uid="uid://bql6lryimm5hl" path="res://resources/path.png" id="4_qipur"]
+[ext_resource type="Texture2D" uid="uid://bykd6qpm7gwnr" path="res://resources/thimble.png" id="5_0o023"]
+[ext_resource type="AudioStream" uid="uid://bbvdav7hvlst3" path="res://resources/menuMusic.mp3" id="8_jlk5q"]
+[ext_resource type="AudioStream" uid="uid://qdfdqn8bl2k2" path="res://resources/movePiece.mp3" id="9_p8cak"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6lw1y"]
+shader = ExtResource("1_cyfw4")
+shader_parameter/color_a = Color(1, 0, 0, 1)
+shader_parameter/color_b = Color(0, 0, 0, 1)
+shader_parameter/color_c = Color(0.960784, 0, 0, 1)
+shader_parameter/spin_speed = 0.5
+shader_parameter/noise_scale = 20.0
+shader_parameter/contrast = 1.0
+shader_parameter/intensity = 1.0
+shader_parameter/mouse_position = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykr71"]
+shader = ExtResource("3_sa353")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[node name="LevelSelect" type="Node2D"]
+script = ExtResource("1_ltpm6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelInfoLabel" type="Label" parent="CanvasLayer"]
+offset_left = 1000.0
+offset_top = 10.0
+offset_right = 1132.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("2_fa27o")
+text = "World 1-1: ???"
+
+[node name="BackToMenuButton" type="Button" parent="CanvasLayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back to Menu"
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -2
+texture_repeat = 2
+material = SubResource("ShaderMaterial_6lw1y")
+offset_right = 1284.0
+offset_bottom = 702.0
+scale = Vector2(0.99617, 1.02433)
+texture = ExtResource("2_0x1tl")
+
+[node name="PathShadow" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ykr71")
+position = Vector2(640.5, 360.5)
+scale = Vector2(0.997656, 0.961333)
+texture = ExtResource("4_qipur")
+
+[node name="Path" type="Sprite2D" parent="."]
+position = Vector2(640.5, 360.5)
+scale = Vector2(0.997656, 0.961333)
+texture = ExtResource("4_qipur")
+
+[node name="Thimble" type="Sprite2D" parent="."]
+position = Vector2(262, 101)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_0o023")
+
+[node name="LevelMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_jlk5q")
+
+[node name="MovePiecePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_p8cak")
+
+[connection signal="pressed" from="CanvasLayer/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
+[connection signal="pressed" from="CanvasLayer/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
