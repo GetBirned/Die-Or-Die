@@ -41,21 +41,15 @@ func damage_dominoes(damage):
 		return
 		
 	var active_domino = domino_stack.front()
-	
+	var dmg = 1
 	for i in range(damage):
 		if active_domino.get_life() == 0:
 			destroy_top()
 			if domino_stack.is_empty():
-				SceneManager.switch_scene("shop")
 				return
 			active_domino = domino_stack.front()
 			
-		
-		if active_domino == null:
-			SceneManager.switch_scene("shop")
-			return
-			
-		active_domino.take_damage(1)
+		active_domino.take_damage(dmg)
 		
 		# damage noise for domino
 		var pitch_base = 1.0
