@@ -8,9 +8,13 @@ func _ready():
 	for i in range(10):
 		full_bag.append($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()])
 
-func add_die(key):
-	full_bag.append($DiceDictionary.dice_dict[key])
-
+func add_die(die):
+	if $"/root/GameInfo" > die.price():
+		full_bag.append(die)
+		$"/root/GameInfo".add_money(-die.price())
+	else:
+		print("broke")
+		
 func new_hand(hand_size: int):
 	var new_hand = []
 	for i in range(hand_size):

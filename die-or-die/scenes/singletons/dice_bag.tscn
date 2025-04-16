@@ -1,8 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://q7ep38vcw2ce"]
+[gd_scene load_steps=15 format=3 uid="uid://q7ep38vcw2ce"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/singletons/dice_bag.gd" id="1_p0r2o"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="2_osq17"]
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/DiceBag.png" id="3_6ewch"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jag2m"]
+atlas = ExtResource("3_6ewch")
+region = Rect2(1200, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m5j4"]
+atlas = ExtResource("3_6ewch")
+region = Rect2(900, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgxnb"]
+atlas = ExtResource("3_6ewch")
+region = Rect2(600, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdhv6"]
+atlas = ExtResource("3_6ewch")
+region = Rect2(300, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xqg8"]
+atlas = ExtResource("3_6ewch")
+region = Rect2(0, 0, 300, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnjlg"]
 atlas = ExtResource("3_6ewch")
@@ -28,6 +48,26 @@ region = Rect2(1200, 0, 300, 300)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jag2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m5j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgxnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdhv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xqg8")
+}],
+"loop": true,
+"name": &"bag_closing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wnjlg")
 }, {
 "duration": 1.0,
@@ -48,10 +88,11 @@ animations = [{
 }]
 
 [node name="DiceBag" type="Node2D"]
+visible = false
 script = ExtResource("1_p0r2o")
 
 [node name="DiceDictionary" parent="." instance=ExtResource("2_osq17")]
 
 [node name="BagVisual" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jx6u8")
-animation = &"bag_opening"
+animation = &"bag_closing"

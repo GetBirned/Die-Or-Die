@@ -13,6 +13,7 @@ var return_position
 var held_by = null
 var closest_space
 var hover_count = 0
+var purchased = false
 
 var sides = ["1", "2", "3", "4", "5", "6"]
 var current_side;
@@ -31,6 +32,9 @@ func _ready():
 
 func name_description():
 	return [die_name, description]
+	
+func price():
+	return 2 # doesn't currently have set prices
 	
 func _physics_process(delta):
 	match status:

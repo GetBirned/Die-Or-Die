@@ -5,7 +5,7 @@ enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD}
 var dice_in_shelf = []
 var slots = []
 var shelf_length
-var dice_holder
+var die_in_bag
 var increment
 
 # Called when the node enters the scene tree for the first time.
@@ -17,11 +17,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
+	if die_in_bag != null:
+		die_in_bag.set_closest($DiceBag/HoldSpace)
+	
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
-
 
 func _order_dice():
 	var num_dice = dice_in_shelf.size()

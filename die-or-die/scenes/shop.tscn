@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=15 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
 [ext_resource type="Texture2D" uid="uid://dyxjkb2jd5n3n" path="res://resources/shop.png" id="3_pc574"]
 [ext_resource type="PackedScene" uid="uid://q7ep38vcw2ce" path="res://scenes/singletons/dice_bag.tscn" id="4_uk3x2"]
+[ext_resource type="PackedScene" uid="uid://6i2ors5uhxv2" path="res://scenes/hold_space.tscn" id="5_ic4o5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8e7b"]
 atlas = ExtResource("3_pc574")
@@ -119,9 +120,12 @@ position = Vector2(359, 421)
 position = Vector2(921, 421)
 
 [node name="DiceBag" parent="." instance=ExtResource("4_uk3x2")]
-visible = false
 position = Vector2(1126, 407)
 scale = Vector2(0.7, 0.7)
+
+[node name="HoldSpace" parent="DiceBag" instance=ExtResource("5_ic4o5")]
+position = Vector2(-1608.57, -581.429)
+scale = Vector2(1.42857, 1.42857)
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Cleanup" to="." method="_order_dice"]
