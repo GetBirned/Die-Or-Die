@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 func _on_body_entered(body):
 	if body.is_in_group("die"):
 		var price = body.price
-		if GameInfo.get_money() > price: 
+		if GameInfo.get_money() >= price: 
 			$BagVisual.play("open")
 			open = true
 			GameInfo.emit_checking_out(body)
