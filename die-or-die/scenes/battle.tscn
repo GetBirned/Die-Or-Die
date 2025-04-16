@@ -92,10 +92,12 @@ func damage_dominoes(damage):
 		
 		active_domino.shake(0)
 		active_domino.update_sprite()
-		$Timer.start()
-		if i+1 % 15 == 0:
-			$Timer.wait_time = $Timer.wait_time/2
-		await $Timer.timeout
+		if i > 15:
+			$FastTimer.start()
+			await $FastTimer.timeout
+		else:
+			$Timer.start()
+			await $Timer.timeout
 		
 	if active_domino.get_life() == 0:
 		destroy_top()
@@ -182,6 +184,9 @@ shape = SubResource("RectangleShape2D_0rdc6")
 
 [node name="Timer" type="Timer" parent="DominoZone"]
 wait_time = 0.2
+
+[node name="FastTimer" type="Timer" parent="DominoZone"]
+wait_time = 0.05
 
 [node name="DamagePlayer" type="AudioStreamPlayer" parent="DominoZone"]
 stream = ExtResource("8_324rl")

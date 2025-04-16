@@ -87,12 +87,15 @@ func _on_turn_locked_in() -> void:
 			DiceBag.replace_dice()
 	
 func kill_die(die):
-	for d in held_queue:
-		if die == d:
-			held_queue.remove_at(held_queue.find(die))
+	print(die.id)
+	for i in range(0, held_queue.size()):
+		if die.id == held_queue[i].id:
+			held_queue.remove_at(i)
 	
-	for d in live_dice:
-		if d == die:
-			live_dice.remove_at(live_dice.find(die))
+	for i in range(0, live_dice.size()):
+		print(live_dice[i].id)
+		if die.id == live_dice[i].id:
+			print("removed")
+			live_dice.remove_at(i)
 			
 		

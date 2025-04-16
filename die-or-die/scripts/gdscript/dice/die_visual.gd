@@ -5,6 +5,7 @@ signal rolled
 
 enum {DISPLAY = 0, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
 
+var id
 var status
 var friction
 var speed
@@ -24,6 +25,7 @@ var current_side;
 var last_mouse_position := Vector2.ZERO
 
 func _ready():
+	id = GameInfo.increment_and_get()
 	status = DISPLAY
 	friction = 0.999
 	speed = 1500
@@ -181,3 +183,11 @@ func get_sides():
 	
 func get_rect():
 	return Rect2(global_position.x-32, global_position.y-32, 64, 64)
+	
+func get_side_numbers():
+	var sides = []
+	
+	for side in get_sides():
+		sides.append(side.value)
+	
+	return sides
