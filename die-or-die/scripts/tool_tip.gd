@@ -21,18 +21,28 @@ func _process(delta: float) -> void:
 			if hover:
 				state = HOVERING
 		HOVERING:
-			if hovering_counter >= 15:
+			if hovering_counter >= 25:
 				state = DISPLAYING
 				global_position = area_rect.end + Vector2(75, 30)
 			hovering_counter += 1
 			
 		DISPLAYING:
-			init_tooltip()
+			
 			if parent.get_status() == 1 or parent.get_status() == 3:
 				state = NONE
 			else:
 				global_position = get_global_mouse_position()
-				show()
+				if Input.is_action_pressed("ui_shift"):
+					init_tooltip()
+					$DescLabel.text = parent.name_description()[1]
+					show()
+				elif Input.is_action_pressed("ui_ctrl"):
+					init_tooltip()
+					$DescLabel.text = str(parent.get_side_numbers())
+					show()
+				else:
+					hide()
+				
 				if !hover:
 					state = NONE
 

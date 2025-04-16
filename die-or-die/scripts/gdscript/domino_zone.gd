@@ -41,21 +41,15 @@ func damage_dominoes(damage):
 		return
 		
 	var active_domino = domino_stack.front()
-	
+	var dmg = 1
 	for i in range(damage):
 		if active_domino.get_life() == 0:
 			destroy_top()
 			if domino_stack.is_empty():
-				SceneManager.switch_scene("shop")
 				return
 			active_domino = domino_stack.front()
 			
-		
-		if active_domino == null:
-			SceneManager.switch_scene("shop")
-			return
-			
-		active_domino.take_damage(1)
+		active_domino.take_damage(dmg)
 		
 		# damage noise for domino
 		var pitch_base = 1.0
@@ -66,9 +60,13 @@ func damage_dominoes(damage):
 		
 		active_domino.shake(0)
 		active_domino.update_sprite()
-		$Timer.start()
-		await $Timer.timeout
-		
+		if i > 15:
+			$FastTimer.start()
+			await $FastTimer.timeout
+		else:
+			$Timer.start()
+			await $Timer.timeout
+			
 	if active_domino.get_life() == 0:
 		destroy_top()
 

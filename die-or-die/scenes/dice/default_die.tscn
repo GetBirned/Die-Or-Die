@@ -1,14 +1,21 @@
-[gd_scene load_steps=30 format=3 uid="uid://deuttny8qpucy"]
+[gd_scene load_steps=33 format=3 uid="uid://deuttny8qpucy"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/dice/die_visual.gd" id="1_vfs2y"]
 [ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="2_wp1o6"]
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_kbkft"]
 [ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/dice/die parts/die_faces.tscn" id="4_gneeq"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="4_vxaj0"]
 [ext_resource type="Script" path="res://scripts/tool_tip.gd" id="5_7k2mi"]
+[ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="5_87kcu"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/dice/die parts/side.tscn" id="5_c26ik"]
 [ext_resource type="Texture2D" uid="uid://ugglhsaxidr0" path="res://resources/sticky-note.png" id="5_qbjyt"]
 [ext_resource type="Script" path="res://scripts/gdscript/dice/specials/no_special.gd" id="6_rxiil"]
 [ext_resource type="FontFile" uid="uid://b4tcp7fpoh2mm" path="res://resources/PermanentMarker.ttf" id="7_1oclx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1wx8"]
+shader = ExtResource("4_vxaj0")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
 size = Vector2(62, 62)
@@ -149,6 +156,12 @@ script = ExtResource("1_vfs2y")
 die_name = "D6"
 description = "Basic 6 sided die."
 
+[node name="Shadow" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_b1wx8")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_87kcu")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y05ou")
 
@@ -197,6 +210,7 @@ scale_amount_curve = SubResource("Curve_o4ekf")
 [node name="DieFaces" parent="." instance=ExtResource("4_gneeq")]
 
 [node name="ToolTip" type="Sprite2D" parent="."]
+z_index = 10
 position = Vector2(62, 44)
 rotation = -0.0872665
 scale = Vector2(0.8, 0.8)
