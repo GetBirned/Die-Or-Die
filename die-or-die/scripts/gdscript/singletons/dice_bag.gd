@@ -1,32 +1,42 @@
 extends Node
 
-var full_bag = []
-var active_dice = []
+var in_bag = []
 var money = 999999;
 
 func _ready():
 	for i in range(10):
-		full_bag.append($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()])
+		add_die($DiceDictionary.dice_dict.keys().pick_random())
 
 func add_die(key):
-	full_bag.append($DiceDictionary.dice_dict[key])
+	var die = load($DiceDictionary.dice_dict[key]).instantiate()
+	$Dice.add_child(die)
+	in_bag.append(die)
 
 func new_hand(hand_size: int):
 	var new_hand = []
-	for i in range(hand_size):
-		new_hand.append(full_bag.pop_front())
 	
-	active_dice.append_array(new_hand)
+	if hand_size > in_bag.size():
+		refill()
+	
+	for i in range(hand_size):
+		new_hand.append(in_bag.pop_front())
 		
 	return new_hand
-	
-func replace_dice():
-	full_bag.append_array(active_dice)
-	active_dice = []
+
+func refill():
+	in_bag = []
+	for die in $Dice.get_children():
+		in_bag.append(die)
+		die.set_hidden()
+	in_bag.shuffle()
 	
 func kill_die(die):
 	CustomSignals.kill_die.emit(die)
-	for i in range(full_bag.size()):
-		if full_bag[i] == die:
-			full_bag.remove_at(i)
-	
+	for i in range(in_bag.size()):
+		if in_bag[i].id == die.id:
+			in_bag.remove_at(i)
+	$Dice.remove_child(die)
+	die.queue_free()
+
+func get_dice():
+	return $Dice.get_children()

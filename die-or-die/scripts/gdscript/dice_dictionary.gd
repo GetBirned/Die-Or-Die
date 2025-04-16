@@ -1,26 +1,26 @@
 extends Node
 
 @onready var dice_dict: Dictionary = {
-	"D6": 
-	preload("res://scenes/dice/default_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
-	,
-	"Seven":
-	preload("res://scenes/dice/lucky_seven.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
-	,
-	"Twoless":
-	preload("res://scenes/dice/twoless_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
-	,
-	"Blank":
-	preload("res://scenes/dice/blank_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
-	,
-	"Devil":
-	preload("res://scenes/dice/devil_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
-	,
-	"Golden":
-	preload("res://scenes/dice/golden_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
-	,
+	#"D6": 
+	#"res://scenes/dice/default_die.tscn"
+	#,
+	#"Seven":
+	#"res://scenes/dice/lucky_seven.tscn"
+	#,
+	#"Twoless":
+	#"res://scenes/dice/twoless_die.tscn"
+	#,
+	#"Blank":
+	#"res://scenes/dice/blank_die.tscn"
+	#,
+	#"Devil":
+	#"res://scenes/dice/devil_die.tscn"
+	#,
+	#"Golden":
+	#"res://scenes/dice/golden_die.tscn"
+	#,
 	"Glass":
-	preload("res://scenes/dice/glass_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/glass_die.tscn"
 	}
 						#"Marble": {
 							#"visual": default_visual(),

@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal connect_special
 signal rolled
 
-enum {DISPLAY = 0, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE}
+enum {DISPLAY = 0, ROLLING, FACE, DRAGGING, RETURNING, HELD, SHAKE, HIDDEN}
 
 var id
 var status
@@ -26,7 +26,7 @@ var last_mouse_position := Vector2.ZERO
 
 func _ready():
 	id = GameInfo.increment_and_get()
-	status = DISPLAY
+	status = HIDDEN
 	friction = 0.999
 	speed = 1500
 	do_bounce = true
@@ -38,7 +38,11 @@ func name_description():
 	return [die_name, description]
 
 func _physics_process(delta):
+	show()
 	match status:
+		HIDDEN:
+			global_position = Vector2(-100,-100)
+			hide()
 		DISPLAY:
 			pass
 		ROLLING:
@@ -148,6 +152,7 @@ func set_closest(slot: Area2D):
 	closest_space = slot
 
 func _on_die_face_pressed() -> void:
+	print("clicked")
 	if status == FACE:
 		return_position = global_position
 		status = DRAGGING
@@ -183,3 +188,6 @@ func get_sides():
 	
 func get_rect():
 	return Rect2(global_position.x-32, global_position.y-32, 64, 64)
+	
+func set_hidden():
+	status = HIDDEN

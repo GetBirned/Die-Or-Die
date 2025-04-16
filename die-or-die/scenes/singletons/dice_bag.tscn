@@ -55,3 +55,5 @@ script = ExtResource("1_p0r2o")
 [node name="BagVisual" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jx6u8")
 animation = &"bag_opening"
+
+[node name="Dice" type="Node2D" parent="."]

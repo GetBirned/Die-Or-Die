@@ -5,7 +5,7 @@ func _on_connect_special():
 
 func signal_special():
 	var blank_total: int = 0
-	for die in DiceBag.full_bag:
+	for die in DiceBag.get_dice():
 		for side in die.get_sides():
 			if side.is_blank():
 				blank_total += 1
