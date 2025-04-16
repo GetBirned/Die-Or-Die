@@ -270,7 +270,7 @@ label_settings = SubResource("LabelSettings_i34m6")
 autowrap_mode = 2
 justification_flags = 64
 
-[connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="connect_special" from="." to="Special" method="_on_glass_die_connect_special"]
+[connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]
