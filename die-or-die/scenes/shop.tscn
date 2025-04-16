@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
 [ext_resource type="Texture2D" uid="uid://dyxjkb2jd5n3n" path="res://resources/shop.png" id="3_pc574"]
-[ext_resource type="Script" path="res://scripts/bag_detector.gd" id="5_rqod6"]
+[ext_resource type="Script" path="res://scripts/gdscript/bag_detector.gd" id="5_rqod6"]
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/DiceBag.png" id="5_vaf1e"]
-[ext_resource type="Script" path="res://scenes/bag_visual.gd" id="6_j1ty6"]
+[ext_resource type="Script" path="res://scripts/gdscript/bag_visual.gd" id="6_j1ty6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8e7b"]
 atlas = ExtResource("3_pc574")

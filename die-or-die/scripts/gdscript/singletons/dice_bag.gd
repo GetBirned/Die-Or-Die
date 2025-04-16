@@ -4,16 +4,12 @@ var full_bag = []
 var active_dice = []
 
 func _ready():
-	for i in range(10):
-		full_bag.append($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()])
+	GameInfo.purchasing.connect(add_die)
+	for i in range(5):
+		full_bag.append($DiceDictionary.dice_dict["D6"])
 
 func add_die(key):
-	var die = $DiceDictionary.dice_dict[key]
-	if GameInfo.get_money() > die.price():
-		full_bag.append(die)
-		GameInfo.add_money(-die.price())
-	else:
-		print("broke")
+	full_bag.append($DiceDictionary.dice_dict[key].duplicate())
 
 func new_hand(hand_size: int):
 	var new_hand = []

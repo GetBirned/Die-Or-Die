@@ -1,24 +1,32 @@
 extends Node2D
-
 enum {DISPLAY, ROLLING, FACE, DRAGGING, RETURNING, HELD}
 
 var dice_in_shelf = []
-var slots = []
 var shelf_length
-var die_in_bag
+var die_in_bag = null
 var increment
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GameInfo.purchasing.connect(_on_purchase)
+	GameInfo.checking_out.connect(_on_checking_out)
 	shelf_length = $DiceShelfBottomEnd.global_position.x - $DiceShelfBottomStart.global_position.x
 	increment = shelf_length / 3
 	$BackgroundAnimated.play("default")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if die_in_bag != null:
-		die_in_bag.set_closest($DiceBag/HoldSpace)
+func _on_checking_out(die):
+	die_in_bag = die
 	
+
+func _on_purchase(key):
+	# purchase logic here
+	#print('buying %s' % (key))
+	#print(dice_in_shelf)
+	dice_in_shelf.erase(die_in_bag)
+	#print(dice_in_shelf)
+	die_in_bag.free()
+	_order_dice()
+
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 

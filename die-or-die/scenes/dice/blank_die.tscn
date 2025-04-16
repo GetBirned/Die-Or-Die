@@ -146,6 +146,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="BlankDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_r1kjc")
+die_name = "Blank Die"
 
 [node name="Die" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.82606, 0.82606, 0.82606, 1)
