@@ -6,12 +6,19 @@ var live_dice = []
 var rolls
 var top_domino
 
+@onready var calculator = $Calculator
+
 func _ready() -> void:
 	$BattleMusicPlayer.play()
 	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
 	load_dice(5)
+	GameInfo.money_changed.connect(update_calculator)
+	update_calculator()
 	domino_stack = $DominoZone.create_dominoes(4)
 	top_domino = domino_stack.front()
+	
+func update_calculator():
+	calculator.set_money(GameInfo.money)
 	
 func load_dice(num):
 	GameInfo.reset_score()
