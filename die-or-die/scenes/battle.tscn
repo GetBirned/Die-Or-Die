@@ -172,10 +172,11 @@ text = "back"
 [node name="Dice" type="Node2D" parent="."]
 
 [node name="DominoZone" type="Area2D" parent="."]
-position = Vector2(1128, 256)
+position = Vector2(1132, 301)
 script = SubResource("GDScript_ihc73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DominoZone"]
+position = Vector2(-4, -2)
 shape = SubResource("RectangleShape2D_0rdc6")
 
 [node name="DefaultDomino" parent="DominoZone" instance=ExtResource("4_if4pf")]

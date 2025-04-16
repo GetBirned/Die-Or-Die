@@ -1,4 +1,4 @@
-extends TextureRect
+extends Node2D
 
 var origin_position: Vector2
 
