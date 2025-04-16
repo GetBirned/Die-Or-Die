@@ -13,6 +13,7 @@ func _ready():
 	shelf_length = $DiceShelfBottomEnd.global_position.x - $DiceShelfBottomStart.global_position.x
 	increment = shelf_length / 3
 	$BackgroundAnimated.play("default")
+	$BackgroundAnimatedSHADOW.play("default")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

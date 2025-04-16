@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=22 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://doxuvyr88igso" path="res://resources/blip.wav" id="8_324rl"]
 [ext_resource type="AudioStream" uid="uid://b0ut5gauhcj2q" path="res://resources/diceroll.wav" id="11_r5o66"]
 [ext_resource type="AudioStream" uid="uid://rhfdyp0708f8" path="res://resources/battleMusic.mp3" id="12_p4e7e"]
+[ext_resource type="PackedScene" uid="uid://bkppif6eqif66" path="res://scenes/calculator.tscn" id="13_1gfq5"]
 [ext_resource type="Texture2D" uid="uid://p7ojfit0a8w8" path="res://resources/lock.png" id="13_bb3br"]
 [ext_resource type="Texture2D" uid="uid://bgni2uab6nny1" path="res://resources/roll.png" id="14_hjqby"]
 
@@ -234,6 +235,9 @@ theme_override_font_sizes/font_size = 32
 icon = ExtResource("14_hjqby")
 flat = true
 icon_alignment = 1
+
+[node name="Calculator" parent="." instance=ExtResource("13_1gfq5")]
+position = Vector2(160, 635)
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="LockNode/LockInButton" to="." method="_on_turn_locked_in"]
