@@ -35,6 +35,9 @@ func add_money(value):
 	money += value
 	money_changed.emit()
 	
+func get_money():
+	return money
+	
 func add_score(value):
 	current_score += value
 	if value != 0:
