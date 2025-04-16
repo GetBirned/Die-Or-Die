@@ -195,7 +195,11 @@ sprite_frames = SubResource("SpriteFrames_xj5jv")
 sprite_frames = SubResource("SpriteFrames_btlou")
 frame = 2
 
-[node name="LockIns" type="Node2D" parent="Sway"]
+[node name="Hundreds" type="AnimatedSprite2D" parent="Threshold"]
+sprite_frames = SubResource("SpriteFrames_btlou")
+frame = 2
+
+[node name="LockIns" type="Node2D" parent="."]
 position = Vector2(0, 64)
 scale = Vector2(2, 2)
 script = ExtResource("3_u0nfp")
@@ -207,3 +211,7 @@ sprite_frames = SubResource("SpriteFrames_xj5jv")
 
 [node name="Tens" type="AnimatedSprite2D" parent="Sway/LockIns"]
 sprite_frames = SubResource("SpriteFrames_btlou")
+
+[node name="Hundreds" type="AnimatedSprite2D" parent="LockIns"]
+sprite_frames = SubResource("SpriteFrames_btlou")
+frame = 2
