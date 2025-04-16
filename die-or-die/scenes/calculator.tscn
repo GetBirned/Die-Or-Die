@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bkppif6eqif66"]
+[gd_scene load_steps=35 format=3 uid="uid://bkppif6eqif66"]
 
 [ext_resource type="Script" path="res://scenes/calculator.gd" id="1_oxxyx"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_8pw5o"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b4c0q7cfprmr0" path="res://resources/MinusButton.png" id="7_pvldr"]
 [ext_resource type="Texture2D" uid="uid://dsp1h3mtf1hgh" path="res://resources/ClearButton.png" id="8_jv425"]
 [ext_resource type="AudioStream" uid="uid://n2srt6i8l5uf" path="res://resources/calcTap.wav" id="9_055jk"]
+[ext_resource type="AudioStream" uid="uid://cl60ny5gmt3b6" path="res://resources/duckQuack.mp3" id="10_wt1g5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ny6u"]
 shader = ExtResource("2_8pw5o")
@@ -198,6 +199,14 @@ z_index = 10
 sprite_frames = SubResource("SpriteFrames_be6eh")
 frame_progress = 0.229286
 
+[node name="ClickDuck" type="Button" parent="DuckButton"]
+offset_left = 76.0
+offset_top = 21.0
+offset_right = 127.0
+offset_bottom = 72.0
+focus_mode = 0
+flat = true
+
 [node name="MinusButton" type="AnimatedSprite2D" parent="."]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_1mfol")
@@ -244,3 +253,8 @@ sprite_frames = SubResource("SpriteFrames_3bq7q")
 [node name="ButtonSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_055jk")
 volume_db = -10.0
+
+[node name="DuckSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_wt1g5")
+
+[connection signal="pressed" from="DuckButton/ClickDuck" to="." method="_on_click_duck_pressed"]

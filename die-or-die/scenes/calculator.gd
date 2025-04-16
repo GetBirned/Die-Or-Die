@@ -10,6 +10,7 @@ extends Node2D
 	$BaseCalc/Digits/Digit0
 ]
 
+@onready var duck_button: AnimatedSprite2D = $DuckButton
 @onready var plus_button: AnimatedSprite2D = $PlusButton
 @onready var minus_button: AnimatedSprite2D = $MinusButton
 @onready var button_sound: AudioStreamPlayer = $ButtonSound
@@ -50,3 +51,13 @@ func update_display():
 		button_sound.play()
 		await get_tree().create_timer(0.1).timeout
 		minus_button.frame = 0
+
+func _quack_duck():
+	duck_button.frame = 1
+	$DuckSound.play()
+	await get_tree().create_timer(0.15).timeout
+	duck_button.frame = 0
+
+func _on_click_duck_pressed() -> void:
+	print("CLICKED THE DUCK!")
+	_quack_duck()
