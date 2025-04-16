@@ -18,6 +18,7 @@ signal purchasing
 @onready var blank_value = 0
 @onready var last_scored_side = null
 @onready var hand_multiplier = 1
+@onready var hand = null
 @onready var id = 0
 
 func increment_and_get():
