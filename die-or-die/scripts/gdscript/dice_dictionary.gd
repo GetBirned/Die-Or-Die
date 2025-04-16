@@ -22,10 +22,10 @@ extends Node
 	"Glass Die":
 	preload("res://scenes/dice/glass_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Odd":
+	"Odd Die":
 	preload("res://scenes/dice/odd_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Even":
+	"Even Die":
 	preload("res://scenes/dice/even_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
 	}

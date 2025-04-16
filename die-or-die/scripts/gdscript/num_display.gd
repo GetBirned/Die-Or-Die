@@ -18,7 +18,8 @@ func update(n: int):
 		$Hundreds.position.x = -7
 		$Hundreds.set_frame_and_progress(int(hundreds), 0.0)
 	elif n > 9:
-		$Hundreds.hide()
+		if $Hundreds:
+			$Hundreds.hide()
 		var tens = str(n)[0]
 		var ones = str(n)[1]
 		$Tens.show()
@@ -27,7 +28,8 @@ func update(n: int):
 		$Ones.set_frame_and_progress(int(ones), 0.0)
 		$Tens.set_frame_and_progress(int(tens), 0.0)
 	else:
-		$Hundreds.hide()
+		if $Hundreds:
+			$Hundreds.hide()
 		$Ones.position.x = -18
 		$Tens.hide()
 		$Ones.scale = Vector2(1.2, 1.2)

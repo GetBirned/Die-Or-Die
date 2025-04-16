@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=29 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="Texture2D" uid="uid://baghstslxq8vu" path="res://resources/shopsign.png" id="2_jrmhs"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
 [ext_resource type="Texture2D" uid="uid://4kkxluwujqpf" path="res://resources/shopshelf.png" id="3_nr8yg"]
-[ext_resource type="PackedScene" uid="uid://q7ep38vcw2ce" path="res://scenes/singletons/dice_bag.tscn" id="4_uk3x2"]
+[ext_resource type="Script" path="res://scripts/gdscript/bag_detector.gd" id="5_rjy1f"]
+[ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/dicebag.png" id="5_vaf1e"]
+[ext_resource type="Script" path="res://scripts/gdscript/bag_visual.gd" id="6_j1ty6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atv6r"]
 atlas = ExtResource("2_jrmhs")
@@ -211,7 +213,7 @@ position = Vector2(921, 421)
 
 [node name="BagArea" type="Area2D" parent="."]
 position = Vector2(1126, 412)
-script = ExtResource("5_rqod6")
+script = ExtResource("5_rjy1f")
 
 [node name="BagDetection" type="CollisionShape2D" parent="BagArea"]
 shape = SubResource("CircleShape2D_idjsi")
