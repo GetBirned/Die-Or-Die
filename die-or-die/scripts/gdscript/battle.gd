@@ -38,7 +38,7 @@ func _on_back_button_pressed():
 func _on_turn_locked_in() -> void:
 	top_domino.lock_in_used()
 	var held_queue = $DiceHolder.get_dice()
-	var num = held_queue.size() # number to track how many new dice need to be loaded 
+	var num_held = held_queue.size() # number to track how many new dice need to be loaded 
 	GameInfo.reset_score()
 	for die in held_queue:
 		die.score()
@@ -58,6 +58,8 @@ func _on_turn_locked_in() -> void:
 	await $DominoZone.damage_dominoes(GameInfo.current_score)
 	
 	$DiceHolder.clear_dice()
+	for die in held_queue:
+		die.set_hidden()
 	
 	if domino_stack.is_empty():
 		await SceneManager.swipe_transition(self)
@@ -68,8 +70,7 @@ func _on_turn_locked_in() -> void:
 			SceneManager.switch_scene("title_screen")
 		else:	
 			top_domino = domino_stack.front()
-			load_dice(num)
-			DiceBag.replace_dice()
+			load_dice(5 - (live_dice.size() - num_held))
 	
 func kill_die(die):
 	for i in range(live_dice.size()):

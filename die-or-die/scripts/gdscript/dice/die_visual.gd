@@ -152,7 +152,6 @@ func set_closest(slot: Area2D):
 	closest_space = slot
 
 func _on_die_face_pressed() -> void:
-	print("clicked")
 	if status == FACE:
 		return_position = global_position
 		status = DRAGGING
