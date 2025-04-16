@@ -28,6 +28,9 @@ extends Node
 	"Even":
 	preload("res://scenes/dice/even_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
+	"Lovers":
+	preload("res://scenes/dice/lovers_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	,
 	}
 						#"Marble": {
 							#"visual": default_visual(),

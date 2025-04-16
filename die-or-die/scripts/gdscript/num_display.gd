@@ -21,6 +21,8 @@ func update(n: int):
 		$Hundreds.hide()
 		var tens = str(n)[0]
 		var ones = str(n)[1]
+		$Tens.scale = Vector2(1,1)
+		$Tens.position.x = 0
 		$Tens.show()
 		$Ones.position.x = 0
 		$Ones.scale = Vector2(1, 1)

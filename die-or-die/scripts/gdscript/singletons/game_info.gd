@@ -17,6 +17,7 @@ signal holder_updated
 @onready var blank_value = 0
 @onready var last_scored_side = null
 @onready var hand_multiplier = 1
+@onready var hand = null
 
 func reset_score():
 	current_score = 0
