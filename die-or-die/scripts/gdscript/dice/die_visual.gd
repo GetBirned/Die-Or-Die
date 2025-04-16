@@ -181,3 +181,11 @@ func get_sides():
 	
 func get_rect():
 	return Rect2(global_position.x-32, global_position.y-32, 64, 64)
+	
+func get_side_numbers():
+	var sides = []
+	
+	for side in get_sides():
+		sides.append(side.value)
+	
+	return sides

@@ -21,6 +21,13 @@ extends Node
 	,
 	"Glass":
 	preload("res://scenes/dice/glass_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	,
+	"Odd":
+	preload("res://scenes/dice/odd_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	,
+	"Even":
+	preload("res://scenes/dice/even_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	,
 	}
 						#"Marble": {
 							#"visual": default_visual(),
