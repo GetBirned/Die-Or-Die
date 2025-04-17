@@ -6,12 +6,15 @@ var shelf_length
 var die_in_bag = null
 var increment
 
+@onready var calculator = $Calculator
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameInfo.purchasing.connect(_on_purchase)
 	GameInfo.checking_out.connect(_on_checking_out)
 	shelf_length = $DiceShelfBottomEnd.global_position.x - $DiceShelfBottomStart.global_position.x
 	increment = shelf_length / 3
+	update_calculator()
 	$BackgroundAnimated.play("default")
 	$BackgroundAnimatedSHADOW.play("default")
 	for i in range(6):
@@ -20,6 +23,8 @@ func _ready():
 func _on_checking_out(die):
 	die_in_bag = die
 	
+func update_calculator():
+	calculator.set_money(GameInfo.money)
 
 func _on_purchase(key):
 	# purchase logic here
