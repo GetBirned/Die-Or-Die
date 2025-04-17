@@ -56,5 +56,5 @@ stream = ExtResource("8_jlk5q")
 [node name="MovePiecePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_p8cak")
 
-[connection signal="pressed" from="CanvasLayer/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
 [connection signal="pressed" from="CanvasLayer/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
