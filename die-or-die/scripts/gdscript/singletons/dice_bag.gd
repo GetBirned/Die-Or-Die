@@ -11,6 +11,7 @@ func _ready():
 func add_die(key):
 	var die = load($DiceDictionary.dice_dict[key]).instantiate()
 	$Dice.call_deferred("add_child", die)
+	GameInfo.emit_bag_updated()
 	in_bag.append(die)
 
 func new_hand(hand_size: int):

@@ -70,10 +70,12 @@ func _on_turn_locked_in() -> void:
 		die.set_hidden()
 	
 	if domino_stack.is_empty():
+		DiceBag.refill()
 		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:
 		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
+			DiceBag.refill()
 			await SceneManager.swipe_transition(self)
 			SceneManager.switch_scene("title_screen")
 		else:	

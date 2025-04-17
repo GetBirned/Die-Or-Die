@@ -254,6 +254,7 @@ justification_flags = 64
 value = 2
 
 [node name="Side3" parent="Sides" instance=ExtResource("5_c26ik")]
+value = 3
 
 [node name="Side4" parent="Sides" instance=ExtResource("5_c26ik")]
 value = 4
