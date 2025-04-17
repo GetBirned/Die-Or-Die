@@ -1,0 +1,282 @@
+[gd_scene load_steps=33 format=3 uid="uid://cfj7f7yx40kds"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/dice/die_visual.gd" id="1_r1kjc"]
+[ext_resource type="Texture2D" uid="uid://lih4y86wcq85" path="res://resources/die_faces/new_die_body.png" id="2_pw78y"]
+[ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="3_3a6g0"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="4_8o8er"]
+[ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/dice/die parts/die_faces.tscn" id="4_vtqqv"]
+[ext_resource type="Texture2D" uid="uid://bscajpxqoemj1" path="res://resources/die_faces/diebody.png" id="5_o1sgi"]
+[ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/dice/die parts/side.tscn" id="5_ooyx2"]
+[ext_resource type="Script" path="res://scripts/gdscript/dice/specials/blank_special.gd" id="6_3leex"]
+[ext_resource type="Texture2D" uid="uid://ugglhsaxidr0" path="res://resources/sticky-note.png" id="7_1g61u"]
+[ext_resource type="Script" path="res://scripts/tool_tip.gd" id="8_nt25k"]
+[ext_resource type="FontFile" uid="uid://b4tcp7fpoh2mm" path="res://resources/PermanentMarker.ttf" id="9_056bo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkfne"]
+shader = ExtResource("4_8o8er")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4wbc"]
+atlas = ExtResource("2_pw78y")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptxux"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ktif"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_145rf"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kv04e"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gm7o"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf8o2"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3b0lb"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i5yd"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(288, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbf55"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(0, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxtkj"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(96, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehw7o"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(192, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx33x"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(288, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8cvg"]
+atlas = ExtResource("3_3a6g0")
+region = Rect2(0, 288, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_icm1i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4wbc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptxux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ktif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_145rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv04e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gm7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf8o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3b0lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i5yd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbf55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxtkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehw7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx33x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8cvg")
+}],
+"loop": true,
+"name": &"rolling",
+"speed": 18.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ou"]
+size = Vector2(62, 62)
+
+[sub_resource type="Curve" id="Curve_1i7rn"]
+min_value = -10.0
+max_value = 80.0
+_data = [Vector2(0, 80), 0.0, 0.0, 0, 0, Vector2(1, -10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o4ekf"]
+min_value = 0.01
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_im3yk"]
+font = ExtResource("9_056bo")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hp5r8"]
+font = ExtResource("9_056bo")
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[node name="BlankDie" type="CharacterBody2D" groups=["die"]]
+script = ExtResource("1_r1kjc")
+die_name = "Blank Die"
+description = "Blank sides are worth 1 value for every 2 blank sides in full bag"
+
+[node name="Shadow" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_xkfne")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_o1sgi")
+
+[node name="Die" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.82606, 0.82606, 0.82606, 1)
+sprite_frames = SubResource("SpriteFrames_icm1i")
+animation = &"rolling"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y05ou")
+
+[node name="DieFace" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+speed_scale = 0.9
+explosiveness = 1.0
+randomness = 0.21
+lifetime_randomness = 0.15
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_max = 196.97
+angular_velocity_min = -5.0
+angular_velocity_max = 10.0
+linear_accel_min = -16.16
+linear_accel_max = 14.15
+linear_accel_curve = SubResource("Curve_1i7rn")
+scale_amount_min = 5.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_o4ekf")
+
+[node name="DieFaces" parent="." instance=ExtResource("4_vtqqv")]
+
+[node name="Sides" type="Node" parent="."]
+
+[node name="Side" parent="Sides" instance=ExtResource("5_ooyx2")]
+type = 1
+
+[node name="Side2" parent="Sides" instance=ExtResource("5_ooyx2")]
+value = 2
+type = 1
+
+[node name="Side3" parent="Sides" instance=ExtResource("5_ooyx2")]
+value = 3
+type = 1
+
+[node name="Side4" parent="Sides" instance=ExtResource("5_ooyx2")]
+value = 4
+type = 1
+
+[node name="Side5" parent="Sides" instance=ExtResource("5_ooyx2")]
+value = 5
+type = 1
+
+[node name="Side6" parent="Sides" instance=ExtResource("5_ooyx2")]
+value = 6
+type = 1
+
+[node name="Special" type="Node" parent="."]
+script = ExtResource("6_3leex")
+
+[node name="ToolTip" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(62, 44)
+rotation = -0.0872665
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_1g61u")
+offset = Vector2(60, 80)
+script = ExtResource("8_nt25k")
+
+[node name="NameLabel" type="Label" parent="ToolTip"]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 94.0
+offset_bottom = 23.0
+rotation = 0.122173
+label_settings = SubResource("LabelSettings_im3yk")
+horizontal_alignment = 1
+
+[node name="ToolTip" type="Sprite2D" parent="ToolTip"]
+modulate = Color(0.996078, 0.996078, 0.996078, 0.490196)
+self_modulate = Color(0.019554, 0.0195542, 0.0195541, 1)
+show_behind_parent = true
+clip_children = 2
+visibility_layer = 512
+position = Vector2(46.7745, 10.3661)
+texture = ExtResource("7_1g61u")
+offset = Vector2(60, 80)
+
+[node name="DescLabel" type="Label" parent="ToolTip"]
+offset_left = -17.0
+offset_top = 36.0
+offset_right = 105.0
+offset_bottom = 138.0
+rotation = 0.226893
+label_settings = SubResource("LabelSettings_hp5r8")
+autowrap_mode = 2
+justification_flags = 64
+
+[connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
+[connection signal="connect_special" from="." to="Special" method="_on_connect_special"]
+[connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
+[connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]

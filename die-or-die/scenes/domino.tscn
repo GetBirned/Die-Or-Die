@@ -1,0 +1,217 @@
+[gd_scene load_steps=31 format=3 uid="uid://cmnig6822n6j3"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/domino_visual.gd" id="1_klou8"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="2_edrvp"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_qnlko"]
+[ext_resource type="Texture2D" uid="uid://bmlp1i1n6r5qd" path="res://resources/dominoDOD.png" id="2_umsks"]
+[ext_resource type="Script" path="res://scripts/gdscript/num_display.gd" id="3_u0nfp"]
+[ext_resource type="Texture2D" uid="uid://8a7fx0aq5b5b" path="res://resources/die_faces/new_ones_numbers.png" id="4_3ldec"]
+[ext_resource type="Texture2D" uid="uid://cquqmdg1xeqw" path="res://resources/die_faces/new_tens_numbers.png" id="5_ijpg8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dasmd"]
+shader = ExtResource("2_qnlko")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr3j7"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kt5b"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpjpm"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h7mb"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtapl"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gchpx"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gaet"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebuuy"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(288, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rppp0"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(0, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4mow"]
+atlas = ExtResource("4_3ldec")
+region = Rect2(96, 192, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xj5jv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr3j7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kt5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpjpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h7mb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtapl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gchpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gaet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebuuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rppp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4mow")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1jr7"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3dr8"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd4o5"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nejdt"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6sas"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(0, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2l01"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(96, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71kbe"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(192, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7f8aa"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(288, 96, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5k6e"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(0, 192, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxksx"]
+atlas = ExtResource("5_ijpg8")
+region = Rect2(96, 192, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_btlou"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1jr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3dr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd4o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nejdt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6sas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2l01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71kbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7f8aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5k6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxksx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[node name="DefaultDomino" type="Node2D"]
+visible = false
+script = ExtResource("1_klou8")
+
+[node name="Sway" type="Node2D" parent="."]
+script = ExtResource("2_edrvp")
+
+[node name="DominoShadow" type="Sprite2D" parent="Sway"]
+material = SubResource("ShaderMaterial_dasmd")
+texture = ExtResource("2_umsks")
+
+[node name="Domino" type="Sprite2D" parent="Sway"]
+texture = ExtResource("2_umsks")
+
+[node name="Threshold" type="Node2D" parent="Sway"]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+script = ExtResource("3_u0nfp")
+
+[node name="Ones" type="AnimatedSprite2D" parent="Sway/Threshold"]
+sprite_frames = SubResource("SpriteFrames_xj5jv")
+
+[node name="Tens" type="AnimatedSprite2D" parent="Sway/Threshold"]
+sprite_frames = SubResource("SpriteFrames_btlou")
+frame = 2
+
+[node name="Hundreds" type="AnimatedSprite2D" parent="Threshold"]
+sprite_frames = SubResource("SpriteFrames_btlou")
+frame = 2
+
+[node name="LockIns" type="Node2D" parent="."]
+position = Vector2(0, 64)
+scale = Vector2(2, 2)
+script = ExtResource("3_u0nfp")
+
+[node name="Ones" type="AnimatedSprite2D" parent="Sway/LockIns"]
+position = Vector2(-18, 0)
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_xj5jv")
+
+[node name="Tens" type="AnimatedSprite2D" parent="Sway/LockIns"]
+sprite_frames = SubResource("SpriteFrames_btlou")
+
+[node name="Hundreds" type="AnimatedSprite2D" parent="LockIns"]
+sprite_frames = SubResource("SpriteFrames_btlou")
+frame = 2

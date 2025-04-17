@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjijg2tbsmngs"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/dice_holder.gd" id="1_o7nx7"]
+[ext_resource type="Texture2D" uid="uid://h2mvsopf54v3" path="res://resources/DiceHolder.png" id="2_7qrcu"]
+[ext_resource type="Shader" path="res://scenes/dice_holdershadow.gdshader" id="2_sgkux"]
+[ext_resource type="PackedScene" uid="uid://6i2ors5uhxv2" path="res://scenes/hold_space.tscn" id="3_jr2nt"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="4_5w41q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_23pgq"]
+shader = ExtResource("2_sgkux")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjo4p"]
+size = Vector2(760, 200)
+
+[node name="DiceHolder" type="Area2D"]
+script = ExtResource("1_o7nx7")
+
+[node name="DiceHolderRoot" type="Node2D" parent="."]
+script = ExtResource("4_5w41q")
+
+[node name="DiceHolder_Shadow" type="Sprite2D" parent="DiceHolderRoot"]
+editor_description = "8px bezzle
+128x128px slots
+12px separators"
+show_behind_parent = true
+z_index = -1
+material = SubResource("ShaderMaterial_23pgq")
+texture = ExtResource("2_7qrcu")
+
+[node name="DiceHolder" type="Sprite2D" parent="DiceHolderRoot"]
+editor_description = "8px bezzle
+128x128px slots
+12px separators"
+show_behind_parent = true
+z_index = -1
+texture = ExtResource("2_7qrcu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bjo4p")
+
+[node name="Slot_1" parent="." groups=["slot"] instance=ExtResource("3_jr2nt")]
+position = Vector2(-280, 0)
+
+[node name="Slot_2" parent="." groups=["slot"] instance=ExtResource("3_jr2nt")]
+position = Vector2(-140, 0)
+
+[node name="Slot_3" parent="." groups=["slot"] instance=ExtResource("3_jr2nt")]
+
+[node name="Slot_4" parent="." groups=["slot"] instance=ExtResource("3_jr2nt")]
+position = Vector2(140, 0)
+
+[node name="Slot_5" parent="." groups=["slot"] instance=ExtResource("3_jr2nt")]
+position = Vector2(280, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_holder_tray_entered"]
+[connection signal="body_exited" from="." to="." method="_on_holder_tray_exited"]
