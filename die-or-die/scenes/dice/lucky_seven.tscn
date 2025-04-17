@@ -153,7 +153,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="Lucky Seven" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_muwlv")
-die_name = "Lucky 777"
+die_name = "Lucky 7"
 description = "90% of gamblers quit before hitting it big."
 
 [node name="Shadow" type="Sprite2D" parent="."]

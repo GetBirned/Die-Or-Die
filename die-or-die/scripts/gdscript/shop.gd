@@ -51,7 +51,7 @@ func order_die(die_index):
 func _on_add_pressed():	
 	var num_dice = dice_in_shelf.size()
 	if num_dice < 6:	
-		var die = $DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()].duplicate()
+		var die = load($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()]).instantiate()
 		die.hide()
 		add_child(die)
 		dice_in_shelf.append(die)

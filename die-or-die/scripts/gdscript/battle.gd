@@ -10,6 +10,7 @@ var top_domino
 func _ready() -> void:
 	$BattleMusicPlayer.play()
 	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
+	DiceBag.refill()
 	load_dice(5)
 	GameInfo.money_changed.connect(update_calculator)
 	update_calculator()

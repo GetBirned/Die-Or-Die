@@ -153,8 +153,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="LoversDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_lbi5o")
-die_name = "Odd Die"
-description = "Gives +7 to your score for each odd face scored"
+die_name = "Lovers Die"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false

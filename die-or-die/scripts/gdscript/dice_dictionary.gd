@@ -4,22 +4,22 @@ extends Node
 	"D6": 
 	"res://scenes/dice/default_die.tscn"
 	,
-	"Seven":
+	"Lucky 7":
 	"res://scenes/dice/lucky_seven.tscn"
 	,
-	"Twoless":
+	"Twoless Die":
 	"res://scenes/dice/twoless_die.tscn"
 	,
-	"Blank":
+	"Blank Die":
 	"res://scenes/dice/blank_die.tscn"
 	,
-	"Devil":
+	"D666":
 	"res://scenes/dice/devil_die.tscn"
 	,
-	"Golden":
+	"Golden Die":
 	"res://scenes/dice/golden_die.tscn"
 	,
-	"Glass":
+	"Glass Die":
 	"res://scenes/dice/glass_die.tscn"
 	,
 	"Odd Die":
@@ -28,7 +28,7 @@ extends Node
 	"Even Die":
 	"res://scenes/dice/even_die.tscn"
 	,
-	"Lovers":
+	"Lovers Die":
 	"res://scenes/dice/lovers_die.tscn"
 	,
 	}

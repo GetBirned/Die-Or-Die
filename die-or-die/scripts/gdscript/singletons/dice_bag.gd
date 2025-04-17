@@ -10,14 +10,16 @@ func _ready():
 
 func add_die(key):
 	var die = load($DiceDictionary.dice_dict[key]).instantiate()
-	$Dice.add_child(die)
+	$Dice.call_deferred("add_child", die)
 	in_bag.append(die)
 
 func new_hand(hand_size: int):
 	var new_hand = []
+	print("getting" + str(hand_size))
 	
 	if hand_size > in_bag.size():
 		refill()
+		hand_size = 5
 	
 	for i in range(hand_size):
 		new_hand.append(in_bag.pop_front())
