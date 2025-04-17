@@ -2,34 +2,34 @@ extends Node
 
 @onready var dice_dict: Dictionary = {
 	"D6": 
-	preload("res://scenes/dice/default_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/default_die.tscn"
 	,
-	"Lucky 777":
-	preload("res://scenes/dice/lucky_seven.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"Lucky 7":
+	"res://scenes/dice/lucky_seven.tscn"
 	,
 	"Twoless Die":
-	preload("res://scenes/dice/twoless_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/twoless_die.tscn"
 	,
 	"Blank Die":
-	preload("res://scenes/dice/blank_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/blank_die.tscn"
 	,
 	"D666":
-	preload("res://scenes/dice/devil_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/devil_die.tscn"
 	,
 	"Golden Die":
-	preload("res://scenes/dice/golden_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/golden_die.tscn"
 	,
 	"Glass Die":
-	preload("res://scenes/dice/glass_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/glass_die.tscn"
 	,
 	"Odd Die":
-	preload("res://scenes/dice/odd_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/odd_die.tscn"
 	,
 	"Even Die":
-	preload("res://scenes/dice/even_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"res://scenes/dice/even_die.tscn"
 	,
-	"Lovers":
-	preload("res://scenes/dice/lovers_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
+	"Lovers Die":
+	"res://scenes/dice/lovers_die.tscn"
 	,
 	}
 						#"Marble": {

@@ -1,7 +1,6 @@
 extends Node2D
 
 var domino_stack = []
-var held_queue = []
 var live_dice = []
 var rolls
 var top_domino
@@ -11,6 +10,7 @@ var top_domino
 func _ready() -> void:
 	$BattleMusicPlayer.play()
 	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
+	DiceBag.refill()
 	load_dice(5)
 	GameInfo.money_changed.connect(update_calculator)
 	update_calculator()
@@ -26,15 +26,13 @@ func load_dice(num):
 	$RollDicePlayer.stop()
 	$RollDicePlayer.play() # dice rolling sound effect
 	for die in live_dice:
-		var new_die = die.duplicate()
-		$Dice.add_child(new_die)
-		new_die.position = $Tray/Sprite2D.position
-		new_die.roll(true) # temporary solution, we need to figure out the bounds
+		die.global_position = $Tray/Sprite2D.position
+		die.roll(true) # temporary solution, we need to figure out the bounds
 
 
 func _on_roll_button_pressed():
 	if top_domino.lock_ins > 0:
-		var dice = $Dice.get_children()
+		var dice = live_dice
 		$RollDicePlayer.stop()
 		$RollDicePlayer.play() # dice rolling sound effect
 		for die in dice:
@@ -42,13 +40,13 @@ func _on_roll_button_pressed():
 
 func _on_back_button_pressed():
 	live_dice.clear()
-	DiceBag.full_bag.append_array(DiceBag.active_dice)
+	DiceBag.refill()
 	SceneManager.switch_scene("title_screen")
 
 func _on_turn_locked_in() -> void:
 	top_domino.lock_in_used()
-	held_queue = $DiceHolder.get_dice()
-	var num = held_queue.size() # number to track how many new dice need to be loaded 
+	var held_queue = $DiceHolder.get_dice()
+	var num_held = held_queue.size() # number to track how many new dice need to be loaded 
 	GameInfo.reset_score()
 	for die in held_queue:
 		die.score()
@@ -68,11 +66,8 @@ func _on_turn_locked_in() -> void:
 	await $DominoZone.damage_dominoes(GameInfo.current_score)
 	
 	$DiceHolder.clear_dice()
-	
 	for die in held_queue:
-		$Dice.remove_child(die)
-	
-	held_queue = []
+		die.set_hidden()
 	
 	if domino_stack.is_empty():
 		await SceneManager.swipe_transition(self)
@@ -83,19 +78,12 @@ func _on_turn_locked_in() -> void:
 			SceneManager.switch_scene("title_screen")
 		else:	
 			top_domino = domino_stack.front()
-			load_dice(num)
-			DiceBag.replace_dice()
+			load_dice(5 - (live_dice.size() - num_held))
 	
 func kill_die(die):
-	print(die.id)
-	for i in range(0, held_queue.size()):
-		if die.id == held_queue[i].id:
-			held_queue.remove_at(i)
-	
-	for i in range(0, live_dice.size()):
-		print(live_dice[i].id)
+	for i in range(live_dice.size()):
 		if die.id == live_dice[i].id:
-			print("removed")
 			live_dice.remove_at(i)
+			return
 			
 		

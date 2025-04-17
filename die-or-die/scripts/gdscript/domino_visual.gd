@@ -21,7 +21,7 @@ func lock_in_used():
 
 func calculate_difficulty(domino_num):
 	# difficulty calculation
-	life = (DiceBag.full_bag.size()+DiceBag.active_dice.size())*domino_num
+	life = (DiceBag.get_dice().size())*domino_num
 	lock_ins = min(6, max(roundi(life/8)-1, 1))
 
 func take_damage(damage):
