@@ -76,7 +76,8 @@ func on_holder_updated(faces):
 	else:
 		hand = \"high number\"
 		GameInfo.hand_multiplier = 1
-	
+		
+	GameInfo.hand = hand
 	$Hover/HandSprite.play(hand)
 	
 func is_straight(values):

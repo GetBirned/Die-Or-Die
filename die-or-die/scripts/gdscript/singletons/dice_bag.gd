@@ -4,8 +4,9 @@ var in_bag = []
 var money = 999999;
 
 func _ready():
-	for i in range(10):
-		add_die($DiceDictionary.dice_dict.keys().pick_random())
+	GameInfo.purchasing.connect(add_die)
+	for i in range(5):
+		add_die("D6")
 
 func add_die(key):
 	var die = load($DiceDictionary.dice_dict[key]).instantiate()

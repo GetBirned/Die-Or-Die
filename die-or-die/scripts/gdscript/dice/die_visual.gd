@@ -20,6 +20,8 @@ var current_side;
 
 @export var die_name: String
 @export var description: String
+@export var purchased: bool = false
+@export var price: int = 2
 
 @onready var shadow = $Shadow
 var last_mouse_position := Vector2.ZERO
@@ -187,6 +189,14 @@ func get_sides():
 	
 func get_rect():
 	return Rect2(global_position.x-32, global_position.y-32, 64, 64)
+	
+func get_side_numbers():
+	var sides = []
+	
+	for side in get_sides():
+		sides.append(side.value)
+	
+	return sides
 	
 func set_hidden():
 	status = HIDDEN

@@ -60,9 +60,13 @@ func damage_dominoes(damage):
 		
 		active_domino.shake(0)
 		active_domino.update_sprite()
-		$Timer.start()
-		await $Timer.timeout
-		
+		if i > 15:
+			$FastTimer.start()
+			await $FastTimer.timeout
+		else:
+			$Timer.start()
+			await $Timer.timeout
+			
 	if active_domino.get_life() == 0:
 		destroy_top()
 

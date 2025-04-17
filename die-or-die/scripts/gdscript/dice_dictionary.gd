@@ -21,6 +21,16 @@ extends Node
 	,
 	"Glass":
 	"res://scenes/dice/glass_die.tscn"
+	,
+	"Odd Die":
+	"res://scenes/dice/odd_die.tscn"
+	,
+	"Even Die":
+	"res://scenes/dice/even_die.tscn"
+	,
+	"Lovers":
+	"res://scenes/dice/lovers_die.tscn"
+	,
 	}
 						#"Marble": {
 							#"visual": default_visual(),
