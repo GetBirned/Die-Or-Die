@@ -28,8 +28,8 @@ func take_damage(damage):
 	life -= damage
 
 func update_sprite():
-	$Sway/Threshold.update(life)
-	$Sway/LockIns.update(lock_ins)
+	$Threshold.update(life)
+	$LockIns.update(lock_ins)
 
 @onready var shake_index = 0
 @onready var shake_speed = 300

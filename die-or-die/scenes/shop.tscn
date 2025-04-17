@@ -1,12 +1,18 @@
 [gd_scene load_steps=29 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_8hpdi"]
 [ext_resource type="Texture2D" uid="uid://baghstslxq8vu" path="res://resources/shopsign.png" id="2_jrmhs"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
 [ext_resource type="Texture2D" uid="uid://4kkxluwujqpf" path="res://resources/shopshelf.png" id="3_nr8yg"]
 [ext_resource type="Script" path="res://scripts/gdscript/bag_detector.gd" id="5_rjy1f"]
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/dicebag.png" id="5_vaf1e"]
 [ext_resource type="Script" path="res://scripts/gdscript/bag_visual.gd" id="6_j1ty6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8dh8a"]
+shader = ExtResource("2_8hpdi")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atv6r"]
 atlas = ExtResource("2_jrmhs")
@@ -160,6 +166,12 @@ animations = [{
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_bptpf")
+
+[node name="BackgroundAnimatedSHADOW" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_8dh8a")
+position = Vector2(640, 375)
+sprite_frames = SubResource("SpriteFrames_r37p2")
+frame_progress = 0.154096
 
 [node name="BackgroundAnimated" type="AnimatedSprite2D" parent="."]
 position = Vector2(640, 375)
