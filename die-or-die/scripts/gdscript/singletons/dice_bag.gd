@@ -2,14 +2,14 @@ extends Node
 
 var full_bag = []
 var active_dice = []
-var money = 999999;
 
 func _ready():
-	for i in range(10):
-		full_bag.append($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()])
+	GameInfo.purchasing.connect(add_die)
+	for i in range(5):
+		full_bag.append($DiceDictionary.dice_dict["D6"])
 
 func add_die(key):
-	full_bag.append($DiceDictionary.dice_dict[key])
+	full_bag.append($DiceDictionary.dice_dict[key].duplicate())
 
 func new_hand(hand_size: int):
 	var new_hand = []
@@ -29,4 +29,3 @@ func kill_die(die):
 	for i in range(full_bag.size()):
 		if full_bag[i] == die:
 			full_bag.remove_at(i)
-	

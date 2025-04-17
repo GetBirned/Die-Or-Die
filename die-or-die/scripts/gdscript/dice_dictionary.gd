@@ -4,28 +4,28 @@ extends Node
 	"D6": 
 	preload("res://scenes/dice/default_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Seven":
+	"Lucky 777":
 	preload("res://scenes/dice/lucky_seven.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Twoless":
+	"Twoless Die":
 	preload("res://scenes/dice/twoless_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Blank":
+	"Blank Die":
 	preload("res://scenes/dice/blank_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Devil":
+	"D666":
 	preload("res://scenes/dice/devil_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Golden":
+	"Golden Die":
 	preload("res://scenes/dice/golden_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Glass":
+	"Glass Die":
 	preload("res://scenes/dice/glass_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Odd":
+	"Odd Die":
 	preload("res://scenes/dice/odd_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
-	"Even":
+	"Even Die":
 	preload("res://scenes/dice/even_die.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN_INHERITED)
 	,
 	"Lovers":

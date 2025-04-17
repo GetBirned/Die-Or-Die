@@ -76,6 +76,7 @@ func damage_dominoes(damage):
 	
 	for i in range(damage):
 		if active_domino.get_life() == 0:
+			
 			destroy_top()
 			if (domino_stack.is_empty()):
 				return

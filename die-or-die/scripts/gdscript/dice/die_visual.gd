@@ -20,6 +20,8 @@ var current_side;
 
 @export var die_name: String
 @export var description: String
+@export var purchased: bool = false
+@export var price: int = 2
 
 @onready var shadow = $Shadow
 var last_mouse_position := Vector2.ZERO
