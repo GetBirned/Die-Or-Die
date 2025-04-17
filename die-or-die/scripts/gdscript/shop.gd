@@ -14,6 +14,8 @@ func _ready():
 	increment = shelf_length / 3
 	$BackgroundAnimated.play("default")
 	$BackgroundAnimatedSHADOW.play("default")
+	for i in range(6):
+		add_die()
 
 func _on_checking_out(die):
 	die_in_bag = die
@@ -48,15 +50,19 @@ func order_die(die_index):
 		die.return_position = Vector2($DiceShelfBottomStart.global_position.x + x, $DiceShelfBottomStart.global_position.y)
 	die.status = RETURNING
 
+func add_die():
+	var num_dice = dice_in_shelf.size()
+	var die = load($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()]).instantiate()
+	die.hide()
+	add_child(die)
+	dice_in_shelf.append(die)
+	die.face()
+	order_die(num_dice)
+
 func _on_add_pressed():	
 	var num_dice = dice_in_shelf.size()
 	if num_dice < 6:	
-		var die = load($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()]).instantiate()
-		die.hide()
-		add_child(die)
-		dice_in_shelf.append(die)
-		die.face()
-		order_die(num_dice)
+		add_die()
 
 func _on_remove_pressed():
 	if dice_in_shelf.size() > 0:
