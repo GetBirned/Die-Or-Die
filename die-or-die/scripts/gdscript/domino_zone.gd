@@ -31,8 +31,9 @@ func place_dominoes():
 
 func destroy_top():
 	var active_domino = domino_stack.pop_front()
+	GameInfo.add_money(1)
+	print("destroying domino")
 	active_domino.active = false
-	$DominoDeathPlayer.play() # play a noise when the domino is destroyed.
 	remove_child(active_domino)
 		
 # damages the top domino
@@ -41,15 +42,21 @@ func damage_dominoes(damage):
 		return
 		
 	var active_domino = domino_stack.front()
+	var i = 0
 	var dmg = 1
-	for i in range(damage):
+	var tempdmg = dmg
+	while i < damage:
+		tempdmg = dmg
 		if active_domino.get_life() == 0:
 			destroy_top()
 			if domino_stack.is_empty():
 				return
 			active_domino = domino_stack.front()
-			
-		active_domino.take_damage(dmg)
+		
+		if dmg > active_domino.life:
+			tempdmg = active_domino.life
+		active_domino.take_damage(tempdmg)
+		i += tempdmg
 		
 		# damage noise for domino
 		var pitch_base = 1.0
@@ -63,6 +70,8 @@ func damage_dominoes(damage):
 		if i > 15:
 			$FastTimer.start()
 			await $FastTimer.timeout
+			if int(i) % 15 == 0:
+				dmg += 1
 		else:
 			$Timer.start()
 			await $Timer.timeout
