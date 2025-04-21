@@ -28,7 +28,6 @@ func _on_body_entered(body):
 			GameInfo.add_money(-price)
 			print("$%s" % GameInfo.get_money())
 			update_calculator()
-			$ChaChing.play()
 		else:
 			print("broke")
 

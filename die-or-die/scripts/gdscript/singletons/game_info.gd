@@ -47,6 +47,8 @@ func emit_bag_updated():
 	bag_updated.emit()
 
 func add_money(value):
+	$ChaChing.stop()
+	$ChaChing.play()
 	money += value
 	money_changed.emit()
 	
