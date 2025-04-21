@@ -15,3 +15,8 @@ func _on_play_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+
+func _on_SettingsButton_pressed():
+	var settings_overlay = preload("res://scenes/SettingsOverlay.tscn").instantiate()
+	get_tree().current_scene.add_child(settings_overlay)

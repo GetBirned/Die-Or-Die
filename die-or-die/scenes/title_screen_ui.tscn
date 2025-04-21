@@ -99,7 +99,7 @@ position = Vector2(622.5, 601)
 texture = ExtResource("9_fer2y")
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/SettingsButton"]
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/SettingsButton"]
 offset_left = 480.0
 offset_top = 566.0
 offset_right = 765.0
@@ -111,3 +111,4 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PlayButton/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/QuitButton/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/SettingsButton/SettingsButton" to="." method="_on_SettingsButton_pressed"]
