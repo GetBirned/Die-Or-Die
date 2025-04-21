@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://d22783g6s86pt"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/settings_overlay.gd" id="1_blxr2"]
+
+[node name="SettingsOverlay" type="Node2D"]
+script = ExtResource("1_blxr2")
+
+[node name="Overlay" type="Panel" parent="."]
+offset_left = -1.0
+offset_top = -6.0
+offset_right = 1279.0
+offset_bottom = 723.0
+
+[node name="ColorAPicker" type="ColorPickerButton" parent="."]
+offset_left = 48.0
+offset_top = 36.0
+offset_right = 148.0
+offset_bottom = 136.0
+text = "Color A"
+color = Color(1, 0, 0, 1)
+
+[node name="ColorBPicker" type="ColorPickerButton" parent="."]
+offset_left = 154.0
+offset_top = 36.0
+offset_right = 254.0
+offset_bottom = 136.0
+text = "Color B
+"
+
+[node name="CloseButton" type="Button" parent="."]
+offset_left = 572.0
+offset_top = 576.0
+offset_right = 699.0
+offset_bottom = 685.0
+text = "Close
+"
+
+[node name="ColorA" type="Label" parent="."]
+offset_left = 74.0
+offset_top = 14.0
+offset_right = 130.0
+offset_bottom = 37.0
+text = "Color A"
+
+[node name="ColorB" type="Label" parent="."]
+offset_left = 177.0
+offset_top = 16.0
+offset_right = 233.0
+offset_bottom = 39.0
+text = "Color A"
+
+[connection signal="color_changed" from="ColorAPicker" to="." method="_on_color_a_picker_color_changed"]
+[connection signal="color_changed" from="ColorBPicker" to="." method="_on_color_b_picker_color_changed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
