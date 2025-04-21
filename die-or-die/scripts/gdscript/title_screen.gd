@@ -15,6 +15,5 @@ func _process(delta):
 func _on_rolldebug_pressed():
 	SceneManager.switch_scene("battle")
 
-
 func _on_shopdebug_pressed():
 	SceneManager.switch_scene("shop")
