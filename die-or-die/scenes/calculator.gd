@@ -43,12 +43,10 @@ func update_display():
 	# Trigger button animation based on change
 	if money > last_money:
 		plus_button.frame = 1
-		button_sound.play()
 		await get_tree().create_timer(0.1).timeout
 		plus_button.frame = 0
 	elif money < last_money:
 		minus_button.frame = 1
-		button_sound.play()
 		await get_tree().create_timer(0.1).timeout
 		minus_button.frame = 0
 

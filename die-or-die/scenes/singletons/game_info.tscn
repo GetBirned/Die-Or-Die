@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3d7y5s4xmy7m"]
+[gd_scene load_steps=3 format=3 uid="uid://d3d7y5s4xmy7m"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/singletons/game_info.gd" id="1_b3xbg"]
+[ext_resource type="AudioStream" uid="uid://drbxv6mgd6o3u" path="res://resources/cha_ching.wav" id="2_cy8n2"]
 
 [node name="GameInfo" type="Node"]
 script = ExtResource("1_b3xbg")
+
+[node name="ChaChing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_cy8n2")

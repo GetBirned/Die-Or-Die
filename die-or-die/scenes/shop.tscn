@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=36 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_8hpdi"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://4kkxluwujqpf" path="res://resources/shopshelf.png" id="3_nr8yg"]
 [ext_resource type="Script" path="res://scripts/gdscript/bag_detector.gd" id="5_rjy1f"]
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/DiceBag.png" id="5_vaf1e"]
-[ext_resource type="AudioStream" uid="uid://drbxv6mgd6o3u" path="res://resources/cha_ching.wav" id="8_3xr6f"]
 [ext_resource type="Script" path="res://scenes/can_detector.gd" id="8_q4a4d"]
 [ext_resource type="Texture2D" uid="uid://cox0yewphwut" path="res://resources/can.png" id="9_lbvkd"]
 [ext_resource type="PackedScene" uid="uid://bkppif6eqif66" path="res://scenes/calculator.tscn" id="11_qhr5v"]
@@ -257,9 +256,6 @@ position = Vector2(-3, -21)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_7oni3")
 animation = &"open"
-
-[node name="ChaChing" type="AudioStreamPlayer" parent="BagArea"]
-stream = ExtResource("8_3xr6f")
 
 [node name="CanArea" type="Area2D" parent="."]
 position = Vector2(143, 424)
