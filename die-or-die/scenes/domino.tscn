@@ -192,6 +192,9 @@ sprite_frames = SubResource("SpriteFrames_btlou")
 frame = 2
 
 [node name="Hundreds" type="AnimatedSprite2D" parent="Threshold"]
+sprite_frames = SubResource("SpriteFrames_xj5jv")
+
+[node name="Thousands" type="AnimatedSprite2D" parent="Threshold"]
 sprite_frames = SubResource("SpriteFrames_btlou")
 frame = 2
 
@@ -209,5 +212,8 @@ sprite_frames = SubResource("SpriteFrames_xj5jv")
 sprite_frames = SubResource("SpriteFrames_btlou")
 
 [node name="Hundreds" type="AnimatedSprite2D" parent="LockIns"]
+sprite_frames = SubResource("SpriteFrames_xj5jv")
+
+[node name="Thousands" type="AnimatedSprite2D" parent="LockIns"]
 sprite_frames = SubResource("SpriteFrames_btlou")
 frame = 2

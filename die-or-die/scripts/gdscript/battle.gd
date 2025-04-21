@@ -14,29 +14,41 @@ func _ready() -> void:
 	load_dice(5)
 	GameInfo.money_changed.connect(update_calculator)
 	update_calculator()
-	domino_stack = $DominoZone.create_dominoes(4)
+	domino_stack = $DominoZone.create_dominoes(2*GameInfo.current_level+1)
 	top_domino = domino_stack.front()
+
+func _process(delta: float) -> void:
+	update_calculator()
 	
 func update_calculator():
-	calculator.set_money(GameInfo.money)
+	$Calculator.set_money(GameInfo.get_money())
+	$Calculator.update_display()
 	
 func load_dice(num):
 	GameInfo.reset_score()
-	live_dice = DiceBag.new_hand(num)
+	var new_dice = DiceBag.new_hand(num)
 	$RollDicePlayer.stop()
 	$RollDicePlayer.play() # dice rolling sound effect
-	for die in live_dice:
+	for die in new_dice:
 		die.global_position = $Tray/Sprite2D.position
 		die.roll(true) # temporary solution, we need to figure out the bounds
+	live_dice.append_array(new_dice)
 
 
 func _on_roll_button_pressed():
+	var dice = live_dice
 	if top_domino.lock_ins > 0:
-		var dice = live_dice
-		$RollDicePlayer.stop()
-		$RollDicePlayer.play() # dice rolling sound effect
-		for die in dice:
-			die.roll()
+		if not dice.is_empty() and dice[0].get_status() != 1:
+		
+			if $Calculator.money > 0:
+				GameInfo.add_money(-1)
+				
+				$RollDicePlayer.stop()
+				$RollDicePlayer.play() # dice rolling sound effect
+				for die in dice:
+					die.roll()
+			else:
+				$Calculator._quack_duck()
 
 func _on_back_button_pressed():
 	live_dice.clear()
@@ -71,6 +83,7 @@ func _on_turn_locked_in() -> void:
 	
 	if domino_stack.is_empty():
 		DiceBag.refill()
+		GameInfo.current_level += 1
 		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:

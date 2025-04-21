@@ -20,6 +20,7 @@ signal purchasing
 @onready var hand_multiplier = 1
 @onready var id: int = 0
 @onready var hand = null
+@onready var current_level = 1
 
 func increment_and_get():
 	id += 1
