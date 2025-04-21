@@ -8,6 +8,7 @@ var top_domino
 @onready var calculator = $Calculator
 
 func _ready() -> void:
+	await SceneManager.swipe_in_left_transition(self)
 	$BattleMusicPlayer.play()
 	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
 	DiceBag.refill()

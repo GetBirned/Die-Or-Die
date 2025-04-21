@@ -6,7 +6,6 @@ func switch_scene(scene:String):
 	get_tree().change_scene_to_file("res://scenes/%s.tscn" % scene)
 	current_scene = scene
 	
-	
 func get_die_scores():
 	if current_scene == "battle":
 		var dice = get_tree().current_scene.get_node("DiceHolder").get_dice()
@@ -60,3 +59,22 @@ func shrink_transition(source_root: Node):
 		$Timer.start()
 		await $Timer.timeout
 			
+func swipe_in_left_transition(source_root: Node):
+	Background.position.x = 1280
+	
+	var shift = Vector2(10,0)
+	
+	for i in range(100):
+		if Background.position.x < 0:
+			Background.position -= shift*Vector2(9-i,0)
+		else:
+			Background.position -= shift*Vector2(i,0)
+		if Background.position.x < 50 and Background.position.x > -250:
+			break
+		$Timer.start()
+		await $Timer.timeout
+	
+	for i in range(abs(Background.position.x)/20):
+		Background.position += shift*Vector2(i*.8, 0)
+		$Timer.start()
+		await $Timer.timeout

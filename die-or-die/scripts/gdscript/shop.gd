@@ -10,6 +10,7 @@ var increment
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await SceneManager.swipe_in_left_transition(self)
 	GameInfo.purchasing.connect(_on_purchase)
 	GameInfo.checking_out.connect(_on_checking_out)
 	shelf_length = $DiceShelfBottomEnd.global_position.x - $DiceShelfBottomStart.global_position.x
