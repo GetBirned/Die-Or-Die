@@ -51,6 +51,10 @@ func add_money(value):
 	$ChaChing.play()
 	money += value
 	money_changed.emit()
+
+func set_money(value):
+	money = value
+	money_changed.emit()
 	
 func get_money():
 	return money
