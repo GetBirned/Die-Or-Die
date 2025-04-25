@@ -8,4 +8,10 @@ script = ExtResource("1_p0r2o")
 
 [node name="DiceDictionary" parent="." instance=ExtResource("2_osq17")]
 
-[node name="Dice" type="Node2D" parent="."]
+[node name="Bag" type="Node2D" parent="."]
+
+[node name="Board" type="Node2D" parent="."]
+
+[node name="Discard" type="Node2D" parent="."]
+
+[node name="Held" type="Node2D" parent="."]

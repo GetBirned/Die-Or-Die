@@ -67,7 +67,7 @@ func _physics_process(delta):
 				global_position.x += (return_position.x - global_position.x) * 0.2
 				global_position.y += (return_position.y - global_position.y) * 0.2
 		HELD:
-			position = closest_space.global_position
+			position = held_by.global_position
 		SHAKE:
 			shake(delta)
 	
@@ -85,7 +85,7 @@ func roll(initial = false):
 		
 		if not initial:
 			rolled.emit()
-			
+		
 		roll_physics()
 
 @onready var shake_index = 0
