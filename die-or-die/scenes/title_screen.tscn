@@ -40,8 +40,27 @@ offset_bottom = 180.0
 theme_override_font_sizes/font_size = 32
 text = "roll tray"
 
+[node name="savedebug" type="Button" parent="debugbuttons"]
+layout_mode = 0
+offset_top = 240.0
+offset_right = 180.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 32
+text = "save
+"
+
+[node name="loaddebug" type="Button" parent="debugbuttons"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 180.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 32
+text = "load"
+
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ebknj")
 
 [connection signal="pressed" from="debugbuttons/shopdebug" to="." method="_on_shopdebug_pressed"]
 [connection signal="pressed" from="debugbuttons/rolldebug" to="." method="_on_rolldebug_pressed"]
+[connection signal="pressed" from="debugbuttons/savedebug" to="." method="_on_savedebug_pressed"]
+[connection signal="pressed" from="debugbuttons/loaddebug" to="." method="_on_loaddebug_pressed"]

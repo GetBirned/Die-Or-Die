@@ -16,6 +16,7 @@ func get_die():
 func register_die(die):
 	held_die = die
 	GameInfo.emit_holder_updated()
+	DiceBag.hold(die)
 	
 func is_free():
 	return held_die == null

@@ -1,7 +1,6 @@
 extends Node2D
 
 var domino_stack = []
-var live_dice = []
 var rolls
 var top_domino
 
@@ -10,9 +9,8 @@ var top_domino
 func _ready() -> void:
 	await SceneManager.swipe_in_left_transition(self)
 	$BattleMusicPlayer.play()
-	CustomSignals.kill_die.connect(Callable(self, "kill_die"))
-	DiceBag.refill()
-	load_dice(5)
+	DiceBag.reset_to_bag()
+	load_dice()
 	GameInfo.money_changed.connect(update_calculator)
 	update_calculator()
 	domino_stack = $DominoZone.create_dominoes(2*GameInfo.current_level+1)
@@ -25,19 +23,18 @@ func update_calculator():
 	$Calculator.set_money(GameInfo.get_money())
 	$Calculator.update_display()
 	
-func load_dice(num):
+func load_dice():
 	GameInfo.reset_score()
-	var new_dice = DiceBag.new_hand(num)
+	var new_dice = DiceBag.new_hand()
 	$RollDicePlayer.stop()
 	$RollDicePlayer.play() # dice rolling sound effect
 	for die in new_dice:
 		die.global_position = $Tray/Sprite2D.position
 		die.roll(true) # temporary solution, we need to figure out the bounds
-	live_dice.append_array(new_dice)
 
 
 func _on_roll_button_pressed():
-	var dice = live_dice
+	var dice = DiceBag.get_dice_on_board()
 	if top_domino.lock_ins > 0:
 		if not dice.is_empty() and dice[0].get_status() != 1:
 		
@@ -52,8 +49,7 @@ func _on_roll_button_pressed():
 				$Calculator._quack_duck()
 
 func _on_back_button_pressed():
-	live_dice.clear()
-	DiceBag.refill()
+	DiceBag.reset_to_bag()
 	SceneManager.switch_scene("title_screen")
 
 func _on_turn_locked_in() -> void:
@@ -79,27 +75,20 @@ func _on_turn_locked_in() -> void:
 	await $DominoZone.damage_dominoes(GameInfo.current_score)
 	
 	$DiceHolder.clear_dice()
-	for die in held_queue:
-		die.set_hidden()
+	DiceBag.discard()
 	
 	if domino_stack.is_empty():
-		DiceBag.refill()
+		DiceBag.reset_to_bag()
 		GameInfo.current_level += 1
 		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:
 		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
-			DiceBag.refill()
+			DiceBag.reset_to_bag()
 			await SceneManager.swipe_transition(self)
 			SceneManager.switch_scene("title_screen")
 		else:	
 			top_domino = domino_stack.front()
-			load_dice(5 - (live_dice.size() - num_held))
-	
-func kill_die(die):
-	for i in range(live_dice.size()):
-		if die.id == live_dice[i].id:
-			live_dice.remove_at(i)
-			return
+			load_dice()
 			
 		
