@@ -62,7 +62,7 @@ func discard():
 		die.reparent($Discard)
 
 func kill_die(die):
-	CustomSignals.kill_die.emit(die)
+	CustomSignals.kill_die.emit(die) # potentially redundant now, but leaving anyway
 	$Bag.remove_child(die)
 	$Board.remove_child(die)
 	$Discard.remove_child(die)

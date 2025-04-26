@@ -12,6 +12,6 @@ script = ExtResource("1_p0r2o")
 
 [node name="Board" type="Node2D" parent="."]
 
-[node name="Discard" type="Node2D" parent="."]
-
 [node name="Held" type="Node2D" parent="."]
+
+[node name="Discard" type="Node2D" parent="."]
