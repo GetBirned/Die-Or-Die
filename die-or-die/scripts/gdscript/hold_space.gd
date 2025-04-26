@@ -22,6 +22,5 @@ func is_free():
 	return held_die == null
 	
 func clear_die():
-	DiceBag.unhold(held_die)
 	held_die = null
 	GameInfo.emit_holder_updated()

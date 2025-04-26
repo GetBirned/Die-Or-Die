@@ -161,6 +161,7 @@ func _on_die_face_pressed() -> void:
 		last_mouse_position = get_global_mouse_position()
 	elif status == HELD:
 		if held_by != null:
+			DiceBag.unhold(self)
 			held_by.clear_die()
 			held_by = null
 			

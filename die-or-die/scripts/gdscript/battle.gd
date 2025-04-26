@@ -54,7 +54,7 @@ func _on_back_button_pressed():
 
 func _on_turn_locked_in() -> void:
 	top_domino.lock_in_used()
-	var held_queue = DiceBag.get_held_dice()
+	var held_queue = $DiceHolder.get_dice()
 	var num_held = held_queue.size() # number to track how many new dice need to be loaded 
 	GameInfo.reset_score()
 	for die in held_queue:
