@@ -74,3 +74,7 @@ func _on_remove_pressed():
 	if dice_in_shelf.size() > 0:
 		var die = dice_in_shelf.pop_back()
 		die.queue_free()
+		
+func _on_continue_pressed():
+		await SceneManager.swipe_transition(self)
+		SceneManager.switch_scene("level_select")

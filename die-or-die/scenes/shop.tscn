@@ -231,6 +231,13 @@ offset_bottom = 180.0
 theme_override_font_sizes/font_size = 32
 text = "remove"
 
+[node name="Continue" type="Button" parent="."]
+offset_top = 240.0
+offset_right = 180.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
 [node name="DiceShelfTopStart" type="Node2D" parent="."]
 position = Vector2(359, 226)
 
@@ -277,3 +284,4 @@ position = Vector2(640, 634)
 [connection signal="pressed" from="Cleanup" to="." method="_order_dice"]
 [connection signal="pressed" from="Add" to="." method="_on_add_pressed"]
 [connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]
+[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
