@@ -13,7 +13,7 @@ func _ready() -> void:
 	load_dice()
 	GameInfo.money_changed.connect(update_calculator)
 	update_calculator()
-	domino_stack = $DominoZone.create_dominoes(2*GameInfo.current_level+1)
+	domino_stack = $DominoZone.create_dominoes(4+log(GameInfo.current_level+1))
 	top_domino = domino_stack.front()
 
 func _process(delta: float) -> void:

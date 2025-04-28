@@ -217,21 +217,14 @@ offset_bottom = 60.0
 theme_override_font_sizes/font_size = 32
 text = "back"
 
-[node name="Cleanup" type="Button" parent="."]
-offset_top = 180.0
-offset_right = 180.0
-offset_bottom = 240.0
-theme_override_font_sizes/font_size = 32
-text = "cleanup"
-
-[node name="Add" type="Button" parent="."]
+[node name="Refresh" type="Button" parent="."]
 offset_top = 60.0
 offset_right = 180.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 32
-text = "add"
+text = "Refresh ($3)"
 
-[node name="Remove" type="Button" parent="."]
+[node name="Continue" type="Button" parent="."]
 offset_top = 120.0
 offset_right = 180.0
 offset_bottom = 180.0

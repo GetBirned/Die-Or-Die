@@ -21,6 +21,13 @@ func get_die_scores():
 		return faces
 	else:
 		return []
+		
+func get_dice():
+	if current_scene == "battle":
+		var dice = get_tree().current_scene.get_node("DiceHolder").get_dice()
+		return dice
+	else:
+		return []
 
 func swipe_transition(source_root: Node):
 	var children = []
@@ -83,3 +90,19 @@ func swipe_in_left_transition(source_root: Node):
 		Background.position += shift*Vector2(i*.8, 0)
 		$Timer.start()
 		await $Timer.timeout
+
+func fade_transition(source_root: Node):
+	var children = []
+	for child in source_root.get_children():
+		if child is Node2D:
+			children.append(child)
+		else:
+			if child is Control:
+				child.hide()
+			
+	for i in range(33):
+		for child in children:
+			child.modulate.a -= .03
+		$Timer.start()
+		await $Timer.timeout
+			

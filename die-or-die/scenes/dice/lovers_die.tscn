@@ -154,6 +154,7 @@ font_color = Color(0, 0, 0, 1)
 [node name="LoversDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_lbi5o")
 die_name = "Lovers Die"
+description = "Multiplies your score by 2x for every pair scored."
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false

@@ -39,6 +39,15 @@ func _on_purchase(key):
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
+func _refresh_shop():
+	if GameInfo.get_money() > 3:
+		GameInfo.add_money(-3)
+		update_calculator()
+		for i in range(6):
+			_on_remove_pressed()
+		for i in range(6):
+			add_die()
+
 func _order_dice():
 	var num_dice = dice_in_shelf.size()
 	for die_index in num_dice:
@@ -58,7 +67,7 @@ func order_die(die_index):
 
 func add_die():
 	var num_dice = dice_in_shelf.size()
-	var die = load($DiceDictionary.dice_dict[$DiceDictionary.dice_dict.keys().pick_random()]).instantiate()
+	var die = load($DiceDictionary.dice_dict[DiceBag.unlocked_dice.pick_random()]).instantiate()
 	die.hide()
 	add_child(die)
 	dice_in_shelf.append(die)

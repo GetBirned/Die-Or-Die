@@ -32,7 +32,7 @@ func _ready():
 	friction = 0.999
 	speed = 1500
 	do_bounce = true
-	current_side = $Sides.get_child(0)
+	current_side = $Sides.get_children().pick_random()
 	connect_special.emit()
 	shadow.visible = false
 
@@ -149,6 +149,11 @@ func face():
 	$DieFaces.set_face(current_side)
 	$DieFaces.visible = true
 	$Die.play("default")
+	
+func random_face():
+	$DieFaces.set_face(sides.pick_random())
+	$DieFaces.visible = true
+	$Die.play("default")	
 
 func set_closest(slot: Area2D):
 	closest_space = slot

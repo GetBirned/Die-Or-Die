@@ -32,9 +32,11 @@ func _process(delta: float) -> void:
 				state = NONE
 			else:
 				global_position = get_global_mouse_position()
+				global_position.y = get_global_mouse_position().y + 15
 				if Input.is_action_pressed("ui_shift"):
 					init_tooltip()
 					$DescLabel.text = parent.name_description()[1]
+					
 					show()
 				elif Input.is_action_pressed("ui_ctrl"):
 					init_tooltip()
