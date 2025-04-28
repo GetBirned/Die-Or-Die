@@ -34,6 +34,9 @@ extends Node
 	"Ouroboros Die":
 	"res://scenes/dice/ouroboros_die.tscn"
 	,
+	"Frequent Die":
+	"res://scenes/dice/commonplace_die.tscn"
+	,
 	}
 						#"Marble": {
 							#"visual": default_visual(),

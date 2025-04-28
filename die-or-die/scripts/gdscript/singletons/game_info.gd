@@ -35,6 +35,7 @@ func _process(delta: float) -> void:
 	if not Achievements["Beginner"] and current_level > 2:
 		Achievements["Beginner"] = true
 		Background.show_achievement("Beginner")
+		DiceBag.unlock_die("Frequent Die")
 	if not Achievements["Collector"] and DiceBag.get_dice_in_bag().size() >= 15:
 		Achievements["Collector"] = true
 		Background.show_achievement("Collector")

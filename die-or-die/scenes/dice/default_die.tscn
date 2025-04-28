@@ -237,10 +237,10 @@ texture = ExtResource("5_qbjyt")
 offset = Vector2(60, 80)
 
 [node name="DescLabel" type="Label" parent="ToolTip"]
-offset_left = -19.5654
-offset_top = 37.1863
-offset_right = 102.435
-offset_bottom = 139.186
+offset_left = -9.93034
+offset_top = 41.7936
+offset_right = 112.07
+offset_bottom = 143.793
 rotation = 0.226893
 label_settings = SubResource("LabelSettings_2whuj")
 autowrap_mode = 2

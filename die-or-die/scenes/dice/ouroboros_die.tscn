@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://baxb1bigx0kx5"]
+[gd_scene load_steps=35 format=3 uid="uid://baxb1bigx0kx5"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/dice/die_visual.gd" id="1_vkptf"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_bs2ik"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bih03a6nmie7r" path="res://resources/DieRolling.png" id="5_1hs4c"]
 [ext_resource type="PackedScene" uid="uid://3q3udkydgb4m" path="res://scenes/dice/die parts/die_faces.tscn" id="6_t0bgb"]
 [ext_resource type="Texture2D" uid="uid://ugglhsaxidr0" path="res://resources/sticky-note.png" id="7_1y28p"]
+[ext_resource type="Shader" path="res://scripts/shaders/ouroboros_die.gdshader" id="7_ulrnh"]
 [ext_resource type="Script" path="res://scripts/tool_tip.gd" id="8_o5vms"]
 [ext_resource type="FontFile" uid="uid://b4tcp7fpoh2mm" path="res://resources/PermanentMarker.ttf" id="9_woyct"]
 [ext_resource type="PackedScene" uid="uid://bbpwaocxxom6q" path="res://scenes/dice/die parts/side.tscn" id="10_y8jbp"]
@@ -142,6 +143,9 @@ min_value = 0.01
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.01), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q44es"]
+shader = ExtResource("7_ulrnh")
+
 [sub_resource type="LabelSettings" id="LabelSettings_euwtt"]
 font = ExtResource("9_woyct")
 font_color = Color(0, 0, 0, 1)
@@ -154,7 +158,8 @@ font_color = Color(0, 0, 0, 1)
 [node name="OuroborosDie" type="CharacterBody2D" groups=["die"]]
 script = ExtResource("1_vkptf")
 die_name = "Ouroboros Die"
-description = "Basic 6 sided die."
+description = "5x your current score if snake eyes are scored."
+price = 3
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false
@@ -209,6 +214,7 @@ scale_amount_max = 30.0
 scale_amount_curve = SubResource("Curve_o4ekf")
 
 [node name="DieFaces" parent="." instance=ExtResource("6_t0bgb")]
+material = SubResource("ShaderMaterial_q44es")
 
 [node name="ToolTip" type="Sprite2D" parent="."]
 z_index = 10
@@ -220,9 +226,10 @@ offset = Vector2(65, 80)
 script = ExtResource("8_o5vms")
 
 [node name="NameLabel" type="Label" parent="ToolTip"]
-offset_left = 6.0
-offset_right = 94.0
-offset_bottom = 24.0
+offset_left = -1.02735
+offset_top = -2.59943
+offset_right = 97.9726
+offset_bottom = 21.4006
 rotation = 0.122173
 label_settings = SubResource("LabelSettings_euwtt")
 horizontal_alignment = 1
@@ -238,10 +245,10 @@ texture = ExtResource("7_1y28p")
 offset = Vector2(60, 80)
 
 [node name="DescLabel" type="Label" parent="ToolTip"]
-offset_left = -19.5654
-offset_top = 37.1863
-offset_right = 102.435
-offset_bottom = 139.186
+offset_left = -13.3392
+offset_top = 37.731
+offset_right = 108.661
+offset_bottom = 139.731
 rotation = 0.226893
 label_settings = SubResource("LabelSettings_2whuj")
 autowrap_mode = 2
