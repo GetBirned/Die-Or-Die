@@ -21,7 +21,7 @@ func lock_in_used():
 
 func calculate_difficulty(domino_num):
 	#life = (DiceBag.get_dice().size())*domino_num*pow(GameInfo.current_level,2)
-	life = max(12+pow(2,domino_num+1),DiceBag.get_dice().size()*(log(GameInfo.current_level) + domino_num))
+	life = max(12+pow(2,domino_num+1),(DiceBag.get_dice().size()*(GameInfo.current_level + domino_num)))
 	lock_ins = min(6, max(roundi(life/12)-1, 1)) # max number of rerolls is 6
 
 func take_damage(damage):
