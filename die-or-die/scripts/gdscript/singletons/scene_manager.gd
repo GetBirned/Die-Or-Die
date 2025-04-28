@@ -1,10 +1,16 @@
 extends Node2D
 
-@onready var current_scene = null
+@onready var current_scene: String = ""
+@onready var previous_scene: String = ""
 
-func switch_scene(scene:String):
-	get_tree().change_scene_to_file("res://scenes/%s.tscn" % scene)
+func switch_scene(scene: String):
+	previous_scene = current_scene
 	current_scene = scene
+	print("🔄 Switching scenes:")
+	print("   Previous Scene: ", previous_scene)
+	print("   Current Scene: ", current_scene)
+	get_tree().change_scene_to_file("res://scenes/%s.tscn" % scene)
+
 	
 func get_die_scores():
 	if current_scene == "battle":

@@ -105,7 +105,16 @@ func move_thimble_to(target_pos: Vector2):
 	tween.tween_callback(Callable(self, "_on_thimble_move_finished"))
 
 func _on_back_to_menu_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
+	await SceneManager.swipe_transition(self)
+	SceneManager.switch_scene("title_screen")
 
 func _on_thimble_move_finished():
 	is_moving = false
+
+func _on_open_dice_bag_pressed():
+	await SceneManager.swipe_transition(self)
+	SceneManager.switch_scene("dicebag_visual")
+
+func _on_shop_button_pressed():
+	await SceneManager.swipe_transition(self)
+	SceneManager.switch_scene("shop")

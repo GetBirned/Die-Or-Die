@@ -91,4 +91,6 @@ func _on_turn_locked_in() -> void:
 			top_domino = domino_stack.front()
 			load_dice()
 			
-		
+	
+func _on_bag_button_pressed() -> void:
+	SceneManager.switch_scene("dicebag_visual")

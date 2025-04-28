@@ -12,6 +12,9 @@ signal holder_updated
 signal checking_out
 signal purchasing
 
+var saved_color_a : Color = Color(1, 0, 0)  # Default red
+var saved_color_b : Color = Color(0, 0, 0)  # Default black
+
 @onready var current_score: float = 1
 @onready var state = GameStates.BATTLE
 @onready var money = 10
