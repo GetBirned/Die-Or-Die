@@ -210,31 +210,17 @@ offset_bottom = 60.0
 theme_override_font_sizes/font_size = 32
 text = "back"
 
-[node name="Cleanup" type="Button" parent="."]
-offset_top = 180.0
-offset_right = 180.0
-offset_bottom = 240.0
-theme_override_font_sizes/font_size = 32
-text = "cleanup"
-
-[node name="Add" type="Button" parent="."]
+[node name="Refresh" type="Button" parent="."]
 offset_top = 60.0
 offset_right = 180.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 32
-text = "add"
+text = "Refresh ($3)"
 
-[node name="Remove" type="Button" parent="."]
+[node name="Continue" type="Button" parent="."]
 offset_top = 120.0
 offset_right = 180.0
 offset_bottom = 180.0
-theme_override_font_sizes/font_size = 32
-text = "remove"
-
-[node name="Continue" type="Button" parent="."]
-offset_top = 240.0
-offset_right = 180.0
-offset_bottom = 300.0
 theme_override_font_sizes/font_size = 32
 text = "Continue"
 
@@ -281,7 +267,5 @@ sprite_frames = SubResource("SpriteFrames_1ky1b")
 position = Vector2(640, 634)
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Cleanup" to="." method="_order_dice"]
-[connection signal="pressed" from="Add" to="." method="_on_add_pressed"]
-[connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]
+[connection signal="pressed" from="Refresh" to="." method="_refresh_shop"]
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
