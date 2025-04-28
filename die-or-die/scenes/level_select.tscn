@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dsgpjbpjba31a"]
+[gd_scene load_steps=27 format=3 uid="uid://dsgpjbpjba31a"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/levelSelect.gd" id="1_ltpm6"]
 [ext_resource type="FontFile" uid="uid://b6rmwmt2r11oe" path="res://resources/VCR_OSD_MONO_1.001.ttf" id="2_fa27o"]
@@ -6,16 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://bql6lryimm5hl" path="res://resources/path.png" id="4_qipur"]
 [ext_resource type="Texture2D" uid="uid://bykd6qpm7gwnr" path="res://resources/thimble.png" id="5_0o023"]
 [ext_resource type="Texture2D" uid="uid://duyui8yf1ortp" path="res://resources/BACK.png" id="5_7xu5p"]
-[ext_resource type="Texture2D" uid="uid://dyxjkb2jd5n3n" path="res://resources/SHOP.png" id="6_0u51x"]
+[ext_resource type="Texture2D" uid="uid://dyxjkb2jd5n3n" path="res://resources/shop.png" id="6_0u51x"]
 [ext_resource type="AudioStream" uid="uid://bbvdav7hvlst3" path="res://resources/menuMusic.mp3" id="8_jlk5q"]
 [ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="9_b0fwg"]
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/DiceBag.png" id="9_f83k6"]
 [ext_resource type="AudioStream" uid="uid://qdfdqn8bl2k2" path="res://resources/movePiece.mp3" id="9_p8cak"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1400w"]
-shader = ExtResource("3_sa353")
-shader_parameter/shadow_offset = Vector2(10, 10)
-shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+[ext_resource type="Texture2D" uid="uid://dcmc87w5twse4" path="res://resources/PLAY.png" id="12_yor3p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykr71"]
 shader = ExtResource("3_sa353")
@@ -110,51 +106,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1400w"]
+shader = ExtResource("3_sa353")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
 [node name="LevelSelect" type="Node2D"]
 script = ExtResource("1_ltpm6")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="LevelInfoLabel" type="Label" parent="CanvasLayer"]
-offset_left = 1000.0
-offset_top = 10.0
-offset_right = 1132.0
-offset_bottom = 34.0
-theme_override_fonts/font = ExtResource("2_fa27o")
-text = "World 1-1: ???"
-
-[node name="BackSway" type="Node2D" parent="CanvasLayer"]
-position = Vector2(85, 600)
-script = ExtResource("9_b0fwg")
-
-[node name="BackSHADOW" type="Sprite2D" parent="CanvasLayer/BackSway"]
-material = SubResource("ShaderMaterial_1400w")
-position = Vector2(72, 35)
-texture = ExtResource("5_7xu5p")
-
-[node name="BackToMenuButton" type="Button" parent="CanvasLayer/BackSway"]
-offset_left = -4.0
-offset_right = 148.0
-offset_bottom = 70.0
-icon = ExtResource("5_7xu5p")
-flat = true
-
-[node name="ShopSway" type="Node2D" parent="CanvasLayer"]
-position = Vector2(85, 600)
-script = ExtResource("9_b0fwg")
-
-[node name="ShopSHADOW" type="Sprite2D" parent="CanvasLayer/ShopSway"]
-material = SubResource("ShaderMaterial_1400w")
-position = Vector2(72, -53)
-texture = ExtResource("6_0u51x")
-
-[node name="ShopButton" type="Button" parent="CanvasLayer/ShopSway"]
-offset_left = -4.0
-offset_top = -88.0
-offset_right = 148.0
-offset_bottom = -18.0
-icon = ExtResource("6_0u51x")
-flat = true
 
 [node name="PathShadow" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ykr71")
@@ -201,9 +159,51 @@ offset_right = 1243.0
 offset_bottom = 689.0
 flat = true
 
-[connection signal="pressed" from="CanvasLayer/BackSway/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/BackSway/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
-[connection signal="pressed" from="CanvasLayer/ShopSway/ShopButton" to="." method="_on_back_to_menu_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ShopSway/ShopButton" to="." method="_on_back_to_menu_debug_pressed"]
-[connection signal="pressed" from="CanvasLayer/ShopSway/ShopButton" to="." method="_on_shop_button_pressed"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="BackSway" type="Node2D" parent="."]
+position = Vector2(85, 600)
+script = ExtResource("9_b0fwg")
+
+[node name="BackSHADOW" type="Sprite2D" parent="BackSway"]
+material = SubResource("ShaderMaterial_1400w")
+position = Vector2(72, 35)
+texture = ExtResource("5_7xu5p")
+
+[node name="BackToMenuButton" type="Button" parent="BackSway"]
+offset_left = -4.0
+offset_right = 148.0
+offset_bottom = 70.0
+icon = ExtResource("5_7xu5p")
+flat = true
+
+[node name="LevelInfoLabel" type="Label" parent="."]
+offset_left = 1000.0
+offset_top = 10.0
+offset_right = 1132.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("2_fa27o")
+text = "World 1-1: ???"
+
+[node name="ContinueSway" type="Node2D" parent="."]
+position = Vector2(85, 600)
+script = ExtResource("9_b0fwg")
+
+[node name="ContinueSHADOW" type="Sprite2D" parent="ContinueSway"]
+material = SubResource("ShaderMaterial_1400w")
+position = Vector2(72, -53)
+texture = ExtResource("6_0u51x")
+
+[node name="ContinueButton" type="Button" parent="ContinueSway"]
+offset_left = -4.0
+offset_top = -88.0
+offset_right = 148.0
+offset_bottom = -18.0
+icon = ExtResource("12_yor3p")
+flat = true
+
 [connection signal="pressed" from="OpenDiceBag" to="." method="_on_open_dice_bag_pressed"]
+[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
+[connection signal="pressed" from="ContinueSway/ContinueButton" to="." method="_on_play_button_pressed"]

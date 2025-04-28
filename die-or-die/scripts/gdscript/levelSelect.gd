@@ -79,11 +79,7 @@ func _ready():
 		$MovePiecePlayer.play()
 		current_index = GameInfo.current_level
 		move_thimble_to(tile_positions[current_index])
-
-func _process(delta):
-	if Input.is_anything_pressed():
-		await SceneManager.fade_transition(self)
-		SceneManager.switch_scene("battle")
+	
 
 	#if Input.is_action_just_pressed("ui_right") and current_index < tile_positions.size() - 1:
 		#current_index += 1
@@ -105,16 +101,21 @@ func move_thimble_to(target_pos: Vector2):
 	tween.tween_callback(Callable(self, "_on_thimble_move_finished"))
 
 func _on_back_to_menu_button_pressed():
-	await SceneManager.swipe_transition(self)
+	await SceneManager.fade_transition(self)
 	SceneManager.switch_scene("title_screen")
 
 func _on_thimble_move_finished():
 	is_moving = false
 
 func _on_open_dice_bag_pressed():
-	await SceneManager.swipe_transition(self)
+	await SceneManager.fade_transition(self)
 	SceneManager.switch_scene("dicebag_visual")
 
 func _on_shop_button_pressed():
-	await SceneManager.swipe_transition(self)
+	await SceneManager.fade_transition(self)
 	SceneManager.switch_scene("shop")
+
+
+func _on_play_button_pressed() -> void:
+	await SceneManager.fade_transition(self)
+	SceneManager.switch_scene("battle")
