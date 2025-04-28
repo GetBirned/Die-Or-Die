@@ -21,7 +21,8 @@ func _on_body_entered(body):
 	if body.is_in_group("die"):
 		var price = body.price
 		if GameInfo.get_money() >= price: 
-			$BagVisual.play("open")
+			$BagSway/BagVisual.play("open")
+			$BagSway/BagSHADOW.play("open")
 			open = true
 			GameInfo.emit_checking_out(body)
 			GameInfo.emit_purchasing(body.name_description()[0])
@@ -33,5 +34,6 @@ func _on_body_entered(body):
 
 func _on_body_exited(body):
 	if body.is_in_group("die") and open:
-		$BagVisual.play("close")
+		$BagSway/BagVisual.play("close")
+		$BagSway/BagSHADOW.play("close")
 		open = false

@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://ir43ivsmvfs4"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/dicebag_visual.gd" id="1_q45hj"]
+[ext_resource type="PackedScene" uid="uid://bkppif6eqif66" path="res://scenes/calculator.tscn" id="2_i2h2r"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="2_muwe0"]
+[ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_wq63j"]
+[ext_resource type="Texture2D" uid="uid://duyui8yf1ortp" path="res://resources/BACK.png" id="3_nkcus"]
+[ext_resource type="Script" path="res://scripts/gdscript/sell_detector.gd" id="3_wspyb"]
+[ext_resource type="Texture2D" uid="uid://bw5otyd1x41k7" path="res://resources/trash.png" id="4_klvjr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41wnm"]
+shader = ExtResource("2_wq63j")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4q1oi"]
+radius = 100.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r7rbl"]
+shader = ExtResource("2_wq63j")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[node name="DicebagVisual" type="Node2D"]
+script = ExtResource("1_q45hj")
+
+[node name="CloseSway" type="Node2D" parent="."]
+script = ExtResource("2_muwe0")
+
+[node name="CloseSway" type="Sprite2D" parent="CloseSway"]
+material = SubResource("ShaderMaterial_41wnm")
+position = Vector2(917, 630)
+texture = ExtResource("3_nkcus")
+
+[node name="Close" type="Button" parent="CloseSway"]
+offset_left = 840.0
+offset_top = 595.0
+offset_right = 992.0
+offset_bottom = 665.0
+icon = ExtResource("3_nkcus")
+flat = true
+
+[node name="Calculator" parent="." instance=ExtResource("2_i2h2r")]
+position = Vector2(640, 634)
+
+[node name="SellArea" type="Area2D" parent="."]
+position = Vector2(1138, 411)
+script = ExtResource("3_wspyb")
+
+[node name="SellDetection" type="CollisionShape2D" parent="SellArea"]
+position = Vector2(-27, -44)
+shape = SubResource("CircleShape2D_4q1oi")
+debug_color = Color(0.846559, 0.277054, 0.64864, 0.42)
+
+[node name="TrashSway" type="Node2D" parent="SellArea"]
+script = ExtResource("2_muwe0")
+
+[node name="TrashSHADOW" type="Sprite2D" parent="SellArea/TrashSway"]
+material = SubResource("ShaderMaterial_r7rbl")
+position = Vector2(-26, -44)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_klvjr")
+
+[node name="Trash" type="Sprite2D" parent="SellArea/TrashSway"]
+position = Vector2(-26, -44)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_klvjr")
+
+[connection signal="pressed" from="CloseSway/Close" to="." method="_on_close_pressed"]

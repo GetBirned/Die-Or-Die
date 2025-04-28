@@ -12,18 +12,18 @@ offset_right = 1279.0
 offset_bottom = 723.0
 
 [node name="ColorAPicker" type="ColorPickerButton" parent="."]
-offset_left = 48.0
-offset_top = 36.0
-offset_right = 148.0
-offset_bottom = 136.0
+offset_left = 522.0
+offset_top = 295.0
+offset_right = 622.0
+offset_bottom = 395.0
 text = "Color A"
 color = Color(1, 0, 0, 1)
 
 [node name="ColorBPicker" type="ColorPickerButton" parent="."]
-offset_left = 154.0
-offset_top = 36.0
-offset_right = 254.0
-offset_bottom = 136.0
+offset_left = 650.0
+offset_top = 295.0
+offset_right = 750.0
+offset_bottom = 395.0
 text = "Color B
 "
 
@@ -36,18 +36,25 @@ text = "Close
 "
 
 [node name="ColorA" type="Label" parent="."]
-offset_left = 74.0
-offset_top = 14.0
-offset_right = 130.0
-offset_bottom = 37.0
+offset_left = 545.0
+offset_top = 272.0
+offset_right = 601.0
+offset_bottom = 295.0
 text = "Color A"
 
+[node name="ColorA" type="Label" parent="ColorA"]
+offset_left = -98.0
+offset_top = 136.0
+offset_right = 297.0
+offset_bottom = 192.0
+text = "Change the colors above to switch the background."
+
 [node name="ColorB" type="Label" parent="."]
-offset_left = 177.0
-offset_top = 16.0
-offset_right = 233.0
-offset_bottom = 39.0
-text = "Color A"
+offset_left = 674.0
+offset_top = 272.0
+offset_right = 730.0
+offset_bottom = 295.0
+text = "Color B"
 
 [connection signal="color_changed" from="ColorAPicker" to="." method="_on_color_a_picker_color_changed"]
 [connection signal="color_changed" from="ColorBPicker" to="." method="_on_color_b_picker_color_changed"]

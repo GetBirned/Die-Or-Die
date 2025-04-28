@@ -1,12 +1,13 @@
-[gd_scene load_steps=36 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=39 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_8hpdi"]
 [ext_resource type="Texture2D" uid="uid://baghstslxq8vu" path="res://resources/shopsign.png" id="2_jrmhs"]
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
-[ext_resource type="Texture2D" uid="uid://4kkxluwujqpf" path="res://resources/shopshelf.png" id="3_nr8yg"]
 [ext_resource type="Script" path="res://scripts/gdscript/bag_detector.gd" id="5_rjy1f"]
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/DiceBag.png" id="5_vaf1e"]
+[ext_resource type="Texture2D" uid="uid://b7c6niw0uw7o7" path="res://resources/CONTINUE.png" id="7_1bm40"]
+[ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="7_x6y4e"]
 [ext_resource type="Script" path="res://scenes/can_detector.gd" id="8_q4a4d"]
 [ext_resource type="Texture2D" uid="uid://cox0yewphwut" path="res://resources/can.png" id="9_lbvkd"]
 [ext_resource type="PackedScene" uid="uid://bkppif6eqif66" path="res://scenes/calculator.tscn" id="11_qhr5v"]
@@ -80,8 +81,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ejr"]
+shader = ExtResource("2_8hpdi")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_idjsi"]
 radius = 100.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ypvd"]
+shader = ExtResource("2_8hpdi")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hvdjc"]
 atlas = ExtResource("5_vaf1e")
@@ -198,10 +209,6 @@ position = Vector2(640, 375)
 sprite_frames = SubResource("SpriteFrames_r37p2")
 frame_progress = 0.154096
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(644, 377)
-texture = ExtResource("3_nr8yg")
-
 [node name="DiceDictionary" parent="." instance=ExtResource("3_6w0dc")]
 
 [node name="Back" type="Button" parent="."]
@@ -231,12 +238,22 @@ offset_bottom = 180.0
 theme_override_font_sizes/font_size = 32
 text = "remove"
 
-[node name="Continue" type="Button" parent="."]
-offset_top = 240.0
-offset_right = 180.0
-offset_bottom = 300.0
+[node name="ContinueSway" type="Node2D" parent="."]
+script = ExtResource("7_x6y4e")
+
+[node name="ContinueSHADOW" type="Sprite2D" parent="ContinueSway"]
+material = SubResource("ShaderMaterial_l2ejr")
+position = Vector2(1045, 621)
+texture = ExtResource("7_1bm40")
+
+[node name="Continue" type="Button" parent="ContinueSway"]
+offset_left = 903.0
+offset_top = 586.0
+offset_right = 1187.0
+offset_bottom = 656.0
 theme_override_font_sizes/font_size = 32
-text = "Continue"
+icon = ExtResource("7_1bm40")
+flat = true
 
 [node name="DiceShelfTopStart" type="Node2D" parent="."]
 position = Vector2(359, 226)
@@ -255,11 +272,22 @@ position = Vector2(1138, 411)
 script = ExtResource("5_rjy1f")
 
 [node name="BagDetection" type="CollisionShape2D" parent="BagArea"]
+position = Vector2(-68, -51)
 shape = SubResource("CircleShape2D_idjsi")
 debug_color = Color(0.846559, 0.277054, 0.64864, 0.42)
 
-[node name="BagVisual" type="AnimatedSprite2D" parent="BagArea"]
-position = Vector2(-3, -21)
+[node name="BagSway" type="Node2D" parent="BagArea"]
+script = ExtResource("7_x6y4e")
+
+[node name="BagSHADOW" type="AnimatedSprite2D" parent="BagArea/BagSway"]
+material = SubResource("ShaderMaterial_7ypvd")
+position = Vector2(-70, -67)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_7oni3")
+animation = &"open"
+
+[node name="BagVisual" type="AnimatedSprite2D" parent="BagArea/BagSway"]
+position = Vector2(-70, -67)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_7oni3")
 animation = &"open"
@@ -280,8 +308,16 @@ sprite_frames = SubResource("SpriteFrames_1ky1b")
 [node name="Calculator" parent="." instance=ExtResource("11_qhr5v")]
 position = Vector2(640, 634)
 
+[node name="OpenDiceBag" type="Button" parent="."]
+offset_left = 981.0
+offset_top = 266.0
+offset_right = 1158.0
+offset_bottom = 449.0
+flat = true
+
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Cleanup" to="." method="_order_dice"]
 [connection signal="pressed" from="Add" to="." method="_on_add_pressed"]
 [connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]
-[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="ContinueSway/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="OpenDiceBag" to="." method="_on_open_dice_bag_pressed"]

@@ -24,3 +24,7 @@ func _on_savedebug_pressed():
 
 func _on_loaddebug_pressed():
 	DiceBag.load_bag("save.txt")
+
+
+func _on_dicebagdebug_pressed() -> void:
+	SceneManager.switch_scene("dicebag_visual")

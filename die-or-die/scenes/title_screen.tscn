@@ -24,14 +24,6 @@ offset_bottom = 60.0
 theme_override_font_sizes/font_size = 32
 text = "open shop"
 
-[node name="dicebagdebug" type="Button" parent="debugbuttons"]
-layout_mode = 0
-offset_top = 60.0
-offset_right = 180.0
-offset_bottom = 120.0
-theme_override_font_sizes/font_size = 32
-text = "open bag"
-
 [node name="rolldebug" type="Button" parent="debugbuttons"]
 layout_mode = 0
 offset_top = 120.0

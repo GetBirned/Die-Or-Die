@@ -78,3 +78,8 @@ func _on_remove_pressed():
 func _on_continue_pressed():
 		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("level_select")
+
+
+func _on_open_dice_bag_pressed() -> void:
+	await SceneManager.swipe_transition(self)
+	SceneManager.switch_scene("dicebag_visual")
