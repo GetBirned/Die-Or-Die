@@ -70,10 +70,8 @@ var level_names = [
 
 func _ready():
 	await SceneManager.swipe_in_left_transition(self)
-	update_level_label()
 	thimble.position = tile_positions[GameInfo.current_level-1]
 	$LevelMusicPlayer.play()
-	update_level_label()
 	$Timer.start()
 	await $Timer.timeout
 	if current_index < GameInfo.current_level:
@@ -81,9 +79,6 @@ func _ready():
 		$MovePiecePlayer.play()
 		current_index = GameInfo.current_level
 		move_thimble_to(tile_positions[current_index])
-
-func update_level_label():
-	$CanvasLayer/LevelInfoLabel.text = level_names[current_index]
 
 func _process(delta):
 	if Input.is_anything_pressed():
@@ -108,7 +103,6 @@ func move_thimble_to(target_pos: Vector2):
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(Callable(self, "_on_thimble_move_finished"))
-	update_level_label()
 
 func _on_back_to_menu_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")

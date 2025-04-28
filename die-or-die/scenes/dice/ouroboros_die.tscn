@@ -159,7 +159,6 @@ font_color = Color(0, 0, 0, 1)
 script = ExtResource("1_vkptf")
 die_name = "Ouroboros Die"
 description = "5x your current score if snake eyes are scored."
-price = 3
 
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false
