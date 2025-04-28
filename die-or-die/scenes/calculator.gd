@@ -43,17 +43,20 @@ func update_display():
 	# Trigger button animation based on change
 	if money > last_money:
 		plus_button.frame = 1
-		await get_tree().create_timer(0.1).timeout
+		$Timer.start()
+		await $Timer.timeout
 		plus_button.frame = 0
 	elif money < last_money:
 		minus_button.frame = 1
-		await get_tree().create_timer(0.1).timeout
+		$Timer.start()
+		await $Timer.timeout
 		minus_button.frame = 0
 
 func _quack_duck():
 	duck_button.frame = 1
 	$DuckSound.play()
-	await get_tree().create_timer(0.15).timeout
+	$Timer.start()
+	await $Timer.timeout
 	duck_button.frame = 0
 
 func _on_click_duck_pressed() -> void:

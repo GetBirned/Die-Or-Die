@@ -257,4 +257,7 @@ volume_db = -10.0
 [node name="DuckSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_wt1g5")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="pressed" from="DuckButton/ClickDuck" to="." method="_on_click_duck_pressed"]
