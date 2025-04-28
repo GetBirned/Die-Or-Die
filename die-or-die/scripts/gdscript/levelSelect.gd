@@ -69,6 +69,8 @@ var level_names = [
 ]
 
 func _ready():
+	await SceneManager.swipe_in_left_transition(self)
+	update_level_label()
 	thimble.position = tile_positions[GameInfo.current_level-1]
 	$LevelMusicPlayer.play()
 	update_level_label()
