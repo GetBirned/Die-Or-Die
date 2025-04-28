@@ -39,6 +39,15 @@ func _on_purchase(key):
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
+func _refresh_shop():
+	if GameInfo.get_money() > 3:
+		GameInfo.add_money(-3)
+		update_calculator()
+		for i in range(6):
+			_on_remove_pressed()
+		for i in range(6):
+			add_die()
+
 func _order_dice():
 	var num_dice = dice_in_shelf.size()
 	for die_index in num_dice:
