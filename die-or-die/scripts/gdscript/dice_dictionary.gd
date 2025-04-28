@@ -31,6 +31,9 @@ extends Node
 	"Lovers Die":
 	"res://scenes/dice/lovers_die.tscn"
 	,
+	"Ouroboros Die":
+	"res://scenes/dice/ouroboros_die.tscn"
+	,
 	}
 						#"Marble": {
 							#"visual": default_visual(),
