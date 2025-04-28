@@ -1,5 +1,9 @@
 extends Node
 
+var unlocked_dice = [
+	"D6", "Lucky 7", "Twoless Die", "Blank Die", "D666", "Golden Die",
+	"Glass Die", "Odd Die", "Even Die", "Lovers Die"
+]
 
 func _ready():
 	GameInfo.purchasing.connect(add_die)
@@ -103,6 +107,8 @@ func save_bag(file):
 	var save_file = FileAccess.open("user://" + str(file), FileAccess.WRITE)
 	var data = {
 		"dice": [],
+		"unlocked": unlocked_dice,
+		"achievements":GameInfo.Achievements,
 		"money": GameInfo.get_money(),
 		"level": GameInfo.current_level
 	}
@@ -141,3 +147,7 @@ func load_default():
 	GameInfo.current_level = 1
 	for i in range(5):
 		add_die("D6")
+		
+func unlock_die(key):
+	unlocked_dice.append(key)
+	

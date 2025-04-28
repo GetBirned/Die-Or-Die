@@ -22,6 +22,38 @@ signal purchasing
 @onready var hand = null
 @onready var current_level = 1
 
+var Achievements = {
+	"Beginner":false, # beat level 2
+	"Collector":false, # have 15 dice in your bag 
+	"High Roller":false, # get a score over 1000
+	"The Don":false, # beat 10 levels
+	"Filthy Rich":false, # have $100
+	"Wanted":false, # get a score over 10000
+}
+
+func _process(delta: float) -> void:
+	if not Achievements["Beginner"] and current_level > 2:
+		Achievements["Beginner"] = true
+		Background.show_achievement("Beginner")
+		DiceBag.unlock_die("Frequent Die")
+	if not Achievements["Collector"] and DiceBag.get_dice_in_bag().size() >= 15:
+		Achievements["Collector"] = true
+		Background.show_achievement("Collector")
+	if not Achievements["High Roller"] and current_score >= 1000:
+		Achievements["High Roller"] = true
+		Background.show_achievement("High Roller")
+		DiceBag.unlock_die("Ouroboros Die")
+	if not Achievements["The Don"] and current_level > 10:
+		Achievements["The Don"] = true
+		Background.show_achievement("The Don")
+	if not Achievements["Filthy Rich"] and GameInfo.get_money() >= 100:
+		Achievements["Filthy Rich"] = true
+		Background.show_achievement("Filthy Rich")
+	if not Achievements["Wanted"] and current_score >= 10000:
+		Achievements["Wanted"] = true
+		Background.show_achievement("Wanted")
+	
+
 func increment_and_get():
 	id += 1
 	return id
