@@ -43,6 +43,7 @@ offset_bottom = 295.0
 text = "Color A"
 
 [node name="ColorA" type="Label" parent="ColorA"]
+layout_mode = 0
 offset_left = -98.0
 offset_top = 136.0
 offset_right = 297.0
