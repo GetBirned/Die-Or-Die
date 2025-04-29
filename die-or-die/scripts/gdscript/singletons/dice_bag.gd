@@ -13,7 +13,7 @@ func _ready():
 func add_die(key):
 	var die = load($DiceDictionary.dice_dict[key]).instantiate()
 	$Bag.call_deferred("add_child", die)
-	GameInfo.emit_bag_updated()
+	GameInfo.call_deferred("emit_bag_updated")
 
 func new_hand():
 	var new_hand = []
