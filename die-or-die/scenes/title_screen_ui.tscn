@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxfft1wass0ut"]
+[gd_scene load_steps=11 format=3 uid="uid://cxfft1wass0ut"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/title_screen_ui.gd" id="1_h4yye"]
 [ext_resource type="Texture2D" uid="uid://bcnngx20n6nxi" path="res://resources/DieOrDie.png" id="1_qw7xu"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="3_8m1sv"]
 [ext_resource type="Script" path="res://scripts/gdscript/titleSway.gd" id="5_4j02x"]
-[ext_resource type="Texture2D" uid="uid://dcmc87w5twse4" path="res://resources/PLAY.png" id="8_qsa4d"]
+[ext_resource type="Texture2D" uid="uid://bkb52pv0r1aqg" path="res://resources/NEWGAME.png" id="5_kjeh8"]
+[ext_resource type="Texture2D" uid="uid://b7c6niw0uw7o7" path="res://resources/CONTINUE.png" id="6_8kllw"]
 [ext_resource type="Texture2D" uid="uid://0ulfcqh0421i" path="res://resources/SETTINGS.png" id="9_fer2y"]
 [ext_resource type="Texture2D" uid="uid://jo6s52xs04vo" path="res://resources/QUIT.png" id="10_0xx63"]
 
@@ -37,7 +38,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Logo" type="Node2D" parent="CenterContainer/VBoxContainer"]
-position = Vector2(321, 305)
+position = Vector2(80, 343)
 script = ExtResource("5_4j02x")
 
 [node name="DieOrDie_Shadow" type="Sprite2D" parent="CenterContainer/VBoxContainer/Logo"]
@@ -53,62 +54,78 @@ texture = ExtResource("1_qw7xu")
 layout_mode = 2
 
 [node name="PlayButton" type="Node2D" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(720, 120)
 script = ExtResource("5_4j02x")
 
 [node name="PlayShadow" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/PlayButton"]
 material = SubResource("ShaderMaterial_shxd5")
-position = Vector2(392, 601)
-texture = ExtResource("8_qsa4d")
+position = Vector2(131, 35)
+texture = ExtResource("5_kjeh8")
 metadata/_edit_use_anchors_ = true
 
 [node name="Play" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/PlayButton"]
-offset_left = 316.0
-offset_top = 566.0
-offset_right = 468.0
-offset_bottom = 636.0
+offset_right = 261.0
+offset_bottom = 70.0
 theme_override_font_sizes/font_size = 32
-icon = ExtResource("8_qsa4d")
+icon = ExtResource("5_kjeh8")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueButton" type="Node2D" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(720, 240)
+script = ExtResource("5_4j02x")
+
+[node name="ContinueShadow" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/ContinueButton"]
+material = SubResource("ShaderMaterial_shxd5")
+position = Vector2(142, 35)
+texture = ExtResource("6_8kllw")
+metadata/_edit_use_anchors_ = true
+
+[node name="Continue" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/ContinueButton"]
+offset_right = 261.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 32
+icon = ExtResource("6_8kllw")
 flat = true
 metadata/_edit_use_anchors_ = true
 
 [node name="QuitButton" type="Node2D" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(720, 480)
 script = ExtResource("5_4j02x")
 
 [node name="QuitShadow" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/QuitButton"]
 material = SubResource("ShaderMaterial_shxd5")
-position = Vector2(853, 601)
+position = Vector2(76, 35)
 texture = ExtResource("10_0xx63")
 metadata/_edit_use_anchors_ = true
 
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/QuitButton"]
-offset_left = 777.0
-offset_top = 566.0
-offset_right = 929.0
-offset_bottom = 636.0
+offset_right = 152.0
+offset_bottom = 70.0
 theme_override_font_sizes/font_size = 32
 icon = ExtResource("10_0xx63")
 flat = true
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingsButton" type="Node2D" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(720, 360)
 script = ExtResource("5_4j02x")
 
 [node name="SettingsShadow" type="Sprite2D" parent="CenterContainer/VBoxContainer/HBoxContainer/SettingsButton"]
 material = SubResource("ShaderMaterial_shxd5")
-position = Vector2(622.5, 601)
+position = Vector2(143, 35)
 texture = ExtResource("9_fer2y")
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/SettingsButton"]
-offset_left = 480.0
-offset_top = 566.0
-offset_right = 765.0
-offset_bottom = 636.0
+offset_right = 285.0
+offset_bottom = 70.0
 theme_override_font_sizes/font_size = 32
 icon = ExtResource("9_fer2y")
 flat = true
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PlayButton/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/ContinueButton/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/QuitButton/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/SettingsButton/SettingsButton" to="." method="_on_SettingsButton_pressed"]

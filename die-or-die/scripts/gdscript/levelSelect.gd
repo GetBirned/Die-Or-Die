@@ -117,5 +117,6 @@ func _on_shop_button_pressed():
 	SceneManager.switch_scene("shop")
 
 func _on_play_button_pressed() -> void:
+	DiceBag.save_bag()
 	await SceneManager.fade_transition(self)
 	SceneManager.switch_scene("battle")

@@ -102,6 +102,7 @@ func _on_remove_pressed():
 		die.queue_free()
 		
 func _on_continue_pressed():
+	DiceBag.save_bag()
 	await SceneManager.swipe_transition(self)
 	SceneManager.switch_scene("level_select")
 

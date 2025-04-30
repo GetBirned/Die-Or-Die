@@ -67,10 +67,10 @@ func discard():
 
 func kill_die(die):
 	CustomSignals.kill_die.emit(die) # potentially redundant now, but leaving anyway
-	$Bag.remove_child(die)
-	$Board.remove_child(die)
-	$Discard.remove_child(die)
-	$Held.remove_child(die)
+	if $Bag.is_ancestor_of(die): $Bag.remove_child(die)
+	if $Board.is_ancestor_of(die): $Board.remove_child(die)
+	if $Discard.is_ancestor_of(die): $Discard.remove_child(die)
+	if $Held.is_ancestor_of(die): $Held.remove_child(die)
 	die.queue_free()
 	
 func clear_bag():
@@ -111,8 +111,26 @@ func load_shop():
 	shop_dice = []
 	return shop_dice_dupe
 
-func save_bag(file):
-	var save_file = FileAccess.open("user://" + str(file), FileAccess.WRITE)
+func erase_save():
+	var save_file = FileAccess.open("user://save.txt", FileAccess.WRITE)
+	save_file.store_line("")
+
+func save_exists():
+	if not FileAccess.file_exists("user://save.txt"):
+		return false
+	
+	var save_file = FileAccess.open("user://save.txt", FileAccess.READ)
+	
+	print(save_file.get_length())
+	
+	if save_file.get_length() <= 1:
+		return false
+		
+	return true
+	
+
+func save_bag():
+	var save_file = FileAccess.open("user://save.txt", FileAccess.WRITE)
 	var data = {
 		"dice": [],
 		"unlocked": unlocked_dice,
@@ -124,13 +142,13 @@ func save_bag(file):
 		data["dice"].append(die.die_name)
 	save_file.store_line(JSON.stringify(data))
 
-func load_bag(file):
+func load_bag(file = "save.txt"):
 	clear_bag()
-	if not FileAccess.file_exists("user://" + str(file)):
+	if not save_exists():
 		load_default()
 		return
 	
-	var save_file = FileAccess.open("user://" + str(file), FileAccess.READ)
+	var save_file = FileAccess.open("user://save.txt", FileAccess.READ)
 	
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
@@ -151,6 +169,7 @@ func load_bag(file):
 			
 	
 func load_default():
+	clear_bag()
 	GameInfo.set_money(10)
 	GameInfo.current_level = 1
 	for i in range(5):

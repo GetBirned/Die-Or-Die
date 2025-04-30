@@ -12,7 +12,7 @@ func _process(delta):
 	pass
 
 func get_save_info():
-	if not FileAccess.file_exists("user://save.txt"):
+	if not DiceBag.save_exists():
 		return "No save file"
 	
 	var save_file = FileAccess.open("user://save.txt", FileAccess.READ)
@@ -48,10 +48,10 @@ func _on_shopdebug_pressed():
 
 
 func _on_savedebug_pressed():
-	DiceBag.save_bag("save.txt")
+	DiceBag.save_bag()
 
 func _on_loaddebug_pressed():
-	DiceBag.load_bag("save.txt")
+	DiceBag.load_bag()
 
 
 func _on_dicebagdebug_pressed() -> void:

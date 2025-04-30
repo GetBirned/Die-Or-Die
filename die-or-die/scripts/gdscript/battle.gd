@@ -89,6 +89,9 @@ func _on_turn_locked_in() -> void:
 	if domino_stack.is_empty():
 		DiceBag.reset_to_bag()
 		GameInfo.current_level += 1
+		
+		DiceBag.save_bag()
+		
 		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:
@@ -102,6 +105,8 @@ func _on_turn_locked_in() -> void:
 			
 	
 func on_loss() -> void:
+	DiceBag.erase_save()
+	
 	$RollNode/RollButton.disabled = true
 	$LockNode/LockInButton.disabled = true
 	$BackButton.disabled = true
