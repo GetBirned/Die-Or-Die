@@ -83,6 +83,7 @@ func _on_turn_locked_in() -> void:
 		await SceneManager.swipe_transition(self)
 		SceneManager.switch_scene("shop")
 	else:
+		# HANDLE LOSS HERE
 		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
 			DiceBag.reset_to_bag()
 			await SceneManager.swipe_transition(self)
