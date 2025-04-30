@@ -7,6 +7,7 @@ var saved = []
 var shelf_length
 var die_in_bag = null
 var increment
+var rerolls = 1
 
 var dummy_shelf = [DUMMY, DUMMY, DUMMY, DUMMY, DUMMY, DUMMY, DUMMY]
 
@@ -25,12 +26,18 @@ func _ready():
 	dice_in_shelf = []
 	saved = DiceBag.load_shop()
 	print(saved)
-	if saved != dummy_shelf:
-		for die_key in saved:
+	var saved_dice = saved[0]
+	var saved_rerolls = saved[1]
+	if saved_dice != dummy_shelf:
+		for die_key in saved_dice:
 			add_die_key(die_key)
 		if dice_in_shelf.size() == 0:
 			for i in range(6):
 				add_die()
+	if saved_rerolls == 2:
+		rerolls = 1
+	else:
+		rerolls = saved_rerolls
 	_order_dice()
 
 func _on_checking_out(die):
@@ -48,13 +55,16 @@ func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
 func _refresh_shop():
-	if GameInfo.get_money() >= 3:
-		GameInfo.add_money(-3)
-		update_calculator()
-		for i in range(6):
-			_on_remove_pressed()
-		for i in range(6):
-			add_die()
+	if rerolls > 0:	
+		if GameInfo.get_money() >= 3:
+			rerolls -= 1
+			GameInfo.add_money(-3)
+			update_calculator()
+			for i in range(6):
+				_on_remove_pressed()
+			for i in range(6):
+				add_die()
+
 
 func _order_dice():
 	var num_dice = dice_in_shelf.size()
@@ -112,9 +122,9 @@ func _on_open_dice_bag_pressed() -> void:
 	for die in dice_in_shelf:
 		dupe_shelf.append(die.name_description()[0])
 	if dice_in_shelf.size() == 0:
-		DiceBag.save_shop(dummy_shelf)
+		DiceBag.save_shop(dummy_shelf, rerolls)
 	else:
-		DiceBag.save_shop(dupe_shelf)
+		DiceBag.save_shop(dupe_shelf, rerolls)
 
 	await SceneManager.swipe_transition(self)
 	SceneManager.switch_scene("dicebag_visual")
