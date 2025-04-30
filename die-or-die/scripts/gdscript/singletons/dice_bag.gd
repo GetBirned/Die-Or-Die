@@ -103,13 +103,18 @@ func get_discarded_dice():
 	return $Discard.get_children()
 
 var shop_dice = []
-func save_shop(shop):
-	shop_dice = shop
+var shop_rerolled = 2
+
+func save_shop(shopd, shopr):
+	shop_dice = shopd
+	shop_rerolled = shopr
 
 func load_shop():
 	var shop_dice_dupe = shop_dice.duplicate(true)
+	var shop_reroll_dupe = shop_rerolled
 	shop_dice = []
-	return shop_dice_dupe
+	shop_rerolled = 2
+	return [shop_dice_dupe, shop_reroll_dupe]
 
 func erase_save():
 	var save_file = FileAccess.open("user://save.txt", FileAccess.WRITE)
