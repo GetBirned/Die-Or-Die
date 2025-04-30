@@ -48,7 +48,7 @@ func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
 func _refresh_shop():
-	if GameInfo.get_money() > 3:
+	if GameInfo.get_money() >= 3:
 		GameInfo.add_money(-3)
 		update_calculator()
 		for i in range(6):
