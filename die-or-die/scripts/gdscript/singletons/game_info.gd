@@ -99,10 +99,7 @@ func add_score(value):
 	current_score += value
 	if current_score < 0:
 		current_score = 0
-	if value > 0:
-		total_score += value
 	if value != 0:
-		total_score_updated.emit()
 		score_updated.emit()
 	
 func mult_score(value):
