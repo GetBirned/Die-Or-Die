@@ -102,6 +102,14 @@ func get_held_dice():
 func get_discarded_dice():
 	return $Discard.get_children()
 
+var shop_dice = []
+func save_shop(shop):
+	shop_dice = shop
+
+func load_shop():
+	var shop_dice_dupe = shop_dice.duplicate(true)
+	shop_dice = []
+	return shop_dice_dupe
 
 func save_bag(file):
 	var save_file = FileAccess.open("user://" + str(file), FileAccess.WRITE)
