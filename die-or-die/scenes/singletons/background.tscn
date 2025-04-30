@@ -47,11 +47,12 @@ offset_bottom = 40.0
 [node name="Label" type="Label" parent="Achievement"]
 z_index = 1000
 layout_mode = 2
-offset_left = 964.0
-offset_top = 13.0
-offset_right = 1179.0
-offset_bottom = 71.0
+offset_left = 122.0
+offset_top = 10.0
+offset_right = 337.0
+offset_bottom = 68.0
 label_settings = SubResource("LabelSettings_smthr")
+horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="Achievement"]
 wait_time = 3.0

@@ -32,29 +32,33 @@ var Achievements = {
 	"The Don":false, # beat 10 levels
 	"Filthy Rich":false, # have $100
 	"Wanted":false, # get a score over 10000
+	"Impoverished":false, # have less than 5 dice
 }
 
 func _process(delta: float) -> void:
 	if not Achievements["Beginner"] and current_level > 2:
 		Achievements["Beginner"] = true
-		Background.show_achievement("Beginner")
+		Background.show_achievement("Beginner\nUnlocked: Frequent Die")
 		DiceBag.unlock_die("Frequent Die")
 	if not Achievements["Collector"] and DiceBag.get_dice_in_bag().size() >= 15:
 		Achievements["Collector"] = true
-		Background.show_achievement("Collector")
+		Background.show_achievement("Collector\n")
 	if not Achievements["High Roller"] and current_score >= 1000:
 		Achievements["High Roller"] = true
-		Background.show_achievement("High Roller")
+		Background.show_achievement("High Roller\nUnlocked: Ouroboros Die")
 		DiceBag.unlock_die("Ouroboros Die")
 	if not Achievements["The Don"] and current_level > 10:
 		Achievements["The Don"] = true
-		Background.show_achievement("The Don")
+		Background.show_achievement("The Don\n")
 	if not Achievements["Filthy Rich"] and GameInfo.get_money() >= 100:
 		Achievements["Filthy Rich"] = true
-		Background.show_achievement("Filthy Rich")
+		Background.show_achievement("Filthy Rich\n")
 	if not Achievements["Wanted"] and current_score >= 10000:
 		Achievements["Wanted"] = true
-		Background.show_achievement("Wanted")
+		Background.show_achievement("Wanted\n")
+	if not Achievements["Impoverished"] and DiceBag.get_dice().size() < 5:
+		Achievements["Impoverished"] = true
+		Background.show_achievement("Impoverished\n")
 	
 
 func increment_and_get():
@@ -106,4 +110,5 @@ func mult_score(value):
 	score_updated.emit()
 
 func emit_holder_updated():
+	print("😊")
 	holder_updated.emit(SceneManager.get_die_scores())

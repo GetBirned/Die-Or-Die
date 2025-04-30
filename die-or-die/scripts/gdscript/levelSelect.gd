@@ -118,4 +118,7 @@ func _on_shop_button_pressed():
 
 func _on_play_button_pressed() -> void:
 	await SceneManager.fade_transition(self)
-	SceneManager.switch_scene("battle")
+	if current_index%8==0:
+		SceneManager.switch_scene("king_chess_battle")
+	else:
+		SceneManager.switch_scene("battle")

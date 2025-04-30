@@ -26,7 +26,6 @@ func on_holder_updated(faces):
 	if faces.size() == 0:
 		$Hover/HandSprite.play(\"default\")
 		return
-		
 	var hand = \"high number\"
 	GameInfo.hand_multiplier = 1
 	

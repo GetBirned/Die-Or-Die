@@ -82,3 +82,6 @@ func damage_dominoes(damage):
 
 func get_lock_ins():
 	return lock_ins
+	
+func get_top_domino():
+	return domino_stack[0]
