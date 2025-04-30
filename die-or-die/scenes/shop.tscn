@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=36 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_8hpdi"]
@@ -6,10 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://eqbsxardccip" path="res://scenes/dice_dictionary.tscn" id="3_6w0dc"]
 [ext_resource type="Script" path="res://scripts/gdscript/bag_detector.gd" id="5_rjy1f"]
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/DiceBag.png" id="5_vaf1e"]
+[ext_resource type="Texture2D" uid="uid://0q5omyr0pear" path="res://resources/REFRESH.png" id="6_rdblx"]
 [ext_resource type="Texture2D" uid="uid://b7c6niw0uw7o7" path="res://resources/CONTINUE.png" id="7_1bm40"]
 [ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="7_x6y4e"]
-[ext_resource type="Script" path="res://scenes/can_detector.gd" id="8_q4a4d"]
-[ext_resource type="Texture2D" uid="uid://cox0yewphwut" path="res://resources/can.png" id="9_lbvkd"]
 [ext_resource type="PackedScene" uid="uid://bkppif6eqif66" path="res://scenes/calculator.tscn" id="11_qhr5v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dh8a"]
@@ -80,6 +79,11 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hynod"]
+shader = ExtResource("2_8hpdi")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l2ejr"]
 shader = ExtResource("2_8hpdi")
@@ -177,24 +181,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nahe1"]
-size = Vector2(101.5, 121.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h5gpg"]
-atlas = ExtResource("9_lbvkd")
-region = Rect2(160, 478, 160, 136)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_1ky1b"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h5gpg")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_bptpf")
 
@@ -217,32 +203,35 @@ offset_bottom = 60.0
 theme_override_font_sizes/font_size = 32
 text = "back"
 
-[node name="Refresh" type="Button" parent="."]
-offset_top = 60.0
-offset_right = 180.0
-offset_bottom = 120.0
-theme_override_font_sizes/font_size = 32
-text = "Refresh ($3)"
+[node name="RefreshSway" type="Node2D" parent="."]
+script = ExtResource("7_x6y4e")
 
-[node name="Continue" type="Button" parent="."]
-offset_top = 120.0
-offset_right = 180.0
-offset_bottom = 180.0
+[node name="RefreshSHADOW" type="Sprite2D" parent="RefreshSway"]
+material = SubResource("ShaderMaterial_hynod")
+position = Vector2(238, 621)
+texture = ExtResource("6_rdblx")
+
+[node name="Refresh" type="Button" parent="RefreshSway"]
+offset_left = 74.0
+offset_top = 586.0
+offset_right = 401.0
+offset_bottom = 656.0
 theme_override_font_sizes/font_size = 32
-text = "remove"
+icon = ExtResource("6_rdblx")
+flat = true
 
 [node name="ContinueSway" type="Node2D" parent="."]
 script = ExtResource("7_x6y4e")
 
 [node name="ContinueSHADOW" type="Sprite2D" parent="ContinueSway"]
 material = SubResource("ShaderMaterial_l2ejr")
-position = Vector2(1045, 621)
+position = Vector2(1023, 621)
 texture = ExtResource("7_1bm40")
 
 [node name="Continue" type="Button" parent="ContinueSway"]
-offset_left = 903.0
+offset_left = 880.0
 offset_top = 586.0
-offset_right = 1187.0
+offset_right = 1164.0
 offset_bottom = 656.0
 theme_override_font_sizes/font_size = 32
 icon = ExtResource("7_1bm40")
@@ -285,19 +274,6 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_7oni3")
 animation = &"open"
 
-[node name="CanArea" type="Area2D" parent="."]
-position = Vector2(143, 424)
-script = ExtResource("8_q4a4d")
-
-[node name="CanDetection" type="CollisionShape2D" parent="CanArea"]
-position = Vector2(-3, -2)
-shape = SubResource("RectangleShape2D_nahe1")
-debug_color = Color(0.453023, 0.484191, 0.973465, 0.42)
-
-[node name="CanVisual" type="AnimatedSprite2D" parent="CanArea"]
-position = Vector2(0, -4)
-sprite_frames = SubResource("SpriteFrames_1ky1b")
-
 [node name="Calculator" parent="." instance=ExtResource("11_qhr5v")]
 position = Vector2(640, 634)
 
@@ -309,6 +285,6 @@ offset_bottom = 449.0
 flat = true
 
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Refresh" to="." method="_refresh_shop"]
+[connection signal="pressed" from="RefreshSway/Refresh" to="." method="_refresh_shop"]
 [connection signal="pressed" from="ContinueSway/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="OpenDiceBag" to="." method="_on_open_dice_bag_pressed"]

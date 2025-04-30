@@ -7,6 +7,15 @@ var top_domino
 @onready var calculator = $Calculator
 
 func _ready() -> void:
+	$DeathScreenUI/BattleSway/DeathScreen.visible = false
+	$DeathScreenUI/BattleSway/DeathScreenShadow.visible = false
+	$DeathScreenUI/BattleSway/YouHaveImage.visible = false
+	$DeathScreenUI/BattleSway/DiedImage.visible = false
+	$DeathScreenUI/BattleSway/ScoreLabel.visible = false
+	$DeathScreenUI/BattleSway/DiceCountLabel.visible = false
+	$DeathScreenUI/BattleSway/RetryButton.visible = false
+	$DeathScreenUI/BattleSway/QuitButton.visible = false
+	
 	await SceneManager.swipe_in_left_transition(self)
 	$BattleMusicPlayer.play()
 	DiceBag.reset_to_bag()
@@ -15,7 +24,7 @@ func _ready() -> void:
 	update_calculator()
 	domino_stack = $DominoZone.create_dominoes(4+log(GameInfo.current_level+1))
 	top_domino = domino_stack.front()
-
+	
 func _process(delta: float) -> void:
 	update_calculator()
 	
@@ -84,13 +93,58 @@ func _on_turn_locked_in() -> void:
 		SceneManager.switch_scene("shop")
 	else:
 		if top_domino == domino_stack.front() and top_domino.lock_ins == 0:
+			# HANDLE LOSS HERE
 			DiceBag.reset_to_bag()
-			await SceneManager.swipe_transition(self)
-			SceneManager.switch_scene("title_screen")
+			await on_loss()
 		else:	
 			top_domino = domino_stack.front()
 			load_dice()
 			
 	
+func on_loss() -> void:
+	$RollNode/RollButton.disabled = true
+	$LockNode/LockInButton.disabled = true
+	$BackButton.disabled = true
+
+	var death_screen = $DeathScreenUI/BattleSway/DeathScreen
+	var death_screen_shadow = $DeathScreenUI/BattleSway/DeathScreenShadow
+	var you_have_img = $DeathScreenUI/BattleSway/YouHaveImage
+	var died_img = $DeathScreenUI/BattleSway/DiedImage
+	var score_label = $DeathScreenUI/BattleSway/ScoreLabel
+	var dice_label = $DeathScreenUI/BattleSway/DiceCountLabel
+	var quit_button = $DeathScreenUI/BattleSway/QuitButton
+	var retry_button = $DeathScreenUI/BattleSway/RetryButton
+
+	death_screen.visible = true
+	death_screen_shadow.visible = true
+	death_screen.modulate.a = 0.0
+	death_screen_shadow.modulate.a = 0.0
+
+	var tween = create_tween()
+	tween.tween_property(death_screen, "modulate:a", 1.0, 0.4).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(death_screen_shadow, "modulate:a", 1.0, 0.4).set_trans(Tween.TRANS_LINEAR)
+	await tween.finished
+	
+	await get_tree().create_timer(1.0).timeout
+	you_have_img.visible = true
+
+	await get_tree().create_timer(2.0).timeout
+	you_have_img.visible = false
+	died_img.visible = true
+	retry_button.visible = true
+	quit_button.visible = true
+	score_label.text = "%d" % GameInfo.total_score
+	score_label.visible = true
+
+	dice_label.text = "%d" % DiceBag.get_dice_in_bag().size()
+	dice_label.visible = true
+
 func _on_bag_button_pressed() -> void:
 	SceneManager.switch_scene("dicebag_visual")
+
+func _on_retry_button_pressed() -> void:
+	await SceneManager.swipe_transition(self)
+	SceneManager.switch_scene("title_screen")
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

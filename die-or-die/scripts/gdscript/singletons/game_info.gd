@@ -8,6 +8,7 @@ signal money_changed
 signal dice_locked
 signal bag_updated
 signal score_updated
+signal total_score_updated
 signal holder_updated
 signal checking_out
 signal purchasing
@@ -24,6 +25,7 @@ var saved_color_b : Color = Color(0, 0, 0)  # Default black
 @onready var id: int = 0
 @onready var hand = null
 @onready var current_level = 1
+@onready var total_score: float = 0
 
 var Achievements = {
 	"Beginner":false, # beat level 2
@@ -74,7 +76,6 @@ func emit_battle():
 func emit_checking_out(die):
 	checking_out.emit(die)
 	
-	
 func emit_purchasing(key):
 	purchasing.emit(key)
 
@@ -98,7 +99,10 @@ func add_score(value):
 	current_score += value
 	if current_score < 0:
 		current_score = 0
+	if value > 0:
+		total_score += value
 	if value != 0:
+		total_score_updated.emit()
 		score_updated.emit()
 	
 func mult_score(value):

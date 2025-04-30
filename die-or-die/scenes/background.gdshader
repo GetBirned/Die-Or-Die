@@ -44,12 +44,12 @@ void fragment() {
         distorted_uv += vec2(sin(t + distorted_uv.y), cos(t - distorted_uv.x)) * 0.2;
     }
 
-    // Mouse distortion 
+    // Mouse distortion
     float dist = distance(UV, mouse_position);
     float influence = smoothstep(0.3, 0.0, dist); // falloff
     vec2 warp = (UV - mouse_position) * influence * 0.2;
     distorted_uv += warp * intensity;
-	
+
     distorted_uv = floor(distorted_uv * 25.0) / 25.0;
 
     // noisy background
