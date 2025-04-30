@@ -11,6 +11,13 @@ script = ExtResource("1_kqayp")
 offset_right = 1280.0
 offset_bottom = 720.0
 
+[node name="SaveLabel" type="Label" parent="TitleScreenUI"]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 654.0
+offset_right = 771.0
+offset_bottom = 708.0
+
 [node name="debugbuttons" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0

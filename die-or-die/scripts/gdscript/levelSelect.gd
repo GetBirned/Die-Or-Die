@@ -37,7 +37,7 @@ var tile_positions = [
 	Vector2(457, 652)
 ]	
 var level_names = [
-	"World 1-1: Starting Tile",
+	"World 1-1: The Start",
 	"World 1-2: Rolling Hills",
 	"World 1-3: The Spinner's Path",
 	"World 1-4: Candy Caverns",
@@ -55,8 +55,8 @@ var level_names = [
 	"World 2-6: Lava Tile Loop",
 	"World 2-7: Burned-Out Backgammon",
 	"World 2-8: Charred Checkers",
-	"World 2-9: The Final Roll",
-	"World 2-10: Boss Battle: The Board Lord",
+	"World 2-9: Dicey Dominoes",
+	"World 2-10: The Board Lord",
 	"World 3-1: Crystal Catan",
 	"World 3-2: Tile Tundra",
 	"World 3-3: The Dice Mines",
@@ -64,8 +64,7 @@ var level_names = [
 	"World 3-5: Settler’s Sanctuary",
 	"World 3-6: The Card Tower",
 	"World 3-7: Icebreaker Island",
-	"World 3-8: Frozen Pieces",
-	"World 3-9: Vault of Victory"
+	"World 3-8: The Final Roll"
 ]
 
 func _ready():
@@ -99,6 +98,8 @@ func move_thimble_to(target_pos: Vector2):
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(Callable(self, "_on_thimble_move_finished"))
+	if current_index < level_names.size():
+		$LevelInfoLabel.text = level_names[current_index - 1]
 
 func _on_back_to_menu_button_pressed():
 	await SceneManager.fade_transition(self)
@@ -114,7 +115,6 @@ func _on_open_dice_bag_pressed():
 func _on_shop_button_pressed():
 	await SceneManager.fade_transition(self)
 	SceneManager.switch_scene("shop")
-
 
 func _on_play_button_pressed() -> void:
 	await SceneManager.fade_transition(self)

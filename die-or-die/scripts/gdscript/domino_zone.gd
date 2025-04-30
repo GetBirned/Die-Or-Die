@@ -56,6 +56,7 @@ func damage_dominoes(damage):
 		if dmg > active_domino.life:
 			tempdmg = active_domino.life
 		active_domino.take_damage(tempdmg)
+		GameInfo.add_score(-tempdmg)
 		i += tempdmg
 		
 		# damage noise for domino

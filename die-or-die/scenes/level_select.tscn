@@ -141,22 +141,22 @@ script = ExtResource("9_b0fwg")
 
 [node name="BagVisualShadow" type="AnimatedSprite2D" parent="BagSway"]
 material = SubResource("ShaderMaterial_njg1b")
-position = Vector2(1183, 623)
+position = Vector2(1122, 592)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_7j8u1")
 animation = &"open"
 
 [node name="BagVisual" type="AnimatedSprite2D" parent="BagSway"]
-position = Vector2(1183, 623)
+position = Vector2(1122, 592)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_7j8u1")
 animation = &"open"
 
 [node name="OpenDiceBag" type="Button" parent="."]
-offset_left = 1127.0
-offset_top = 564.0
-offset_right = 1243.0
-offset_bottom = 689.0
+offset_left = 1065.0
+offset_top = 535.0
+offset_right = 1181.0
+offset_bottom = 660.0
 flat = true
 
 [node name="Timer" type="Timer" parent="."]

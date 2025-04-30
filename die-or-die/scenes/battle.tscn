@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=23 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b1kxg1rkxuqhp" path="res://scenes/score_counter.tscn" id="8_3hxqj"]
 [ext_resource type="AudioStream" uid="uid://doxuvyr88igso" path="res://resources/blip.wav" id="8_324rl"]
 [ext_resource type="AudioStream" uid="uid://b0ut5gauhcj2q" path="res://resources/diceroll.wav" id="11_r5o66"]
+[ext_resource type="Texture2D" uid="uid://dcmc87w5twse4" path="res://resources/PLAY.png" id="12_8il32"]
 [ext_resource type="AudioStream" uid="uid://rhfdyp0708f8" path="res://resources/battleMusic.mp3" id="12_p4e7e"]
 [ext_resource type="PackedScene" uid="uid://bkppif6eqif66" path="res://scenes/calculator.tscn" id="13_1gfq5"]
 [ext_resource type="Texture2D" uid="uid://p7ojfit0a8w8" path="res://resources/lock.png" id="13_bb3br"]
@@ -137,14 +138,14 @@ script = ExtResource("3_ir6n5")
 [node name="LockInShadow" type="Sprite2D" parent="LockNode"]
 material = SubResource("ShaderMaterial_qy1w8")
 position = Vector2(1099, 559)
-texture = ExtResource("13_bb3br")
+texture = ExtResource("12_8il32")
 
 [node name="LockInButton" type="Button" parent="LockNode"]
 offset_left = 1023.0
 offset_top = 524.0
 offset_right = 1175.0
 offset_bottom = 594.0
-icon = ExtResource("13_bb3br")
+icon = ExtResource("12_8il32")
 flat = true
 
 [node name="RollNode" type="Node2D" parent="."]

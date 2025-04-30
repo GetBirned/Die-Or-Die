@@ -9,8 +9,6 @@ func signal_special():
 		for side in die.get_sides():
 			if side.is_blank():
 				blank_total += 1
-	print(blank_total)
-	print(blank_total/2)
 	GameInfo.blank_value = blank_total/2
 
 func manual_special(this_being_scored: bool):
