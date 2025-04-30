@@ -38,6 +38,7 @@ func destroy_top():
 		
 # damages the top domino
 func damage_dominoes(damage):
+	GameInfo.total_score += damage
 	if domino_stack.is_empty():
 		return
 		
