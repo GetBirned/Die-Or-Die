@@ -26,9 +26,13 @@ func on_holder_updated(faces):
 	if faces.size() == 0:
 		$Hover/HandSprite.play(\"default\")
 		return
-		
 	var hand = \"high number\"
 	GameInfo.hand_multiplier = 1
+	
+	faces = faces.reduce(func(accum, number): 
+		if number != 0: 
+			accum.append(number)
+		return accum, [])
 	
 	var counts = {}
 	for face in faces:

@@ -13,7 +13,7 @@ func switch_scene(scene: String):
 
 	
 func get_die_scores():
-	if current_scene == "battle":
+	if current_scene.contains("battle"):
 		var dice = get_tree().current_scene.get_node("DiceHolder").get_dice()
 		var faces = []
 		for die in dice:
@@ -23,7 +23,7 @@ func get_die_scores():
 		return []
 		
 func get_dice():
-	if current_scene == "battle":
+	if current_scene.contains("battle"):
 		var dice = get_tree().current_scene.get_node("DiceHolder").get_dice()
 		return dice
 	else:

@@ -258,16 +258,14 @@ justification_flags = 64
 [node name="Side" parent="Sides" instance=ExtResource("10_thvub")]
 
 [node name="Side2" parent="Sides" instance=ExtResource("10_thvub")]
-value = 2
 
 [node name="Side3" parent="Sides" instance=ExtResource("10_thvub")]
-value = 3
 
 [node name="Side4" parent="Sides" instance=ExtResource("10_thvub")]
-value = 4
+value = 6
 
 [node name="Side5" parent="Sides" instance=ExtResource("10_thvub")]
-value = 5
+value = 6
 
 [node name="Side6" parent="Sides" instance=ExtResource("10_thvub")]
 value = 6
