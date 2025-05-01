@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c3vea4o40bx1b"]
+[gd_scene load_steps=38 format=3 uid="uid://c3vea4o40bx1b"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/shop.gd" id="1_bptpf"]
 [ext_resource type="Shader" path="res://scenes/shadow.gdshader" id="2_8hpdi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://0q5omyr0pear" path="res://resources/REFRESH.png" id="6_rdblx"]
 [ext_resource type="Texture2D" uid="uid://b7c6niw0uw7o7" path="res://resources/CONTINUE.png" id="7_1bm40"]
 [ext_resource type="Script" path="res://scripts/gdscript/battleSway.gd" id="7_x6y4e"]
+[ext_resource type="Texture2D" uid="uid://dncektwhajl2t" path="res://resources/QUESTION2.png" id="11_bx3ok"]
 [ext_resource type="PackedScene" uid="uid://bkppif6eqif66" path="res://scenes/calculator.tscn" id="11_qhr5v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dh8a"]
@@ -181,6 +182,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20wtw"]
+shader = ExtResource("2_8hpdi")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_bptpf")
 
@@ -284,7 +290,24 @@ offset_right = 1158.0
 offset_bottom = 449.0
 flat = true
 
+[node name="TutorialSway" type="Node2D" parent="."]
+script = ExtResource("7_x6y4e")
+
+[node name="TutorialButtonShadow" type="Sprite2D" parent="TutorialSway"]
+material = SubResource("ShaderMaterial_20wtw")
+position = Vector2(1184, 54)
+texture = ExtResource("11_bx3ok")
+
+[node name="TutorialButton" type="Button" parent="TutorialSway"]
+offset_left = 1165.0
+offset_top = 26.0
+offset_right = 1203.0
+offset_bottom = 82.0
+icon = ExtResource("11_bx3ok")
+flat = true
+
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="RefreshSway/Refresh" to="." method="_refresh_shop"]
 [connection signal="pressed" from="ContinueSway/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="OpenDiceBag" to="." method="_on_open_dice_bag_pressed"]
+[connection signal="pressed" from="TutorialSway/TutorialButton" to="." method="_on_tutorial_button_pressed"]

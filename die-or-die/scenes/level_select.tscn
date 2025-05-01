@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dsgpjbpjba31a"]
+[gd_scene load_steps=30 format=3 uid="uid://dsgpjbpjba31a"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/levelSelect.gd" id="1_ltpm6"]
 [ext_resource type="FontFile" uid="uid://b6rmwmt2r11oe" path="res://resources/VCR_OSD_MONO_1.001.ttf" id="2_fa27o"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dod16bc6800ri" path="res://resources/DiceBag.png" id="9_f83k6"]
 [ext_resource type="AudioStream" uid="uid://qdfdqn8bl2k2" path="res://resources/movePiece.mp3" id="9_p8cak"]
 [ext_resource type="Texture2D" uid="uid://dcmc87w5twse4" path="res://resources/PLAY.png" id="12_yor3p"]
+[ext_resource type="Texture2D" uid="uid://ckvrw05y0vdau" path="res://resources/QUESTION.png" id="13_wuxiv"]
+[ext_resource type="Texture2D" uid="uid://dncektwhajl2t" path="res://resources/QUESTION2.png" id="14_vekmd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykr71"]
 shader = ExtResource("3_sa353")
@@ -111,6 +113,11 @@ shader = ExtResource("3_sa353")
 shader_parameter/shadow_offset = Vector2(10, 10)
 shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cw16w"]
+shader = ExtResource("3_sa353")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
 [node name="LevelSelect" type="Node2D"]
 script = ExtResource("1_ltpm6")
 
@@ -179,9 +186,9 @@ icon = ExtResource("5_7xu5p")
 flat = true
 
 [node name="LevelInfoLabel" type="Label" parent="."]
-offset_left = 1000.0
+offset_left = 624.0
 offset_top = 10.0
-offset_right = 1132.0
+offset_right = 756.0
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("2_fa27o")
 text = "World 1-1: ???"
@@ -203,7 +210,24 @@ offset_bottom = -18.0
 icon = ExtResource("12_yor3p")
 flat = true
 
+[node name="TutorialSway" type="Node2D" parent="."]
+script = ExtResource("9_b0fwg")
+
+[node name="TutorialButtonShadow" type="Sprite2D" parent="TutorialSway"]
+material = SubResource("ShaderMaterial_cw16w")
+position = Vector2(1184, 54)
+texture = ExtResource("13_wuxiv")
+
+[node name="TutorialButton" type="Button" parent="TutorialSway"]
+offset_left = 1165.0
+offset_top = 26.0
+offset_right = 1203.0
+offset_bottom = 82.0
+icon = ExtResource("14_vekmd")
+flat = true
+
 [connection signal="pressed" from="OpenDiceBag" to="." method="_on_open_dice_bag_pressed"]
-[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
 [connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
+[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
 [connection signal="pressed" from="ContinueSway/ContinueButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="TutorialSway/TutorialButton" to="." method="_on_tutorial_button_pressed"]

@@ -153,3 +153,23 @@ func _on_retry_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+	
+func _on_tutorial_button_pressed() -> void:
+	if get_node_or_null("TutorialPopup") != null:
+		return  # Already open, do nothing
+
+	var popup = preload("res://scenes/TutorialPopup.tscn").instantiate()
+	popup.name = "TutorialPopup"
+	add_child(popup)
+	popup.set_content("Battle", "Dice:
+To win battles, you need dice. You start the game with 5 regular six-sided dice, but will have many opportunities to add to your collection.
+At the start of every battle, 5 dice are randomly chosen from your bag and rolled onto the board. Additional dice will be rolled out after every time you submit dice to be scored.
+If at any point there aren’t enough dice in your bag to fill the board, your bag will be refilled with any discarded dice before choosing any more to roll out.
+
+Scoring:
+Your score is calculated by adding the values of the dice you submit, then applying a multiplier based on what kind of hand you played.
+Hands are similar to poker hands, ie: 2 2 5 5 6 will count as a two-pair, 1 2 3 4 5 will count as a straight, and so on.
+
+Rerolling:
+Dice are automatically rolled for free when they first appear on the board, but every reroll of the dice will cost $1.
+")

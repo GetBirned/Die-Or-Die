@@ -4,7 +4,8 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$MenuMusicPlayer.play()
-	$TitleScreenUI/SaveLabel.text = get_save_info()
+	$TitleScreenUI/SaveSway/SaveLabelShadow.text = get_save_info()
+	$TitleScreenUI/SaveSway/SaveLabel.text = get_save_info()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

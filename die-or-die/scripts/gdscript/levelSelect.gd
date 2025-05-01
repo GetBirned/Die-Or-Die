@@ -123,3 +123,21 @@ func _on_play_button_pressed() -> void:
 		SceneManager.switch_scene("king_chess_battle")
 	else:
 		SceneManager.switch_scene("battle")
+
+func _on_tutorial_button_pressed() -> void:
+	if get_node_or_null("TutorialPopup") != null:
+		return  # Already open, do nothing
+
+	var popup = preload("res://scenes/TutorialPopup.tscn").instantiate()
+	popup.name = "TutorialPopup"
+	add_child(popup)
+	popup.set_content("Level Select", "Welcome to the level select screen.
+	
+	The thimble represents you. As you complete levels, you will progress and fight harder dominoes.
+	
+	Click the dice bag to view all of the dice in your inventory. You can sell them here as well.
+	
+	Press PLAY to start the next level.
+	
+	Press QUIT to go back to the home screen.
+")
