@@ -106,6 +106,7 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_3j53m")
 
 [node name="BackButton" type="Button" parent="."]
+visible = false
 offset_top = 60.0
 offset_right = 180.0
 offset_bottom = 120.0
