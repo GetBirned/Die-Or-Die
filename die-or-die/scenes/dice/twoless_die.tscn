@@ -214,6 +214,7 @@ scale_amount_curve = SubResource("Curve_o4ekf")
 [node name="Side" parent="Sides" instance=ExtResource("5_py7td")]
 
 [node name="Side2" parent="Sides" instance=ExtResource("5_py7td")]
+value = 0
 type = 1
 
 [node name="Side3" parent="Sides" instance=ExtResource("5_py7td")]
