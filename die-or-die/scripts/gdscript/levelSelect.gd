@@ -2,9 +2,6 @@ extends Node2D
 
 @onready var thimble = $Thimble
 
-var current_index = 0
-var is_moving = false
-
 var tile_positions = [
 	Vector2(250, 53),
 	Vector2(267, 124),
@@ -67,9 +64,12 @@ var level_names = [
 	"World 3-8: The Final Roll"
 ]
 
+var current_index:int = 0
+var is_moving = false
+
 func _ready():
+	thimble.position = tile_positions[int(GameInfo.current_level-1)%tile_positions.size()]
 	await SceneManager.swipe_in_left_transition(self)
-	thimble.position = tile_positions[GameInfo.current_level-1]
 	$LevelMusicPlayer.play()
 	$Timer.start()
 	await $Timer.timeout
@@ -77,7 +77,7 @@ func _ready():
 		$MovePiecePlayer.stop()
 		$MovePiecePlayer.play()
 		current_index = GameInfo.current_level
-		move_thimble_to(tile_positions[current_index])
+		move_thimble_to(tile_positions[int(current_index)%tile_positions.size()])
 	
 
 	#if Input.is_action_just_pressed("ui_right") and current_index < tile_positions.size() - 1:
