@@ -128,3 +128,20 @@ func _on_open_dice_bag_pressed() -> void:
 
 	await SceneManager.swipe_transition(self)
 	SceneManager.switch_scene("dicebag_visual")
+
+
+func _on_tutorial_button_pressed() -> void:
+	if get_node_or_null("TutorialPopup") != null:
+		return  # Already open, do nothing
+
+	var popup = preload("res://scenes/TutorialPopup.tscn").instantiate()
+	popup.name = "TutorialPopup"
+	add_child(popup)
+	popup.set_content("Shop", "After every battle, you will be brought to the shop to spend your money.
+	
+	The shop will display 6 random dice for you to choose from, and you are allowed one refresh of the shop for $3 every time you enter.
+	
+All dice are priced at $2.
+
+To see what a dice does, hold shift while hovering over it to see the description tooltip. Hold control to see the sides that the dice has. 
+")

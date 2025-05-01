@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c32wi6xoter6r"]
+[gd_scene load_steps=31 format=3 uid="uid://c32wi6xoter6r"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/battle.gd" id="1_eb5gq"]
 [ext_resource type="Texture2D" uid="uid://bfe07oh6irpl0" path="res://resources/DiceTray.png" id="2_dlx0y"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://bosu6v0m2gads" path="res://resources/YOUHAVE.png" id="17_fsqt7"]
 [ext_resource type="Texture2D" uid="uid://uwsxnuwjmnab" path="res://resources/DIED.png" id="18_jae62"]
 [ext_resource type="FontFile" uid="uid://b6rmwmt2r11oe" path="res://resources/VCR_OSD_MONO_1.001.ttf" id="19_fdgpa"]
+[ext_resource type="Texture2D" uid="uid://ckvrw05y0vdau" path="res://resources/QUESTION.png" id="20_l4wtl"]
+[ext_resource type="Texture2D" uid="uid://dncektwhajl2t" path="res://resources/QUESTION2.png" id="21_e2gjw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dx0xn"]
 shader = ExtResource("3_i1s5t")
@@ -45,6 +47,11 @@ shader_parameter/shadow_offset = Vector2(10, 10)
 shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g1gtv"]
+shader = ExtResource("3_i1s5t")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo3gy"]
 shader = ExtResource("3_i1s5t")
 shader_parameter/shadow_offset = Vector2(10, 10)
 shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
@@ -272,8 +279,25 @@ theme_override_font_sizes/font_size = 40
 text = "QUIT"
 flat = true
 
+[node name="TutorialSway" type="Node2D" parent="."]
+script = ExtResource("3_ir6n5")
+
+[node name="TutorialButtonShadow" type="Sprite2D" parent="TutorialSway"]
+material = SubResource("ShaderMaterial_bo3gy")
+position = Vector2(1184, 54)
+texture = ExtResource("20_l4wtl")
+
+[node name="TutorialButton" type="Button" parent="TutorialSway"]
+offset_left = 1165.0
+offset_top = 26.0
+offset_right = 1203.0
+offset_bottom = 82.0
+icon = ExtResource("21_e2gjw")
+flat = true
+
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="LockNode/LockInButton" to="." method="_on_turn_locked_in"]
 [connection signal="pressed" from="RollNode/RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="DeathScreenUI/BattleSway/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="DeathScreenUI/BattleSway/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="TutorialSway/TutorialButton" to="." method="_on_tutorial_button_pressed"]

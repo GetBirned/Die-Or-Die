@@ -101,3 +101,18 @@ func _order_all_dice():
 func _on_close_pressed():
 	await SceneManager.swipe_transition(self)
 	SceneManager.switch_scene(SceneManager.previous_scene)
+
+func _on_tutorial_button_pressed() -> void:
+	if get_node_or_null("TutorialPopup") != null:
+		return  # Already open, do nothing
+
+	var popup = preload("res://scenes/TutorialPopup.tscn").instantiate()
+	popup.name = "TutorialPopup"
+	add_child(popup)
+	popup.set_content("Dice Bag", "Being at the shop is also an opportunity to look at the dice in your bag.
+	
+While looking in your bag, you also have the chance to sell dice you don’t want anymore for extra cash, however, you cannot sell any dice if you only have 5 or less in your bag.
+
+Rerolling:
+Dice are automatically rolled for free when they first appear on the board, but every reroll of the dice will cost $1.
+")
