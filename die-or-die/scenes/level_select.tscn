@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dsgpjbpjba31a"]
+[gd_scene load_steps=32 format=3 uid="uid://dsgpjbpjba31a"]
 
 [ext_resource type="Script" path="res://scripts/gdscript/levelSelect.gd" id="1_ltpm6"]
 [ext_resource type="FontFile" uid="uid://b6rmwmt2r11oe" path="res://resources/VCR_OSD_MONO_1.001.ttf" id="2_fa27o"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dcmc87w5twse4" path="res://resources/PLAY.png" id="12_yor3p"]
 [ext_resource type="Texture2D" uid="uid://ckvrw05y0vdau" path="res://resources/QUESTION.png" id="13_wuxiv"]
 [ext_resource type="Texture2D" uid="uid://dncektwhajl2t" path="res://resources/QUESTION2.png" id="14_vekmd"]
+[ext_resource type="Texture2D" uid="uid://blnpr7s02upud" path="res://resources/KingChessIcon.png" id="15_rqav4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykr71"]
 shader = ExtResource("3_sa353")
@@ -114,6 +115,11 @@ shader_parameter/shadow_offset = Vector2(10, 10)
 shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cw16w"]
+shader = ExtResource("3_sa353")
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_62fal"]
 shader = ExtResource("3_sa353")
 shader_parameter/shadow_offset = Vector2(10, 10)
 shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
@@ -226,8 +232,50 @@ offset_bottom = 82.0
 icon = ExtResource("14_vekmd")
 flat = true
 
+[node name="KingChessSway" type="Node2D" parent="."]
+script = ExtResource("9_b0fwg")
+
+[node name="KingChessShadow" type="Sprite2D" parent="KingChessSway"]
+material = SubResource("ShaderMaterial_62fal")
+position = Vector2(716, 266)
+scale = Vector2(2, 2)
+texture = ExtResource("15_rqav4")
+
+[node name="KingChess" type="Sprite2D" parent="KingChessSway"]
+position = Vector2(716, 266)
+scale = Vector2(2, 2)
+texture = ExtResource("15_rqav4")
+
+[node name="KingChessSway2" type="Node2D" parent="."]
+script = ExtResource("9_b0fwg")
+
+[node name="KingChessShadow" type="Sprite2D" parent="KingChessSway2"]
+material = SubResource("ShaderMaterial_62fal")
+position = Vector2(902, 581)
+scale = Vector2(2, 2)
+texture = ExtResource("15_rqav4")
+
+[node name="KingChess" type="Sprite2D" parent="KingChessSway2"]
+position = Vector2(902, 581)
+scale = Vector2(2, 2)
+texture = ExtResource("15_rqav4")
+
+[node name="KingChessSway3" type="Node2D" parent="."]
+script = ExtResource("9_b0fwg")
+
+[node name="KingChessShadow" type="Sprite2D" parent="KingChessSway3"]
+material = SubResource("ShaderMaterial_62fal")
+position = Vector2(424, 417)
+scale = Vector2(2, 2)
+texture = ExtResource("15_rqav4")
+
+[node name="KingChess" type="Sprite2D" parent="KingChessSway3"]
+position = Vector2(424, 417)
+scale = Vector2(2, 2)
+texture = ExtResource("15_rqav4")
+
 [connection signal="pressed" from="OpenDiceBag" to="." method="_on_open_dice_bag_pressed"]
-[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
 [connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
 [connection signal="pressed" from="ContinueSway/ContinueButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TutorialSway/TutorialButton" to="." method="_on_tutorial_button_pressed"]
