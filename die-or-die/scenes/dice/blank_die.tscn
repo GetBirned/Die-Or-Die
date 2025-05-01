@@ -213,26 +213,27 @@ scale_amount_curve = SubResource("Curve_o4ekf")
 [node name="Sides" type="Node" parent="."]
 
 [node name="Side" parent="Sides" instance=ExtResource("5_ooyx2")]
+value = 0
 type = 1
 
 [node name="Side2" parent="Sides" instance=ExtResource("5_ooyx2")]
-value = 2
+value = 0
 type = 1
 
 [node name="Side3" parent="Sides" instance=ExtResource("5_ooyx2")]
-value = 3
+value = 0
 type = 1
 
 [node name="Side4" parent="Sides" instance=ExtResource("5_ooyx2")]
-value = 4
+value = 0
 type = 1
 
 [node name="Side5" parent="Sides" instance=ExtResource("5_ooyx2")]
-value = 5
+value = 0
 type = 1
 
 [node name="Side6" parent="Sides" instance=ExtResource("5_ooyx2")]
-value = 6
+value = 0
 type = 1
 
 [node name="Special" type="Node" parent="."]
@@ -276,7 +277,7 @@ label_settings = SubResource("LabelSettings_hp5r8")
 autowrap_mode = 2
 justification_flags = 64
 
-[connection signal="connect_special" from="." to="Special" method="_on_connect_special"]
 [connection signal="connect_special" from="." to="Special" method="_on_default_die_connect_special"]
+[connection signal="connect_special" from="." to="Special" method="_on_connect_special"]
 [connection signal="button_down" from="DieFace" to="." method="_on_die_face_pressed"]
 [connection signal="button_up" from="DieFace" to="." method="_on_die_face_released"]

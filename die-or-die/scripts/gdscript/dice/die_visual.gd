@@ -200,7 +200,10 @@ func get_side_numbers():
 	var sides = []
 	
 	for side in get_sides():
-		sides.append(side.value)
+		if side.value == 0:
+			sides.append('blank')
+		else:
+			sides.append(side.value)
 	
 	return sides
 	
