@@ -275,7 +275,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("15_rqav4")
 
 [connection signal="pressed" from="OpenDiceBag" to="." method="_on_open_dice_bag_pressed"]
-[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
 [connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_debug_pressed"]
+[connection signal="pressed" from="BackSway/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
 [connection signal="pressed" from="ContinueSway/ContinueButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TutorialSway/TutorialButton" to="." method="_on_tutorial_button_pressed"]

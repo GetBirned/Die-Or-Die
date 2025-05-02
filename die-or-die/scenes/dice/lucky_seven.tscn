@@ -216,19 +216,19 @@ animation = &"multiplier"
 type = 1
 
 [node name="Side2" parent="Sides" instance=ExtResource("5_wx67b")]
+value = 7
 
 [node name="Side3" parent="Sides" instance=ExtResource("5_wx67b")]
-value = 3
+value = 7
 
 [node name="Side4" parent="Sides" instance=ExtResource("5_wx67b")]
-value = 3
+value = 7
 
 [node name="Side5" parent="Sides" instance=ExtResource("5_wx67b")]
-value = 5
+value = 7
 
 [node name="Side6" parent="Sides" instance=ExtResource("5_wx67b")]
-value = 5
-type = 1
+value = 7
 
 [node name="Special" type="Node" parent="."]
 script = ExtResource("6_eqy5k")
